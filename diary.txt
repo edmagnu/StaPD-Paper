@@ -1,0 +1,94 @@
+What's the main point of the paper?
+That adding static field produces phase dependent ionization at same as MW frequency.
+Our model predicts this well.
+Model isolates effect of precession, intial orbit, after orbits.
+Model gives us insight to electron dynamics in weak and strong static fields.
+
+So what's the structure?
+
+Phase-Dependent Electron-Ion Recombination in a Microwave Field
+K. R. Overstreet, R. R. Jones, and T. F. Gallagher
+
+	Introduction
+	Example from elsewhere in physics, i.e. XUV & IR Ionization
+	Quantum works, Simpleman fails, need SM+C
+	We can use SM+C in MW & Rydberg
+	Overview of experiment technicals.
+	In depth description of theory.
+	Important conclusion.
+	In depth description of experiment.
+	Important experiment result.
+	Broad experiment result.
+	Comparison of theory and experiment.
+	Bring back comparison to elsewhere in physics.
+	Speculate about things we can't be certain of.
+	Quick conclusion.
+	Acknowledgements
+
+Multiphoton Assisted Recombination
+E. S. Shuman, R. R. Jones, and T. F. Gallagher
+
+	SM model exists and useful in some situations.
+	Our experiment requires SM+C
+	It's applicable to a & b but we understand it as c
+	Overview of experiment concept.
+	Specific description of experiment.
+	Laser excitation
+	MW field
+	Timing of lasers and detection
+	Explain autoionizing channels for detection.
+	Primary experimental result.
+	Tie result to theory.
+	Introduction to theory concept.
+	Explain SM and the result that is wrong.
+	Explain the differences to the SM.
+	Used MonteCarlo simulations.
+	Discuss predictions that match experimet.
+	Conclude that theory matches experiment.
+	Acknowledgements.
+	
+Coherence and ionization and recombination in a microwave field
+Vincent Carrat, E. Magnuson, and T. F. Gallagher
+
+I Introduction
+	XUV & IR system useful strong field physics.
+	Coulomb potential is important
+	Cycle-cycle coherence is important, according to quantum.
+	Connect from ionization to recombination w/ microwaves.
+II ?
+	Intro to our experiment and quick summary of the result.
+	Summary of classical picture with figure.
+	Statement of classical prediction.
+III Exprimental Methods
+	Summary of experimental setup and excitation.
+	Timing and detection.
+	Particular of experiment w/ synch figure.
+	A Dye Lasers
+		Dye laser description.
+	B. Amplitude modulated 819 nm laser
+		Figure of diode locking.
+		Description of instruments.
+		Amplification chain.
+		Fast Photodiode, mixing and lock.
+		Error signal and quick correction.
+		PID error signal and correction.
+		Figure of locking and contribution of each scheme.
+	C. Microwave Apparatus
+		Source, splitter, amplifier, cavity.
+IV Results
+	Basic observation showing inversion @ ionization limit.
+	Figure with modulation and model results.
+V. Discussion
+	Classical model gives insight to experiment.
+	First orbit only considered.
+	Later orbits must be involved to make discrepancy.
+	Resonance and mulit-orbit may lead to slow onset.
+	Speculation about Floquet.
+IV. Conclusion
+	Column potential is important.
+	Coherence is important.
+
+
+Experimental Methods
+
+Lithium beam passes through a central antinode of 
