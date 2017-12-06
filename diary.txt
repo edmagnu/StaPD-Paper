@@ -88,7 +88,8 @@ IV. Conclusion
 	Column potential is important.
 	Coherence is important.
 
-
-Experimental Methods
-
-Lithium beam passes through a central antinode of 
+APS has a RevTeX 4.1 template "apstemplate.tex"
+I'm starting to fill in the blanks for it.
+I've set up a git repository and pushed it to GitHub
+StaPD-Paper
+Added title, authors, abstract and section headers.
