@@ -93,3 +93,5 @@ I'm starting to fill in the blanks for it.
 I've set up a git repository and pushed it to GitHub
 StaPD-Paper
 Added title, authors, abstract and section headers.
+
+Gallagher says Experimental methods is where I need to start. So that's where I'll start.

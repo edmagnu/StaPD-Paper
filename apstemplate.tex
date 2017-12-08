@@ -100,10 +100,22 @@ In this experiment, Li atoms in a columated thermal beam are optically excited t
 \textbf{\emph{Timing}}
 The microwave cavity is allowed to load for 280 ns before the first laser pulse, and the microwave input is shut off 10 ns after the last laser pulse allowing the cavity to empty. Synchronous with the MW power envelope, a static field pulse is applied to the top and bottom aluminum plates to produce a vertical static field in the interaction region. The 610-nm and 671-nm lasers are pulsed synchronously for 20 ns, after which the 819-nm laser is pulsed with a square envelope for 20 ns. One microsecond after the last laser pulse, we field ionize surviving Rydberg states within 100 GHz of the ioniztion limit by applying a negative voltage pulse to an aluminum plate below the interaction region. Ionized electrons are pushed into a microchannel plate (MCP) assembly which produces a voltage pulse proportional to the number of electrons detected. This pulse is integrated through a boxcar integrator and recorded.
 
-\textbf{\emph{Amplutide Modulated Laser}}
+\textbf{\emph{Amplutide modulated laser}}
+Probing phase dependence in this experiment is achieved by synchronizing the amplitude modulation of the 819-nm laser to a microwave field in the cavity. The laser field can be described by an envelope modulating a fundamental frequency:
+\begin{equation}
+E_{opt}(t) = E_o \sin{(\omega_o t)} \cos{(\omega(t-t_0))}
+\end{equation}
+Using an optical delay line, the phase of the modulation envelope of the 819-nm laser can be delayed relative to phase of the microwave field. This modulation is proportional to the excitation-rate to a Rydberg or continuum state, so delaying the modultion envelope is equivalent to changing the phase $\omega t_0$ of the microwave field at which excitation occurs.
 
+\subsection{\label{dye}Dye Lasers}
 
-\textbf{\emph{Modulated Laser}}
+We use two dye lasers at 670-nm and 610-nm to drive the $2s \rightarrow 2p$ and $2p \rightarrow 3d$ tranitions, respectively. These dye lasers are pumped by a Quantronix Darwin Nd:YLF. The pump laser produces a 30-W, approximately 100-ns FWHM pulses at a 1-kHz repetition rate. Using a pockels cell (PC) and polarizing beam splitter (PBS), the rising edge of the pulse is picked off and split equally between to the 670-nm and 610-nm lasers. A second pockels cell and beamsplitter directs a 20-ns slice from the peak of the pump pulse to a dye amplifier for the 819-nm laser. The long trailing edge of the pump pulse is dumped.
+
+The 670-nm dye laser uses a Littman-style cavity and LDS-698 laser dye dissolved in Ethanol as a lasing medium. The 610-nm uses a H{\"a}nch style cavity with Rhodamine-610 laser dye dissolved in Ethanol. Both lasers have an approximate FWHM of 10-GHz. To minimize unintended ionization from the $3d$ state, both lasers are attenuated to 2 $\mu J$ before being directed to the vacuum chamber.
+
+\subsection{\label{ampmod} Amplitude Modulated Laser}
+
+\subsection{\label{cavity} 15.9-GHz Microwave Cavity}
 
 \section{\label{comp}Computational Model}
 
