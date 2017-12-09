@@ -111,15 +111,37 @@ Using an optical delay line, the phase of the modulation envelope of the 819-nm 
 
 We use two dye lasers at 670-nm and 610-nm to drive the $2s \rightarrow 2p$ and $2p \rightarrow 3d$ tranitions, respectively. These dye lasers are pumped by a Quantronix Darwin Nd:YLF. The pump laser produces a 30-W, approximately 100-ns FWHM pulses at a 1-kHz repetition rate. Using a pockels cell (PC) and polarizing beam splitter (PBS), the rising edge of the pulse is picked off and split equally between to the 670-nm and 610-nm lasers. A second pockels cell and beamsplitter directs a 20-ns slice from the peak of the pump pulse to a dye amplifier for the 819-nm laser. The long trailing edge of the pump pulse is dumped.
 
-The 670-nm dye laser uses a Littman-style cavity and LDS-698 laser dye dissolved in Ethanol as a lasing medium. The 610-nm uses a H{\"a}nch style cavity with Rhodamine-610 laser dye dissolved in Ethanol. Both lasers have an approximate FWHM of 10-GHz. To minimize unintended ionization from the $3d$ state, both lasers are attenuated to 2 $\mu J$ before being directed to the vacuum chamber.
+The 670-nm dye laser uses a Littman-style cavity and LDS-698 laser dye dissolved in Ethanol as a lasing medium. The 610-nm uses a H{\"a}nch style cavity with Rhodamine-610 laser dye dissolved in Ethanol. Both lasers have an approximate FWHM of 10-GHz. To minimize unintended ionization from the $3d$ state, both lasers are attenuated to 2 $\mu J$ pulses before being directed to the vacuum chamber.
 
-\subsection{\label{ampmod} Amplitude Modulated Laser}
+\subsection{\label{ampmod} Amplitude Modulated 819-nm Laser}
 
-\subsection{\label{cavity} 15.9-GHz Microwave Cavity}
+The 819-nm laser is produced rrom two external-cavity diode lasers, a Toptica DL-100 and DL-Pro. They tuned so that they are separated by the microwave frequency, and overlapped on a 50:50 beamsplitter. This overlapping produces a beat-note in the laser intensity at the microwave frequency. One output from the beamsplitter is directed to a high speed photodetector that can detect the beat note and deliver the signal to the phase-locked-loop. The second output from the beamsplitter is directed through an amplification chain and to the interaction region.
+
+The amplitude modulation of the laser is locked at the microwave frequency with a phase-locked-loop (PLL). The locking is driven by a "fast" feedback to the current input of the DL-Pro, and a "slow" feedback to the scan input. To produce an error signal, the amplitude modulation is detected after the 50:50 beamsplitter by a fast photodiode. The DC signal is filtered out, leaving only the AC component. This is amplified and mixed with the microwave source to produce an error signal. The error signal is passed through a variable attenuator and then connected to the Current input of the Toptica DL-100. This achieves a lock between the laser ampltude modulation frequency and the microwave field that lasts for several minutes.
+
+To achieve longer lock times on the order of hours, we use a Toptica PID-110 to drive the scan input of the DL-Pro. The "fast" current lock is primarily lost due to the lasers drifting past the range of the current input to correct. Low-frequency components of the error signal are processed through a PID and fed to the Scan input. This corrects long term drifts in the amplitude modulation frequency, leaving only transient errors for the "fast" loop to correct.
+
+The second output of the 50:50 beamsplitter produces 30 mW of aplitude modulated light. This is passed through a tapered amplifier and a dye amplifier. The Toptica Tapered Amplifier increases the continuous beam power to 800 mW. The dye amplifier is pumped by a 20-ns square pulse picked from the peak of the Nd:YLF laser pulse. We use LDS-819 dissolved in Ethanol as the amplfication medium. This outputs a 20-ns long, 6 $\mu$W pulse of amplitude modulated 819-nm light.
+
+\subsection{\label{cavity} Microwave Apparatus}
+
+A Hittite HMC T-2100 synthesizer tuned to the 15.9-GHz resonance of the microwave cavity is used as our microwave source. The Hittite produces 9 dBm, and a splitter diverts half of the power to the microwave mixer to generate the error signal for the PLL. The other half of the signal is formed into 300-ns pulses by a microwave switch, and then amplified by a Hughes 8020H04F traveling-wave-tube-amplifier (TWTA). Between the TWTA and the cavity, there is a 0 to 50 dBm variable attenuator allowing us to control the intensity of the pulse incident on the microwave cavity.
+
+The microwave cavity is a Fabry-Perot cavity composed to two brass spherical mirrors. These mirrors have a radius of curvature of 10 cm and a 10.2 cm diameter, with a 7.85 cm on axis separation. The 15.9 GHz resonance is the TEM$_{008}$ mode, with a quality of \emph{CAVITY QUALITY}. We are able to determine the field inside the cavity to \emph{15\%}.
+
+\subsection{\label{fields} Static Fields}
+
+This experiment depends on the detection of long lived Rydberg states close to the ionization limit. To prevent these states from ionizing before detection, we must minimize the persistent static field in the interaction region. We accomplish this by surrounding the interaction region on two sides with the brass microwave cavity mirrors, and on the remaining two sides, top, and bottom with polished aluminum plates. A voltage can be applied independently to each plate or mirror, allowing us to compensate persistent static fields in every direction. We measure the depressed ionization limit to minimize stray fields and estimate the residual persistent static field. In this manner, we determine the remaining persistent static field to have a magnitude of 1.5 mV / cm. \emph{ADD REFERENCE}.
+
+To observe phase dependent ionization, we need to apply a pulsed vertical static field to the interaction region during excitation of Rydberg states. This is done using a two-channel arbitrary waveform generator \emph{MODEL} to apply 300-ns square pulses of opposite magnitudes to the top and bottom bias plates. This square pulse is synchronous with the microwave pulse, the leading edge arriving 260-ns before the first laser pulse and the trailing edge arriving 20-ns after the end of the 819-nm laser pulse. Turning off the applied static field minimizes the static field ionization of the high-lying states we wish to observe. 1 $\mu s$ after the final laser pulse, the same AWG applies a voltage to the bottom plate to produce a -0.65 V / cm ionization field, ionizing high-lying states and pushing the electrons toward the MCP stack.
 
 \section{\label{comp}Computational Model}
 
 \section{\label{results}Results}
+
+In \emph{FIGURE} we show that, when the laser intensity is modulated at the same frequency as the microwave field, a phase dependent ionization can only be observed when a static field is present during excitation. This confirms the prediction made by our model, that a static field is needed to lift the vertical symmetry of the system. To produce this result, the central frequency of the excitation laser is tuned to 14-GHz below the depressed ionization limit, in the presence of a 4 V/cm microwave field \emph{CALIBRATION}. The relative phase delay is scanned while measuring the Rydberg signal. Two such scans are completed, one without applying a pulsed static field, one while applying a 14 mV/cm pulsed static field.
+
+
 
 \section{\label{disc}Discussion}
 
