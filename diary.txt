@@ -95,3 +95,9 @@ StaPD-Paper
 Added title, authors, abstract and section headers.
 
 Gallagher says Experimental methods is where I need to start. So that's where I'll start.
+
+I have the experimental section drafted, and part of the "results".
+I need to at least make sure the right figures are added.
+Okay, Modulation & MW phase figure added, PLL added, Delay Scan and Modulatino added.
+2017-12-12: Gave a copy of Experiment & Results to Gallagher
+Told him I'd work on the Simulation section.
