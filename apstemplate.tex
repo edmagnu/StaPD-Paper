@@ -25,6 +25,8 @@
 %\documentclass[aps,prl,preprint,superscriptaddress]{revtex4-1}
 %\documentclass[aps,prl,reprint,groupedaddress]{revtex4-1}
 
+\usepackage{graphicx}
+
 % You should use BibTeX and apsrev.bst for references
 % Choosing a journal automatically selects the correct APS
 % BibTeX style file (bst file), so only uncomment the line
@@ -135,13 +137,35 @@ This experiment depends on the detection of long lived Rydberg states close to t
 
 To observe phase dependent ionization, we need to apply a pulsed vertical static field to the interaction region during excitation of Rydberg states. This is done using a two-channel arbitrary waveform generator \emph{MODEL} to apply 300-ns square pulses of opposite magnitudes to the top and bottom bias plates. This square pulse is synchronous with the microwave pulse, the leading edge arriving 260-ns before the first laser pulse and the trailing edge arriving 20-ns after the end of the 819-nm laser pulse. Turning off the applied static field minimizes the static field ionization of the high-lying states we wish to observe. 1 $\mu s$ after the final laser pulse, the same AWG applies a voltage to the bottom plate to produce a -0.65 V / cm ionization field, ionizing high-lying states and pushing the electrons toward the MCP stack.
 
-\section{\label{comp}Computational Model}
-
 \section{\label{results}Results}
 
-In \emph{FIGURE} we show that, when the laser intensity is modulated at the same frequency as the microwave field, a phase dependent ionization can only be observed when a static field is present during excitation. This confirms the prediction made by our model, that a static field is needed to lift the vertical symmetry of the system. To produce this result, the central frequency of the excitation laser is tuned to 14-GHz below the depressed ionization limit, in the presence of a 4 V/cm microwave field \emph{CALIBRATION}. The relative phase delay is scanned while measuring the Rydberg signal. Two such scans are completed, one without applying a pulsed static field, one while applying a 14 mV/cm pulsed static field.
+\begin{figure}
+\includegraphics[width=0.5\textwidth]{PhaseDelay}
+\caption{\label{PhaseDelay}Observed Rdyberg signal as the phase delay is scanned. When no static field is applied, there is no observed phase modulation at the microwave frequency. When a 14 mV/cm static field is applied, there is a clear phase dependence in the Rydberg signal. For this measurement, the central frequency of the excitation laser is tuned to 14 GHz below the depressed ionization limit, and the microwave field inside the cavity is 4 V/cm.}
+\end{figure}
 
+\emph{FIGURE} shows that, when the laser intensity is modulated at the same frequency as the microwave field, a phase dependent ionization can only be observed when a static field is present during excitation. The central frequency of the excitation laser is tuned to 14-GHz below the depressed ionization limit, in the presence of a 4 V/cm microwave field \emph{CALIBRATION}. The relative phase delay is scanned while measuring the Rydberg signal. Two such scans are completed, one without applying a pulsed static field, one while applying a 14 mV/cm pulsed static field. It is clear that adding the static field allows us to observe phase dependence. This confirms the prediction made by our model, that phase dependent ionization can only be observed at the microwave field frequency when a static field is applied to lift the vertical symmetry of the system.
 
+We quantify these observations by fitting the signal vs. delay to a sinusoidal model:
+\begin{equation}
+S = A \cos{[\omega t - \phi_0]} + S_0
+\end{equation}
+The model frequency is fixed at $\omega = 2\pi / f_{mw}$, while the amplitude (A), phase offset ($\phi_0$) and mean signal ($S_0$) are used as fit parameters. To further explore this phenomena, we record how these fit parameters change as we vary the applied static field for four tunings of the excitation laser central frequency above and below the depressed ionization limit. \emph{FIGURE} shows plots of both peak-to-peak phase dependence in the signal ($2\cdot A$) as well as mean signal ($S_0$) as a function of applied pulsed static field at 3 different laser tunings.
+
+\begin{figure}
+\includegraphics[width=0.5\textwidth]{ModvsField}
+\caption{\label{ModvsField}Mean signal ($S_0$) and peak-to-peak modulation ($2\cdot A$) against applied pulsed static field for excitation laser central frequencies of +2 GHz, -14 GHz, and -30 GHz relative to the depressed ionization limit. \emph{}}
+\end{figure}
+
+For all three laser tunings, the mean signal behaves as expected. The signal is largest when there is no static field applied, and the high lying states we detect are longer lived. As the magnitude of the applied static field increases, mean signal monotonously decreases as the high lying states are more likely to ionize. As would be expected, the further below the depressed ionization limit the central frequency of the excitation laser is tuned, the more slowly $S_0$ drops off with field.
+
+The observed behavior of the peak-to-peak modulation is more complex. In \emph{FIGURE (A)},  the peak-to-peak modulation behaves in an expected way. At zero static field, we can observe no phase dependence for symmetry reasons. However, as the static field magnitude is increased phase dependence quickly emerges. Then, as the total signal approaches zero, so does the peak-to-peak modulation. In these figures, the fit parameter $\phi_0$ is restricted to a range of 0-$\pi$, shifts outside of this range are accounted for with a negative amplitude $A$. Because the applied static field is the only parameter lifting the vertical symmetry, applying an inverse static field produces inverse phase dependence. This shows in the peak-to-peak modulation at opposite applied static fields being approximately equal and opposite.
+
+In the two figures at 14 GHz and 30 GHz below the depressed ionization limit, the behavior is more complex. First, at low static fields, the peak to peak modulation is inverted relative to observations made at 2 GHz above the limit. As the applied static field increases, the peak-to-peak modulation increases to a maximum, but then decreases to zero and changes sign (equivalent to a phase shift of $\pi$). After this zero-crossing, the peak-to-peak modulation then increases to a maximum, and slowly decreases to zero as in the above-the-limit observation. From the two scans below the depressed ionization limit, it's clear that the further below the depressed ionization limit the central frequency of the laser is tuned to, the larger the static field applied before this zero crossing is reached. Further, the scan at 30 GHz below the depressed ionization limit shows there may be an "activation static field" below which phase dependence cannot be observed.
+
+The behavior of the mean signal for all laser tunings, as well as the peak-to-peak modulation in the +2 GHz observation are explained by the fundamentals of our model. However, it is not clear why at small applied static fields, the peak-to-peak modulation is of opposite sign compared to observations above the ionization limit. It is also not immediately obvious why the modulation approaches zero and then changes sign at a particular static field. To investigate these phenomena, we produced a computational model.
+
+\section{\label{comp}Computational Model}
 
 \section{\label{disc}Discussion}
 
