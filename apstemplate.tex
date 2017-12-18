@@ -181,11 +181,50 @@ In the two figures at 14 GHz and 30 GHz below the DIL, the behavior is more comp
 
 The behavior of the mean signal for all laser tunings, as well as the peak-to-peak modulation in the +2 GHz observation are explained by the fundamentals of our model. However, it is not clear why at small applied static fields, the peak-to-peak modulation below the ionization limit is of opposite sign compared to observations above the ionization limit. It is also not immediately obvious why the modulation approaches zero and then changes sign at a particular static field. To investigate these phenomena, we produced a computational model.
 
-\section{\label{comp}Computational Model}
+\section{Computational Model}
+\label{sec:comp}
 
-\section{\label{disc}Discussion}
+We modeled our system as a classical electron excited to a particular energy and angular momentum by the excitation laser, moving in the presence of the core Coulomb potential as well as the applied static and microwave fields. The electron moves in the system for 80 ns after excitation, during which time the static field has turned off, and the microwave cavity has been allowed to ring down. The Rydberg states we are investigating are long-lived, so after the static and microwave fields are no longer present the electron will not be disturbed from whatever final state it has arrived at.
 
-\section{\label{conc}Conclusions}
+In atomic units, the equations of motion executed by the simulation are:
+\begin{equation}
+\ddot{\vec{r}} = -\frac{1}{r^2} \cdot \hat{r} - \Theta_{st}(t) \vec{E}_{st} - \Phi_{mw}(t) \vec{E}_{mw} \sin{(\omega t + \phi_0)},
+\end{equation}
+where $\Phi_{mw}(t)$ and $\Theta_{st}(t)$ are the envelopes of the microwave and static fields, respectively.
+\begin{align}
+\Phi_{mw}(t<t_{off}) & = 1 & \quad & \Theta_{st}(t<t_{off}) & = 1 \\
+\Phi_{mw}(t \geq t_{off}) & = e^{-(t-t_{off})/\tau} & \quad & \Theta_{st}(t \geq t_{off}) & = 0
+\end{align}
+To match the conditions of our experiment, the ring-down time of the microwave cavity is $\tau = 10 ns$, and the time at which the fields are turned off are $t_{off} = 20 ns$. The microwave frequency is $\omega = 2\pi \cdot 15.9 GHz$ and the microwave field is set to $\vec{E}_{mw} = 4 V/cm \hat{z}$. The pulsed electric field $\vec{E}_{st}$ is always along the $\hat{z}$ axis, and simulations are executed at a variety of magnitudes. $\phi_0$ represents the initial phase of the microwave field at which the electron is excited.
+
+The initial conditions of the electron can be set to the classical equivalent of an electron excited to an orbit with a particular initial kinetic energy and angular momentum. Further, because the electron is excited from the much smaller $3D$ state, the initial position is chosen to be the point of closest approach in the classical orbit. There is, however, no classical analog to an $m_l = 0$ state to dictate whether an orbit confined to the $x-z$ plane aught to have it's initial angular momentum vector pointed in the $+/- \hat{y}$ direction. As such, for each set of parameters, both initial conditions are considered. Finally, because our excitation laser frequency is much faster than the microwave frequency, we consider both cases where the the elliptical orbits are elongated in the $+ \hat{z}$ and $-\hat{z}$ directions, corresponding to initial Laplace-Runge-Lenz (LRL) vectors in the $+\hat{z}$ and $-\hat{z}$ directions. In total, for each particular $\phi_0$ and $\vec{E}_{st}$, four separate cases are considered.
+
+\begin{figure}
+	\includegraphics[width=0.5\textwidth]{14}
+	\caption{\emph{LABEL (A)(B)(C).} The analysis converting a set of simulation runs at 200 phases $\phi_0$ between 0 and 2$\pi$, with a pulsed static field of 14 V/cm, a microwave field of 4 V/cm, and an excitation energy of 20 GHz below the ionization limit. For each $\phi_0$, the simulation is run for initial angular momentum in the $+\hat{y}$ and $-\hat{y}$ directions, and initial LRL vectors in the $+\hat{z}$ and $-\hat{z}$ directions. (A) shows the final total orbital energy after the system has evolved for 80 ns. In (B), these final energies are sorted into $E_f\geq 0$ and $E_f<0$ corresponding to ionized and bound states, respectively. (C) shows the results of convolving the results from (B) with the intensity profile of the amplitude modulation. The combined signal from the "up" and "down"-hill electrons is observed experimentally.}
+	\label{fig:ModEval}
+\end{figure}
+
+The process for simulating an experimental result for a particular choice of $\vec{E}_{st} = + 14 mV/cm \hat{z}$ and an initial energy corresponding to 20 GHz below the ionization limit is shown in Fig.~\ref{fig:ModEval}. We iterate the initial excitation phase $\phi_0$ over 200 points between 0 and $2\pi$, corresponding to portions of the electron wave-packet excited at different phases of the microwave field. The system is allowed to evolve for 80 ns, at which point we extract the final orbital energy $E_f$ of the electron. If $E_f \geq 0$ we consider the electron ionized and assume we will not detect it. If $E_f < 0$, we consider the electron bound and assume it will be stable until it is field ionized and detected 1 $\mu s$ later. This set of final states is convolved with the intensity modulation envelope of the excitation laser to produce the expected phase-dependent Rydberg signal.
+\begin{equation}
+S(\phi) = \frac{1}{4n} \sum_{i=0}^{n} F(\phi\prime_i) \cdot \cos{^2(\phi - \phi\prime_i)}
+\end{equation}
+
+\begin{figure}
+\includegraphics[width=0.5\textwidth]{fields0}
+\caption{Phase dependent Rydberg signal produced by our computational model.}
+\label{fig:SimMod}
+\end{figure}
+
+Fig.~\ref{fig:SimMod} shows the results of our computational model with an initial electron energy of -20 GHz, a 4 V/cm microwave field, at different pulsed fields. This model provides insight into how phase dependence emerges as the applied field is increased. At zero field, it is clear that the electrons launched "uphill", along the electric field, produce a signal exactly $\pi$ out of phase with electrons launched "downhill", opposite the electric field direction. The combined signal from these two groups then produces a flat detected signal. However, when a small 14 mV/cm static field is applied, the uphill and downhill signals differentiate. As should be expected, the downhill electrons have the same signal phase, but the mean value of the signal is suppressed. This corresponds to a depressed potential in the downhill direction causing fewer electrons to remain bound. Something interesting, however, happens to the uphill electrons at low fields. The phase that takes energy from electrons to produce more bound states in zero-field leads to more ionization in small fields. Meanwhile, the phase that adds energy to the electron is more likely to produce bound states. Examination of orbits in our model shows that this is do to the uphill potential catching electrons with increased energy in long orbits that do not return to the ion core before the microwave field dies off, and are therefore unlikely to ionize. Uphill electrons launched at phases that lose energy, conversely, are put into deeper, fast orbits that pass near the core many times while the microwave fields are strong, providing many opportunities to gain energy from the microwave field and ionize. Combined, these up- and downhill electron signals produce a clear combined phase dependent Rydberg signal.
+
+Just as is shown in our experimental data, the phase of the total signal produced by our model shifts by $\pi$ at large pulsed fields. From looking at up- and downhill electron contributions, there are two important causes for this phase inversion. First, the downhill electron signal is almost completely suppressed at large static fields. This is sensible, at some point the classical turning point in the core + static potential is too depressed to trap any downhill electrons. The combined signal is then almost entirely due to electrons launched uphill. Investigating the electron orbits in our model shows the uphill signal phase shift is due to the long orbits present at smaller fields disappearing. Instead, electrons both gaining and losing energy in the microwave field end up in orbits that return to the core many times, allowing for ionization. The result is that more deeply bound electrons are further from ionization and are less likely to ionize. Our classical computational model, accounting for multiple orbits of excited Rydberg electrons, can account for both the onset of phase dependence with applied pulsed static field, and the inversion of phase dependence observed at large static fields.
+
+\section{Discussion}
+\label{sec:disc}
+
+\section{Conclusions}
+\label{sec:conc}
 
 % If in two-column mode, this environment will change to single-column
 % format so that long equations can be displayed. Use
