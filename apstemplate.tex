@@ -87,19 +87,42 @@ Pump-probe schemes using high frequency pulsed light synchronous to strong field
 
 % body of paper here - Use proper section commands
 % References should be done using the \cite, \ref, and \label commands
-\section{\label{intro}Introduction}
+%\section{\label{}}
 % Put \label in argument of \section for cross-referencing
 %\section{\label{}}
 %\subsection{}
 %\subsubsection{}
 
+\section{\label{intro}Introduction}
+
+Attosecond-IR experiments very useful. Test understanding of ionization in strong-field + Coulomb regime. High-harmonic-generation. Attosecond streaking to use strong fields to get time-resolved electron dynamics, ultrafast chemistry, and probe internal structure of large atoms / molecules.
+
+The techniques and principles of attosecond-IR experiments have more broad appeal. THz experiments w/ pulsed ps, fs or as lasers use similar concepts experimental principles. Past work has extended this to application in Rydberg atoms using MW fields and pulsed excitation lasers. Shown phase dependent ionization, provided tool for probing the dynamics of Rydberg electrons near the ionization limit.
+
+We now show the effect of breaking symmetry of system by adding pulsed electric field during excitation. Comparable to symmetry arguments used in THz and Attosecond experiments.
+
+We provide further improvements to the computational model.
+
+
 \section{Background}
 \label{sec:back}
+
+Qualitatively describe behavior of electrons near ionization limit in MW fields, and recent work (Alexandr). Rydberg states with long lifetimes in strong MW field. Long orbits.
+
+Include simpleman's + coulomb model discussed in Shuman and Overstreet. Maximum energy exchange at what phase? Describe qualitatively the process this model describes: Electron leaves core exchanging energy w/ MW field. Goes on an orbit in the static field that either ionizes or doesn't. Returning to the core, the electron can exchange energy again, the process repeats. Long orbits protect bound states from returning and maybe getting ionized.
+
+(MAYBE) show how these calculations give a $\Delta E$ vs $\phi_0$ for initially leaving the core, and a return.
+
+Show that when probing with a amplitude modulated laser, the observations can only be at the modulation frequency.
+
+Show that symmetry arguments limit what harmonics of the MW field the system response can include.
+
+(MAYBE) Show that if we limit system response to what initial energy transfer happens, this limits the phase of the phase-dependent signal to particular phases ($7\pi/6$ and $\pi/6$ in static fields, ($\pi/6$ and $7\pi/6$) or ($4\pi/6$ and $11\pi/6$) in zero field.
 
 \section{Experimental Methods}
 \label{sec:exp}
 
-In this experiment, Li atoms in a columated thermal beam are optically excited to high lying Rydberg or continuum states along the path $2s \xrightarrow{\text{671-nm}} 2p \xrightarrow{\text{610-nm}} 3d \xrightarrow{\text{819-nm}} nf, \epsilon f$. These optical beams intersect at a right angle forming a rectangular 1 mm$^3$ excitation region. This region is at an anti-node of a 15.9 GHz Fabry-Perot microwave cavity. The 1 mm$^3$ region is much smaller than the extent of the microwave antinode, allowing us to consider the microwave field constant across the region. The interaction region is enclosed on top, bottom and two sides by aluminum plates. Combined with the two Fabry-Perot mirrors, this forms a 10-cm cubic enclosure. Bias voltages can be applied independently to each plate and mirror to control static fields in the interaction region.
+In this experiment, Li atoms in a collimated thermal beam are optically excited to high lying Rydberg or continuum states along the path $2s \xrightarrow{\text{671-nm}} 2p \xrightarrow{\text{610-nm}} 3d \xrightarrow{\text{819-nm}} nf, \epsilon f$. These optical beams intersect at a right angle forming a rectangular 1 mm$^3$ excitation region. This region is at an anti-node of a 15.9 GHz Fabry-Perot microwave cavity. The 1 mm$^3$ region is much smaller than the extent of the microwave antinode, allowing us to consider the microwave field constant across the region. The interaction region is enclosed on top, bottom and two sides by aluminum plates. Combined with the two Fabry-Perot mirrors, this forms a 10-cm cubic enclosure. Bias voltages can be applied independently to each plate and mirror to control static fields in the interaction region.
 
 The microwave cavity is allowed to load for 240 ns before the first laser pulse, and the microwave input is shut off 20 ns after the last laser pulse allowing the cavity to empty. Synchronous with the MW power envelope, a static field pulse is applied to the top and bottom aluminum plates to produce a vertical static field in the interaction region. The 610-nm and 671-nm lasers are pulsed synchronously for 20 ns, after which the 819-nm laser is pulsed with a square envelope for 20 ns. One microsecond after the last laser pulse, we field ionize surviving Rydberg states within 100 GHz of the ionization limit by applying a negative voltage pulse to an aluminum plate below the interaction region. Ionized electrons are pushed into a microchannel plate (MCP) assembly which produces a voltage pulse proportional to the number of electrons detected. This pulse is integrated through a boxcar integrator and recorded.
 
