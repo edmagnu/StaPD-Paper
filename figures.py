@@ -12,19 +12,25 @@ import matplotlib.gridspec as gridspec
 import pandas as pd
 
 
+def atomic_units():
+    """Return a dictionary of atomic units, ['GHz'], ['mVcm'], and ['ns']"""
+    au = {'GHz': 1.51983e-7, 'mVcm': 1.94469e-13, 'ns': 4.13414e7}
+    return au
+
+
 # ==========
 # Modulation and Mean vs. Pulsed Field
 # ModvsField.pdf
 # ==========
 def phase_amp_mean_plot(data, title, ph_th, ax1, ax2):
     """Standard plotting for computed or experimental data.
-    data DataFrame must have "Ep", "x0", "a", and "y0" keys."""
+    data DataFrame must have 'Ep', 'x0', 'a', and 'y0' keys."""
     # plot data
     ax1.axhline(0, color='grey')
-    data.plot(x="Ep", y="a", ax=ax1, style="-o")
-    data.plot(x="Ep", y="y0", ax=ax2, style="-o")
+    data.plot(x='Ep', y='a', ax=ax1, style='-o')
+    data.plot(x='Ep', y='y0', ax=ax2, style='-o')
     # beautify
-    # ax1.tick_params(which="minor", left="off")
+    # ax1.tick_params(which='minor', left='off')
     ax1.set(ylabel="Amp (pk-pk)", title=title)
     ax2.set(xlabel="Pulsed Field (mV/cm)", ylabel="Mean")
     # turn on grids
@@ -36,38 +42,38 @@ def phase_amp_mean_plot(data, title, ph_th, ax1, ax2):
 
 
 def fsort_prep(fsort, excluded, title, ph_th, figname, ax1, ax2):
-    fsort.sort_values(by=["Static"], inplace=True)
+    fsort.sort_values(by=['Static'], inplace=True)
     # unmassage amps and phases
-    mask = (fsort["a"] < 0)
-    fsort.loc[mask, "a"] = -fsort[mask]["a"]
-    fsort.loc[mask, "phi"] = fsort[mask]["phi"] + np.pi
-    fsort["phi"] = fsort["phi"] % (2*np.pi)
+    mask = (fsort['a'] < 0)
+    fsort.loc[mask, 'a'] = -fsort[mask]['a']
+    fsort.loc[mask, 'phi'] = fsort[mask]['phi'] + np.pi
+    fsort['phi'] = fsort['phi'] % (2*np.pi)
     # amplitude -> pk-pk
-    fsort["a"] = 2*fsort["a"]
+    fsort['a'] = 2*fsort['a']
     # mV/cm
-    fsort["Static"] = fsort["Static"]*0.72*0.1
+    fsort['Static'] = fsort['Static']*0.72*0.1
     # manually exclude bad data runs
     for fname in excluded:
-        fsort = fsort[fsort["Filename"] != fname]
+        fsort = fsort[fsort['Filename'] != fname]
     # translate
     data = pd.DataFrame()
-    data["Ep"] = fsort["Static"]
-    data["a"] = fsort["a"]
-    data["x0"] = fsort["phi"]
-    data["y0"] = fsort["y0"]
+    data['Ep'] = fsort['Static']
+    data['a'] = fsort['a']
+    data['x0'] = fsort['phi']
+    data['y0'] = fsort['y0']
     # phase threshold
     if ph_th is not None:
         # ph_th = 6*np.pi/6
         # Amplitude
-        mask = (data["x0"] >= (ph_th - np.pi)) & (data["x0"] < ph_th)
-        data.loc[mask, "a"] = -data[mask]["a"]
-        mask = (data["x0"] >= (ph_th + np.pi))
-        data.loc[mask, "a"] = -data[mask]["a"]
+        mask = (data['x0'] >= (ph_th - np.pi)) & (data['x0'] < ph_th)
+        data.loc[mask, 'a'] = -data[mask]['a']
+        mask = (data['x0'] >= (ph_th + np.pi))
+        data.loc[mask, 'a'] = -data[mask]['a']
         # phase
-        mask = (data["x0"] < (ph_th - np.pi))
-        data.loc[mask, "x0"] = data["x0"] + 2*np.pi
-        mask = (data["x0"] >= (ph_th + np.pi))
-        data.loc[mask, "x0"] = data["x0"] - 2*np.pi
+        mask = (data['x0'] < (ph_th - np.pi))
+        data.loc[mask, 'x0'] = data['x0'] + 2*np.pi
+        mask = (data['x0'] >= (ph_th + np.pi))
+        data.loc[mask, 'x0'] = data['x0'] - 2*np.pi
     # plot
     ax1, ax2 = phase_amp_mean_plot(data, title, ph_th, ax1, ax2)
     return data, ax1, ax2
@@ -93,7 +99,7 @@ def field_modulation():
     ax[5] = fig.add_subplot(gsi2[1], sharex=ax[4])
     # fig, ax = plt.subplots(nrows=6, figsize=(6, 9))
     # DIL + 2 GHz
-    mask = (fits["DL-Pro"] == 365872.6) & (fits["Attn"] == 44)
+    mask = (fits['DL-Pro'] == 365872.6) & (fits['Attn'] == 44)
     fsort = fits[mask].copy(deep=True)
     excluded = ["2016-09-23\\3_delay.txt", "2016-09-23\\4_delay.txt"]
     title = r"$W_0$ = DIL + 2 GHz"
@@ -104,7 +110,7 @@ def field_modulation():
     ax[0].set(ylim=(-0.1, 0.1))
     ax[1].set(ylim=(0, 0.4))
     # DIL - 14 GHz
-    mask = (fits["DL-Pro"] == 365856.7)
+    mask = (fits['DL-Pro'] == 365856.7)
     fsort = fits[mask].copy(deep=True)
     excluded = ["2016-09-23\\5_delay.txt", "2016-09-23\\11_delay.txt",
                 "2016-09-23\\12_delay.txt", "2016-09-23\\16_delay.txt",
@@ -118,8 +124,8 @@ def field_modulation():
     ax[2].set(ylim=(-0.07, 0.07))
     ax[3].set(ylim=(0, 0.6))
     # DIL - 30 GHz
-    mask = (fits["DL-Pro"] == 365840.7)
-    fsort = fits[mask].sort_values(by=["Static"])
+    mask = (fits['DL-Pro'] == 365840.7)
+    fsort = fits[mask].sort_values(by=['Static'])
     excluded = ["2016-09-27\\7_delay.txt", "2016-09-27\\15_delay.txt"]
     title = r"$W_0$ = DIL - 30 GHz"
     ph_th = 5.5/6*np.pi
@@ -129,15 +135,15 @@ def field_modulation():
     ax[4].set(ylim=(-0.05, 0.05))
     ax[5].set(ylim=(0, 0.7))
     # letter labels
-    props = dict(boxstyle='round', facecolor="white", alpha=1.0)
+    props = dict(boxstyle='round', facecolor='white', alpha=1.0)
     ax[0].text(0.95, 0.95, "(a)", transform=ax[0].transAxes, fontsize=14,
-               verticalalignment="center", horizontalalignment="center",
+               verticalalignment='center', horizontalalignment='center',
                bbox=props)
     ax[2].text(0.95, 0.95, "(b)", transform=ax[2].transAxes, fontsize=14,
-               verticalalignment="center", horizontalalignment="center",
+               verticalalignment='center', horizontalalignment='center',
                bbox=props)
     ax[4].text(0.95, 0.95, "(c)", transform=ax[4].transAxes, fontsize=14,
-               verticalalignment="center", horizontalalignment="center",
+               verticalalignment='center', horizontalalignment='center',
                bbox=props)
     # clean up
     gso.tight_layout(fig)
@@ -146,6 +152,58 @@ def field_modulation():
 # ==========
 
 
+# ==========
+# 1-D model for turning time
+# up_and_down_orbits.pdf
+# ==========
+def turning_time_figure():
+    au = atomic_units()
+    # import data
+    dname = os.path.join("..", "2D-Comp-Model", "computation", "Turning Time")
+    fname = os.path.join(dname, "data_raw.txt")
+    data_tot = pd.read_csv(fname, index_col=0)
+    fname = os.path.join(dname, "picked_f.txt")
+    picked_tot = pd.read_csv(fname, index_col=0)
+    # uphill figure
+    fig, ax = plt.subplots()
+    # mask uphill values (Dir == -1)
+    data = data_tot[data_tot['Dir'] == -1].copy(deep=True)
+    picked = picked_tot[picked_tot['Dir'] == -1].copy(deep=True)
+    # convert to lab units
+    picked['W'] = picked['W']/au['GHz']
+    picked['field'] = picked['field']/au['mVcm']
+    # turning time = 10 ns
+    mask = (picked['kind'] == 'tt=10')
+    mask = mask & np.logical_not(np.isnan(picked['field']))
+    dftt10 = picked[mask].copy(deep=True)
+    dftt10.plot(x='W', y='field', label='tturn=10', ax=ax)
+    # upper binding time = 20 ns
+    mask = (picked['kind'] == 'tplus=20')
+    mask = mask & np.logical_not(np.isnan(picked['field']))
+    # minw = min(picked[mask]['W'])
+    # maxw = max(picked[mask]['W'])
+    # mask = mask & (picked['W'] <= maxw) & (picked['W'] >= minw)
+    dftplus = picked[mask].copy(deep=True)
+    dftplus.plot(x='W', y='field', label='tplus=20', ax=ax)
+    # lower binding time = 20 ns
+    mask = (picked['kind'] == 'tb=20')
+    mask = mask & np.logical_not(np.isnan(picked['field']))
+    # minw = min(picked[mask]['W'])
+    # maxw = max(picked[mask]['W'])
+    # mask = mask & (picked['W'] <= maxw) & (picked['W'] >= minw)
+    dftbind = picked[mask].copy(deep=True)
+    obs = dftbind.iloc[-1].copy(deep=True)
+    obs['W'] = 0
+    obs['field'] = 0
+    dftbind = dftbind.append(obs, ignore_index=True).copy(deep=True)
+    dftbind.sort_values(by='field', inplace=True)
+    dftbind.plot(x='W', y='field', label='tb=20', ax=ax)
+    # save
+    plt.savefig('up_and_down_orbits.pdf')
+    return data_tot, picked_tot
 
 
-field_modulation()
+# ==========
+# main script
+# field_modulation()
+data, picked = turning_time_figure()
