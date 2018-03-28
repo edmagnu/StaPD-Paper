@@ -188,7 +188,7 @@ def turning_time_figure():
     picked_tot['W'] = picked_tot['W']/au['GHz']
     picked_tot['field'] = picked_tot['field']/au['mVcm']
     # plot
-    fig, axes = plt.subplots(nrows=2, figsize=(4,6), sharex=True)
+    fig, axes = plt.subplots(nrows=2, figsize=(4, 6), sharex=True)
     ymin, ymax = -100, 100
     xmin, xmax = 0, 100
     # ==========
@@ -249,7 +249,7 @@ def turning_time_figure():
     ax.text(80, 95, "(a)", **align, bbox=props)  # chaotic
     ax.text(50, 95, "(b)", **align, bbox=props)  # Immediate Ionization
     ax.text(32, 95, "(c)", **align, bbox=props)  # Goldylocks Zone
-    ax.text(10, 95, "(d)", **align, bbox=props)  # Late Return & Ionization 
+    ax.text(10, 95, "(d)", **align, bbox=props)  # Late Return & Ionization
     # touch ups
     ax.set(xlabel="Pulsed Field (mV/cm)", xlim=(xmin, xmax),
            ylabel=r"$W_0 + \Delta W_{MW}(\phi)$ (GHz)", ylim=(ymin, ymax),
@@ -362,7 +362,7 @@ def w0_2D():
     w0 = np.sort(params['E0'].unique())[1]
     fields = np.sort(params['Ep'].unique()[[0, 5, 10]])
     # plot
-    fig, axes = plt.subplots(nrows=3, sharex=True, figsize=(4,6))
+    fig, axes = plt.subplots(nrows=3, sharex=True, figsize=(4, 6))
     xmin, xmax = 0, 2*np.pi
     ymin, ymax = -0.05, 0.32
     xticks, xticklabels = xticks_2p()
@@ -480,7 +480,7 @@ def w20_2D():
     w0 = np.sort(params['E0'].unique())[0]
     fields = np.sort(params['Ep'].unique()[[0, 1, 10]])
     # plot
-    fig, axes = plt.subplots(nrows=3, sharex=True, figsize=(4,6))
+    fig, axes = plt.subplots(nrows=3, sharex=True, figsize=(4, 6))
     xmin, xmax = 0, 2*np.pi
     ymin, ymax = -0.05, 0.4
     xticks, xticklabels = xticks_2p()
