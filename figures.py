@@ -12,10 +12,15 @@ import matplotlib.gridspec as gridspec
 import pandas as pd
 
 
+# ==========
+# Modulation and Mean vs. Pulsed Field
+# ModvsField.pdf
+# ==========
 def phase_amp_mean_plot(data, title, ph_th, ax1, ax2):
     """Standard plotting for computed or experimental data.
     data DataFrame must have "Ep", "x0", "a", and "y0" keys."""
     # plot data
+    ax1.axhline(0, color='grey')
     data.plot(x="Ep", y="a", ax=ax1, style="-o")
     data.plot(x="Ep", y="y0", ax=ax2, style="-o")
     # beautify
@@ -96,6 +101,8 @@ def field_modulation():
     figname = "exp_p2.pdf"
     data, ax[0], ax[1] = fsort_prep(fsort, excluded, title, ph_th, figname,
                                     ax[0], ax[1])
+    ax[0].set(ylim=(-0.1, 0.1))
+    ax[1].set(ylim=(0, 0.4))
     # DIL - 14 GHz
     mask = (fits["DL-Pro"] == 365856.7)
     fsort = fits[mask].copy(deep=True)
@@ -108,6 +115,8 @@ def field_modulation():
     figname = "exp_m14.pdf"
     data, ax[2], ax[3] = fsort_prep(fsort, excluded, title, ph_th, figname,
                                     ax[2], ax[3])
+    ax[2].set(ylim=(-0.07, 0.07))
+    ax[3].set(ylim=(0, 0.6))
     # DIL - 30 GHz
     mask = (fits["DL-Pro"] == 365840.7)
     fsort = fits[mask].sort_values(by=["Static"])
@@ -117,7 +126,9 @@ def field_modulation():
     figname = "exp_m30.pdf"
     data, ax[4], ax[5] = fsort_prep(fsort, excluded, title, ph_th, figname,
                                     ax[4], ax[5])
-    # letter lables
+    ax[4].set(ylim=(-0.05, 0.05))
+    ax[5].set(ylim=(0, 0.7))
+    # letter labels
     props = dict(boxstyle='round', facecolor="white", alpha=1.0)
     ax[0].text(0.95, 0.95, "(a)", transform=ax[0].transAxes, fontsize=14,
                verticalalignment="center", horizontalalignment="center",
@@ -132,5 +143,9 @@ def field_modulation():
     gso.tight_layout(fig)
     plt.savefig('ModvsField.pdf')
     return
+# ==========
+
+
+
 
 field_modulation()
