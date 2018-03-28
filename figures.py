@@ -610,13 +610,13 @@ def phase_delay():
     data.plot(x='wavelengths', y='nsignal', marker='.', ls='None', ax=ax)
     # pick out field = -14 mV/cm
     # mask = mask_p2 & (data_tot['Static'] ==
-                      # np.sort(data_tot['Static'].unique())[17])
+    #                   np.sort(data_tot['Static'].unique())[17])
     # data = data_tot[mask].copy(deep=True)
     # data.sort_values(by='wavelengths', inplace=True)
     # data.plot(x='wavelengths', y='nsignal', marker='.', ls='None', ax=ax)
     # pick out field = -14 mV/cm
     # mask = mask_p2 & (data_tot['Static'] ==
-                      # np.sort(data_tot['Static'].unique())[25])
+    #                   np.sort(data_tot['Static'].unique())[25])
     # data = data_tot[mask].copy(deep=True)
     # data.sort_values(by='wavelengths', inplace=True)
     # data.plot(x='wavelengths', y='nsignal', marker='.', ls='None', ax=ax)
@@ -638,7 +638,6 @@ def phase_delay():
     data = data_tot[mask].copy(deep=True)
     data.sort_values(by='wavelengths', inplace=True)
     data.plot(x='wavelengths', y='nsignal', marker='.', ls='None', ax=ax)
-    
     # tidy
     ax.legend().remove()
     return data_tot, mask_p2
