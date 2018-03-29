@@ -653,11 +653,11 @@ def phase_delay():
     data = data_tot[mask].copy(deep=True)
     data.sort_values(by='wavelengths', inplace=True)
     x, y = running_mean(data, nave)
-    ax.plot(x, y, '-', c='grey')
+    ax.plot(x, y, '-', c='grey', markersize=3)
     x = np.array(data['wavelengths'])
     popt = np.array(data[['y0', 'a', 'phi']].iloc[0])
     y = model_func_fit(x, *popt)
-    ax.plot(x, y, '-', c='k')
+    ax.plot(x, y, '-', c='blue')
     # data.plot(x='wavelengths', y='nsignal', marker='.', ls='None', ax=ax)
     # pick out field = 108 mV/cm
     mask = mask_p2 & (data_tot['Static'] ==
@@ -688,12 +688,15 @@ def phase_delay():
     ax.set(xlabel=r"Delay $\phi_0$ (rad)", ylabel="Norm. Signal",
            xticks=np.arange(0, 3.5, 0.5),
            xticklabels=["0", r"$\pi$", r"$2\pi$", r"$3\pi$", r"$4\pi$",
-                        r"$5\pi$", r"$6\pi$"])
+                        r"$5\pi$", r"$6\pi$"],
+           ylim=(-0.03, 0.37))
+    # twin axes
     ax2 = ax.twiny()
     ax2.tick_params('x')
     tps = 1/(15.932*1e9)*1e12
-    tticks = np.arange(0, 250, 50)
-    ax2.set(xticks=tticks/tps, xticklabels=tticks, xlabel=r"Delay $t_0$ (ns)")
+    tticks = np.arange(0, 3.5, 0.5)
+    ax2.set(xticks=tticks, xticklabels=np.round(tticks*tps,1),
+            xlabel=r"Delay $t_0$ (ps)")
     # ax.legend().remove()
     # labels
     props = dict(boxstyle='round', facecolor='white', alpha=1.0)
@@ -704,9 +707,77 @@ def phase_delay():
     ax2.text(3.2, 0.06, "36.0 mV/cm", **align, bbox=props)
     ax2.text(3.2, 0, "108.0 mV/cm", **align, bbox=props)
     # save
-    fig.tight_layout()
+    fig.tight_layout(rect=(0,0, 0.98, 1))
     plt.savefig("phase_delay.pdf")
     return data_tot, mask_p2, data
+# ==========
+
+
+# ==========
+# Field vs IR Intensity
+# fields.pdf
+# ==========
+def field_fig():
+    # constants
+    phi0 = 4*np.pi/6
+    a = 0.9
+    offmw = 2.0
+    offir = 0.0
+    freq = 15.932*1e9  # MW freq in Hz
+    # omega = freq*(2*np.pi)
+    # vectors
+    phases = np.linspace(0, 5*np.pi, 10001)
+    # times = phases/omega
+    mw = a*np.sin(phases) + offmw
+    ir = a*np.sin(phases + phi0) + offir
+    # plot
+    fig, ax = plt.subplots()
+    ax.plot(phases, mw, c='C3', lw=3)
+    ax.fill_between(phases, ir, -a + offir, color='C0')
+    # markers
+    largs = dict(c='k', lw=1)  # marker line arguments
+    props = dict(boxstyle='round', color='white', alpha=0)
+    align = {'verticalalignment': 'center',
+             'horizontalalignment': 'center'}
+    fs = 14  # text font size
+    # zero references
+    ax.axhline(-a + offir, color='grey', lw=1)
+    ax.axhline(offmw, color='grey', lw=1)
+    # phase offset
+    ax.plot([np.pi]*2, offmw + np.array([0, 0.5]), **largs)
+    ax.plot([np.pi + 3/2*np.pi - phi0]*2, [a + offir, offmw + 0.5], **largs)
+    ax.plot([np.pi, np.pi + 3/2*np.pi - phi0], [offmw + 0.25]*2, **largs)
+    ax.text(np.pi + (3/2*np.pi - phi0)/2, offmw + 0.5, r"$\omega t_0$",
+            **align, bbox=props, fontsize=fs)
+    # MW Period
+    ax.plot([2.5*np.pi]*2, offmw + a + np.array([0, 0.3]), **largs)
+    ax.plot([4.5*np.pi]*2, offmw + a + np.array([0, 0.3]), **largs)
+    ax.plot([2.5*np.pi, 4.5*np.pi], [offmw + a + 0.15]*2, **largs)
+    ax.text(3.5*np.pi, offmw + a + 0.3, str(np.round(1/freq*1e12, 1)) + " ps",
+            **align, bbox=props, fontsize=fs)
+    # y labels
+    ax.text(-1.5, offmw, "MW Field", rotation=90, **align, fontsize=fs)
+    ax.text(-1.5, offir, "IR Intensity", rotation=90, **align, fontsize=fs)
+    # axes
+    xticklabels = []
+    xticks = np.arange(0, 5.5, 0.5)*np.pi
+    for i in range(0, 13, 1):
+        if (i % 2) == 0:
+            label = str(int(i/2)) + r"$\pi$"
+        else:
+            label = ""
+        xticklabels = xticklabels + [label]
+    ax.set_xlabel("MW Phase $\omega t_0$ (rad.)", fontsize=fs)
+    ax.set(xticks=xticks, xticklabels=xticklabels,
+           yticks=[], yticklabels=[])
+    ax.tick_params(labelsize=fs-2)
+    ax.tick_params(axis='x', direction='in')
+    ax.spines['right'].set_visible(False)
+    ax.spines['top'].set_visible(False)
+    # finishing
+    fig.tight_layout(rect=[0.05, 0, 1, 1])
+    plt.savefig('fields.pdf')
+    return phases, mw
 # ==========
 
 
@@ -716,4 +787,5 @@ def phase_delay():
 # data, picked = turning_time_figure()
 # data, params = w0_2D()
 # data, params = w20_2D()
-data_tot, mask, data = phase_delay()
+# data_tot, mask, data = phase_delay()
+phases, mw = field_fig()
