@@ -161,7 +161,7 @@ def field_modulation():
     # clean up
     gso.tight_layout(fig)
     plt.savefig('ModvsField.pdf')
-    return
+    return fits
 # ==========
 
 
@@ -591,23 +591,50 @@ def w20_2D():
 # Phase Delay scan with and without pulsed field of 14 mV/cm
 # phase_delay.pdf
 # ==========
+def model_func_fit(x, y0, a, phi):
+    """Sinusoidal plus offset model for delay scan phase dependence.
+    "x" is the delay in wavelengths
+    "y" is the normalized Rydberg signal.
+    Returns model dataframe and fit parameters.
+    """
+    return y0 + a*np.sin(2*np.pi*x + phi)
+
+
+def running_mean(df, n):
+    cumsum = np.array(df['nsignal'].cumsum(skipna=True))
+    y = (cumsum[n:] - cumsum[:-n]) / n
+    cumsum = np.array(df['wavelengths'].cumsum(skipna=True))
+    x = (cumsum[n:] - cumsum[:-n]) / n
+    return x, y
+
+
 def phase_delay():
     # load
     dname = os.path.join("..", "Data", "StaPD-Analysis")
     fname = os.path.join(dname, "moddata.txt")
     data_tot = pd.read_csv(fname, sep="\t", index_col=0)
-    # pick out p2
+    # pick out DIL + 2 GHz
     mask_p2 = (data_tot["DL-Pro"] == 365872.6)
     mask_p2 = mask_p2 & (data_tot["Attn"] == 44)
-    # data_tot = data_tot[mask]
+    # excluded data
+    excluded = ["2016-09-23\\3_delay.txt", "2016-09-23\\4_delay.txt"]
+    for fname in excluded:
+        mask_p2 = mask_p2 & (data_tot["Filename"] != fname)
     # plot
     fig, ax = plt.subplots()
+    nave = 3
     # pick out field = 0 mV/cm
     mask = mask_p2 & (data_tot['Static'] ==
                       np.sort(data_tot['Static'].unique())[21])
     data = data_tot[mask].copy(deep=True)
     data.sort_values(by='wavelengths', inplace=True)
-    data.plot(x='wavelengths', y='nsignal', marker='.', ls='None', ax=ax)
+    x, y = running_mean(data, nave)
+    ax.plot(x, y, '-', c='grey')
+    x = np.array(data['wavelengths'])
+    popt = np.array(data[['y0', 'a', 'phi']].iloc[0])
+    y = model_func_fit(x, *popt)
+    ax.plot(x, y, '-', c='k')
+    # data.plot(x='wavelengths', y='nsignal', marker='.', ls='None', ax=ax)
     # pick out field = -14 mV/cm
     # mask = mask_p2 & (data_tot['Static'] ==
     #                   np.sort(data_tot['Static'].unique())[17])
@@ -625,29 +652,68 @@ def phase_delay():
                       np.sort(data_tot['Static'].unique())[29])
     data = data_tot[mask].copy(deep=True)
     data.sort_values(by='wavelengths', inplace=True)
-    data.plot(x='wavelengths', y='nsignal', marker='.', ls='None', ax=ax)
+    x, y = running_mean(data, nave)
+    ax.plot(x, y, '-', c='grey')
+    x = np.array(data['wavelengths'])
+    popt = np.array(data[['y0', 'a', 'phi']].iloc[0])
+    y = model_func_fit(x, *popt)
+    ax.plot(x, y, '-', c='k')
+    # data.plot(x='wavelengths', y='nsignal', marker='.', ls='None', ax=ax)
     # pick out field = 108 mV/cm
     mask = mask_p2 & (data_tot['Static'] ==
                       np.sort(data_tot['Static'].unique())[-7])
     data = data_tot[mask].copy(deep=True)
     data.sort_values(by='wavelengths', inplace=True)
-    data.plot(x='wavelengths', y='nsignal', marker='.', ls='None', ax=ax)
+    x, y = running_mean(data, nave)
+    ax.plot(x, y, '-', c='grey')
+    x = np.array(data['wavelengths'])
+    popt = np.array(data[['y0', 'a', 'phi']].iloc[0])
+    y = model_func_fit(x, *popt)
+    ax.plot(x, y, '-', c='k')
+    # data.plot(x='wavelengths', y='nsignal', marker='.', ls='None', ax=ax)
     # pick out field = 7.2 mV/cm
     mask = mask_p2 & (data_tot['Static'] ==
                       np.sort(data_tot['Static'].unique())[23])
     data = data_tot[mask].copy(deep=True)
     data.sort_values(by='wavelengths', inplace=True)
-    data.plot(x='wavelengths', y='nsignal', marker='.', ls='None', ax=ax)
+    x, y = running_mean(data, nave)
+    ax.plot(x, y, '-', c='grey')
+    x = np.array(data['wavelengths'])
+    popt = np.array(data[['y0', 'a', 'phi']].iloc[0])
+    y = model_func_fit(x, *popt)
+    ax.plot(x, y, '-', c='k')
+    # data.plot(x='wavelengths', y='nsignal', marker='.', ls='None', ax=ax)
     # tidy
-    ax.legend().remove()
-    return data_tot, mask_p2
+    # ax.set(xlim=(-0.2, 3.5))
+    ax.set(xlabel=r"Delay $\phi_0$ (rad)", ylabel="Norm. Signal",
+           xticks=np.arange(0, 3.5, 0.5),
+           xticklabels=["0", r"$\pi$", r"$2\pi$", r"$3\pi$", r"$4\pi$",
+                        r"$5\pi$", r"$6\pi$"])
+    ax2 = ax.twiny()
+    ax2.tick_params('x')
+    tps = 1/(15.932*1e9)*1e12
+    tticks = np.arange(0, 250, 50)
+    ax2.set(xticks=tticks/tps, xticklabels=tticks, xlabel=r"Delay $t_0$ (ns)")
+    # ax.legend().remove()
+    # labels
+    props = dict(boxstyle='round', facecolor='white', alpha=1.0)
+    align = {'verticalalignment': 'center',
+             'horizontalalignment': 'right'}
+    ax2.text(3.2, 0.3, "0.0 mV/cm", **align, bbox=props)
+    ax2.text(3.2, 0.18, "7.2 mV/cm", **align, bbox=props)
+    ax2.text(3.2, 0.06, "36.0 mV/cm", **align, bbox=props)
+    ax2.text(3.2, 0, "108.0 mV/cm", **align, bbox=props)
+    # save
+    fig.tight_layout()
+    plt.savefig("phase_delay.pdf")
+    return data_tot, mask_p2, data
 # ==========
 
 
 # ==========
 # main script
-# field_modulation()
+# fits = field_modulation()
 # data, picked = turning_time_figure()
 # data, params = w0_2D()
 # data, params = w20_2D()
-data, mask = phase_delay()
+data_tot, mask, data = phase_delay()
