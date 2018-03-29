@@ -782,10 +782,18 @@ def field_fig():
 
 
 # ==========
+# Sideways Pulsed Field
+# circle_static.pdf
+# ==========
+def circle_static():
+    
+# ==========
+
+# ==========
 # main script
 # fits = field_modulation()
 # data, picked = turning_time_figure()
 # data, params = w0_2D()
 # data, params = w20_2D()
 # data_tot, mask, data = phase_delay()
-phases, mw = field_fig()
+# phases, mw = field_fig()
