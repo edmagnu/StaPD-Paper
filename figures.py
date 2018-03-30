@@ -191,7 +191,7 @@ def turning_time_figure():
     picked_tot['W'] = picked_tot['W']/au['GHz']
     picked_tot['field'] = picked_tot['field']/au['mVcm']
     # plot
-    fig, axes = plt.subplots(nrows=2, figsize=(4, 6), sharex=True)
+    fig, axes = plt.subplots(ncols=2, figsize=(6, 3), sharey=True)
     ymin, ymax = -100, 100
     xmin, xmax = 0, 100
     # ==========
@@ -249,10 +249,10 @@ def turning_time_figure():
     props = dict(boxstyle='round', facecolor='white', alpha=1.0)
     align = {'verticalalignment': 'top',
              'horizontalalignment': 'center'}
-    ax.text(80, 95, "(a)", **align, bbox=props)  # chaotic
-    ax.text(50, 95, "(b)", **align, bbox=props)  # Immediate Ionization
-    ax.text(32, 95, "(c)", **align, bbox=props)  # Goldylocks Zone
-    ax.text(10, 95, "(d)", **align, bbox=props)  # Late Return & Ionization
+    ax.text(80, 95, "(d)", **align, bbox=props)  # chaotic
+    ax.text(50, 95, "(c)", **align, bbox=props)  # Immediate Ionization
+    ax.text(32, 95, "(b)", **align, bbox=props)  # Goldylocks Zone
+    ax.text(10, 95, "(a)", **align, bbox=props)  # Late Return & Ionization
     # touch ups
     ax.set(xlabel="Pulsed Field (mV/cm)", xlim=(xmin, xmax),
            ylabel=r"$W_0 + \Delta W_{MW}(\phi)$ (GHz)", ylim=(ymin, ymax),
@@ -309,10 +309,10 @@ def turning_time_figure():
     props = dict(boxstyle='round', facecolor='white', alpha=1.0)
     align = {'verticalalignment': 'center',
              'horizontalalignment': 'left'}
-    ax.text(2.5, -50, "(a)", **align, bbox=props)  # chaotic
-    # ax.text(0, 50, "(b)", **align, bbox=props)  # Late Return and Ionize
-    ax.text(10, 0, "(c)", **align, bbox=props)  # Goldylocks Zone
-    ax.text(2.5, 50, "(d)", **align, bbox=props)  # Immediate Ionization
+    ax.text(2.5, -50, "(d)", **align, bbox=props)  # chaotic
+    # ax.text(0, 50, "(c)", **align, bbox=props)  # Late Return and Ionize
+    ax.text(10, 0, "(b)", **align, bbox=props)  # Goldylocks Zone
+    ax.text(2.5, 50, "(a)", **align, bbox=props)  # Immediate Ionization
     # touch ups
     ax.set(xlabel="Pulsed Field (mV/cm)", xlim=(xmin, xmax),
            ylabel=r"$W_0 + \Delta W_{MW}(\phi)$ (GHz)", ylim=(ymin, ymax),
@@ -401,7 +401,7 @@ def w0_2D():
     # clean up
     ax.set(xlim=(xmin, xmax), ylim=(ymin, ymax), xticks=xticks,
            xticklabels=xticklabels,  # xlabel=r"Phase $\phi_0$ (rad)",
-           ylabel="Norm. $e^-$ Signal", title=r"$E_{pulse} = 0$ mV/cm")
+           ylabel="Norm. Signal", title=r"$E_{pulse} = 0$ mV/cm")
     # ==========
     # 36 mV/cm
     # ==========
@@ -460,7 +460,7 @@ def w0_2D():
     ax.plot(xs, ys/2, label="Downhill", lw=3, ls='dashed', c=colors[1])
     # clean up
     ax.set(xlim=(xmin, xmax), ylim=(ymin, ymax), xticks=xticks,
-           xticklabels=xticklabels, xlabel=r"Phase $\phi_0$ (rad)",
+           xticklabels=xticklabels, xlabel=r"Phase $\omega t_0$ (rad)",
            ylabel="Norm. $e^-$ Signal", title=r"$E_{pulse} = 100$ mV/cm")
     # ==========
     # save
@@ -578,7 +578,7 @@ def w20_2D():
     ax.plot(xs, ys/2, label="Downhill", lw=3, ls='dashed', c=colors[1])
     # clean up
     ax.set(xlim=(xmin, xmax), ylim=(ymin, ymax), xticks=xticks,
-           xticklabels=xticklabels, xlabel=r"Phase $\phi_0$ (rad)",
+           xticklabels=xticklabels, xlabel=r"Phase $\omega t_0$ (rad)",
            ylabel="Norm. $e^-$ Signal", title=r"$E_{pulse} = 100$ mV/cm")
     # ==========
     # save
@@ -692,7 +692,7 @@ def phase_delay():
     # data.plot(x='wavelengths', y='nsignal', marker='.', ls='None', ax=ax)
     # tidy
     # ax.set(xlim=(-0.2, 3.5))
-    ax.set(xlabel=r"Delay $\phi_0$ (rad)", ylabel="Norm. Signal",
+    ax.set(xlabel=r"Delay $\omega t_0$ (rad.)", ylabel="Norm. Signal",
            xticks=np.arange(0, 3.5, 0.5),
            xticklabels=["0", r"$\pi$", r"$2\pi$", r"$3\pi$", r"$4\pi$",
                         r"$5\pi$", r"$6\pi$"],
@@ -854,7 +854,7 @@ def circle_static():
     fits['fa'] = fits['fa']*360/(2*np.pi)
     # get rid of bad files
     fits = excluded_files(fits)
-    gate = {1: np.pi, 2: 2*np.pi, 3: 1.5*np.pi}
+    gate = {1: 2*np.pi, 2: 1*np.pi, 3: 0.5*np.pi}
     # linear regressions on each group
     for group in [1, 2, 3]:
         mask = fits['group'] == group
@@ -943,9 +943,9 @@ def circle_static():
 # ==========
 # main script
 fits = field_modulation()
-data, picked = turning_time_figure()
-data, params = w0_2D()
-data, params = w20_2D()
-data_tot, mask, data = phase_delay()
-phases, mw = field_fig()
-fits = circle_static()
+# data, picked = turning_time_figure()
+# data, params = w0_2D()
+# data, params = w20_2D()
+# data_tot, mask, data = phase_delay()
+# phases, mw = field_fig()
+# fits = circle_static()
