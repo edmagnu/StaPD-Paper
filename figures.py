@@ -8,6 +8,7 @@ Created on Fri Mar  2 07:46:44 2018
 import os
 import numpy as np
 from scipy.stats import linregress
+from scipy.optimize import curve_fit
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import pandas as pd
@@ -927,6 +928,65 @@ def circle_static():
     return fits
 # ==========
 
+
+# ==========
+# Energy exchange vs. Launch Phase
+# EvP.pdf
+# ==========
+def EvP_model_func(x, a, phi):
+    """Function to fit E_final vs phi.
+    Returns a*cos(x-phi)"""
+    return a*np.cos(x - phi)
+
+
+def Efinal_phase():
+    """Load data from model computation of E_final vs phi. Fits the data to
+    EvP_model_func() and plots for select data files.
+    Returns DataFrame of "a", "phi"."""
+    au = atomic_units()
+    fits = pd.DataFrame()
+#    flist = ["1_Efinal_phase.txt", "2_Efinal_phase.txt", "3_Efinal_phase.txt",
+#             "4_Efinal_phase.txt", "5_Efinal_phase.txt", "6_Efinal_phase.txt",
+#             "7_Efinal_phase.txt", "8_Efinal_phase.txt", "9_Efinal_phase.txt"]
+    flist = ["7_Efinal_phase.txt", "1_Efinal_phase.txt", "4_Efinal_phase.txt"]
+    labels = ["6 V/cm", "4 V/cm", "2 V/cm"]
+    colors = ["C0", "C1", "C2"]
+    fields = np.array([6, 4, 2])*1000*1.94469e-13
+    omega = 2*np.pi*15.932/au['ns']
+    folder = os.path.join("..", "2D-Comp-Model", "computation",
+                          "Efinal_phase")
+    # folder = "C:\\Users\\edmag\\Documents\\Work\\Electron Motion\\testing\\"
+    for i, fname in enumerate(flist):
+        flist[i] = os.path.join(folder, flist[i])
+    # flist = [folder + file for file in flist]
+    fig, ax = plt.subplots()
+    for i, file in enumerate(flist):
+        print(i, file)
+        data = pd.read_csv(file, sep="\t", index_col=None, comment="#")
+        data["efinal"] = -data["efinal"]
+        p0 = [0, 0]
+        pT = [3/2*(fields[i]/omega**(2/3))/1.51983e-7, np.pi/6]
+        popt, pcov = curve_fit(
+                EvP_model_func, data["phi"], data["efinal"], p0)
+        data["fit"] = EvP_model_func(data["phi"], *pT)
+        data["error"] = data["fit"] - data["efinal"]
+        fit = pd.DataFrame(index=[i],
+                           data={"a": popt[0], "phi": popt[1]})
+        fits = fits.append(fit)
+        data.plot(x="phi", y="efinal", kind="scatter", label=labels[i],
+                  color=colors[i], ax=ax)
+        ax.plot(data["phi"], data["fit"], linestyle="-", label='_nolegend_',
+                color="black")
+        # data.plot(x="phi", y="error", kind="scatter")
+    ax.set_xlabel(r'$\omega t_0$ (rad)')
+    ax.set_xticks([np.pi/6, 4*np.pi/6, 7*np.pi/6, 10*np.pi/6])
+    ax.set_xticklabels([r"$\pi$/6", r"$4\pi$/6", r"$7\pi$/6", r"$10\pi$/6"])
+    ax.set_ylabel(r'$\Delta W_{MW}$ (GHz)')
+    plt.savefig("EvP.pdf")
+    return fits
+# ==========
+
+
 # ==========
 # main script
 # fits = field_modulation()
@@ -935,4 +995,5 @@ def circle_static():
 # data, params = w20_2D()
 # data_tot, mask, data = phase_delay()
 # phases, mw = field_fig()
-fits = circle_static()
+# fits = circle_static()
+fits = Efinal_phase()
