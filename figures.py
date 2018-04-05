@@ -161,9 +161,7 @@ def field_modulation():
                bbox=props)
     # clean up
     gso.tight_layout(fig)
-    fname = "ModvsField.pdf"
-    print(fname)
-    plt.savefig(fname)
+    plt.savefig('ModvsField.pdf')
     return fits
 # ==========
 
@@ -320,9 +318,7 @@ def turning_time_figure():
     ax.legend().remove()
     # save
     fig.tight_layout()
-    fname = "up_and_down_orbits.pdf"
-    print(fname)
-    plt.savefig(fname)
+    plt.savefig('up_and_down_orbits.pdf')
     return data_tot, picked_tot
 # ==========
 
@@ -587,9 +583,7 @@ def w20_2D():
     # fig.suptitle(r"$W_0 = 0$ GHz")
     # fig.tight_layout(rect=[0, 0, 1, 0.9])
     fig.tight_layout()
-    fname = "w20_2D.pdf"
-    print(fname)
-    plt.savefig(fname)
+    plt.savefig('w20_2D.pdf')
     return data, params
 # ==========
 
@@ -715,9 +709,7 @@ def phase_delay():
     ax2.text(3.2, 0, "108.0 mV/cm", **align, bbox=props)
     # save
     fig.tight_layout(rect=(0, 0, 0.98, 1))
-    fname = "phase_delay.pdf"
-    print(fname)
-    plt.savefig(fname)
+    plt.savefig("phase_delay.pdf")
     return data_tot, mask_p2, data
 # ==========
 
@@ -785,9 +777,7 @@ def field_fig():
     ax.spines['top'].set_visible(False)
     # finishing
     fig.tight_layout(rect=[0.05, 0, 1, 1])
-    fname = "fields.pdf"
-    print(fname)
-    plt.savefig(fname)
+    plt.savefig('fields.pdf')
     return phases, mw
 # ==========
 
@@ -933,19 +923,16 @@ def circle_static():
     ax2.set_xlabel("Vertical Field (mV/cm)", fontsize=14)
     # tidy up
     fig.tight_layout()
-    fname = "circle_static.pdf"
-    print(fname)
-    plt.savefig(fname)
+    plt.savefig('circle_static.pdf')
     return fits
 # ==========
 
-
 # ==========
 # main script
-fits = field_modulation()
-data, picked = turning_time_figure()
-data, params = w0_2D()
-data, params = w20_2D()
-data_tot, mask, data = phase_delay()
-phases, mw = field_fig()
+# fits = field_modulation()
+# data, picked = turning_time_figure()
+# data, params = w0_2D()
+# data, params = w20_2D()
+# data_tot, mask, data = phase_delay()
+# phases, mw = field_fig()
 fits = circle_static()
