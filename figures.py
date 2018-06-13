@@ -36,26 +36,27 @@ def progress(source, i, total):
 # Modulation and Mean vs. Pulsed Field
 # ModvsField.pdf
 # ==========
-def phase_amp_mean_plot(data, title, ph_th, ax1, ax2):
+def phase_amp_mean_plot(data, title, ph_th, ax1, ax2, ax3):
     """Standard plotting for computed or experimental data.
     data DataFrame must have 'Ep', 'x0', 'a', and 'y0' keys."""
     # plot data
     ax1.axhline(0, color='grey')
     data.plot(x='Ep', y='a', ax=ax1, style='-o')
     data.plot(x='Ep', y='y0', ax=ax2, style='-o')
+    data.plot(x='Ep', y='x0', ax=ax3, style='-o')
     # beautify
     # ax1.tick_params(which='minor', left='off')
     ax1.set(ylabel="Amp (pk-pk)", title=title)
     ax2.set(xlabel="Pulsed Field (mV/cm)", ylabel="Mean")
     # turn on grids
-    for ax in [ax1, ax2]:
+    for ax in [ax1, ax2, ax3]:
         ax.grid(False)
         ax.legend()
         ax.legend().remove()
-    return ax1, ax2
+    return ax1, ax2, ax3
 
 
-def fsort_prep(fsort, excluded, title, ph_th, figname, ax1, ax2):
+def fsort_prep(fsort, excluded, title, ph_th, figname, ax1, ax2, ax3):
     fsort.sort_values(by=['Static'], inplace=True)
     # unmassage amps and phases
     mask = (fsort['a'] < 0)
@@ -89,8 +90,8 @@ def fsort_prep(fsort, excluded, title, ph_th, figname, ax1, ax2):
         mask = (data['x0'] >= (ph_th + np.pi))
         data.loc[mask, 'x0'] = data['x0'] - 2*np.pi
     # plot
-    ax1, ax2 = phase_amp_mean_plot(data, title, ph_th, ax1, ax2)
-    return data, ax1, ax2
+    ax1, ax2, ax3 = phase_amp_mean_plot(data, title, ph_th, ax1, ax2, ax3)
+    return data, ax1, ax2, ax3
 
 
 def field_modulation():
@@ -98,19 +99,22 @@ def field_modulation():
     fname = os.path.join("..", "Data", "StaPD-Analysis", "fits.txt")
     fits = pd.read_csv(fname, sep="\t", index_col=0)
     # figure
-    fig = plt.figure(figsize=(6, 9))
+    fig = plt.figure(figsize=(6, 15))
     gso = gridspec.GridSpec(3, 1)
-    gsi0 = gridspec.GridSpecFromSubplotSpec(2, 1, subplot_spec=gso[0])
-    gsi1 = gridspec.GridSpecFromSubplotSpec(2, 1, subplot_spec=gso[1])
-    gsi2 = gridspec.GridSpecFromSubplotSpec(2, 1, subplot_spec=gso[2])
-    ax = np.array([None]*6)  # axes array for inner GridSpec
+    gsi0 = gridspec.GridSpecFromSubplotSpec(3, 1, subplot_spec=gso[0])
+    gsi1 = gridspec.GridSpecFromSubplotSpec(3, 1, subplot_spec=gso[1])
+    gsi2 = gridspec.GridSpecFromSubplotSpec(3, 1, subplot_spec=gso[2])
+    ax = np.array([None]*9)  # axes array for inner GridSpec
     # Add subplots from ax array with appropriate shared axes and labels.
     ax[0] = fig.add_subplot(gsi0[0])
     ax[1] = fig.add_subplot(gsi0[1], sharex=ax[0])
-    ax[2] = fig.add_subplot(gsi1[0])
-    ax[3] = fig.add_subplot(gsi1[1], sharex=ax[2])
-    ax[4] = fig.add_subplot(gsi2[0])
-    ax[5] = fig.add_subplot(gsi2[1], sharex=ax[4])
+    ax[2] = fig.add_subplot(gsi0[2], sharex=ax[0])
+    ax[3] = fig.add_subplot(gsi1[0])
+    ax[4] = fig.add_subplot(gsi1[1], sharex=ax[3])
+    ax[5] = fig.add_subplot(gsi1[2], sharex=ax[3])
+    ax[6] = fig.add_subplot(gsi2[0])
+    ax[7] = fig.add_subplot(gsi2[1], sharex=ax[6])
+    ax[8] = fig.add_subplot(gsi2[2], sharex=ax[6])
     # fig, ax = plt.subplots(nrows=6, figsize=(6, 9))
     # DIL + 2 GHz
     mask = (fits['DL-Pro'] == 365872.6) & (fits['Attn'] == 44)
@@ -119,8 +123,8 @@ def field_modulation():
     title = r"$W_0$ = DIL + 2 GHz"
     ph_th = 5.5/6*np.pi
     figname = "exp_p2.pdf"
-    data, ax[0], ax[1] = fsort_prep(fsort, excluded, title, ph_th, figname,
-                                    ax[0], ax[1])
+    data, ax[0], ax[1], ax[2] = fsort_prep(fsort, excluded, title, ph_th,
+                                           figname, ax[0], ax[1], ax[2])
     ax[0].set(ylim=(-0.1, 0.1))
     ax[1].set(ylim=(0, 0.4))
     # DIL - 14 GHz
@@ -133,10 +137,10 @@ def field_modulation():
     title = r"$W_0$ = DIL - 14 GHz"
     ph_th = 5.5/6*np.pi
     figname = "exp_m14.pdf"
-    data, ax[2], ax[3] = fsort_prep(fsort, excluded, title, ph_th, figname,
-                                    ax[2], ax[3])
-    ax[2].set(ylim=(-0.07, 0.07))
-    ax[3].set(ylim=(0, 0.6))
+    data, ax[3], ax[4], ax[5] = fsort_prep(fsort, excluded, title, ph_th,
+                                           figname, ax[3], ax[4], ax[5])
+    ax[3].set(ylim=(-0.07, 0.07))
+    ax[4].set(ylim=(0, 0.6))
     # DIL - 30 GHz
     mask = (fits['DL-Pro'] == 365840.7)
     fsort = fits[mask].sort_values(by=['Static'])
@@ -144,21 +148,36 @@ def field_modulation():
     title = r"$W_0$ = DIL - 30 GHz"
     ph_th = 5.5/6*np.pi
     figname = "exp_m30.pdf"
-    data, ax[4], ax[5] = fsort_prep(fsort, excluded, title, ph_th, figname,
-                                    ax[4], ax[5])
-    ax[4].set(ylim=(-0.05, 0.05))
-    ax[5].set(ylim=(0, 0.7))
+    data, ax[6], ax[7], ax[8] = fsort_prep(fsort, excluded, title, ph_th,
+                                           figname, ax[6], ax[7], ax[8])
+    ax[6].set(ylim=(-0.05, 0.05))
+    ax[7].set(ylim=(0, 0.7))
     # letter labels
     props = dict(boxstyle='round', facecolor='white', alpha=1.0)
     ax[0].text(0.95, 0.95, "(a)", transform=ax[0].transAxes, fontsize=14,
                verticalalignment='center', horizontalalignment='center',
                bbox=props)
-    ax[2].text(0.95, 0.95, "(b)", transform=ax[2].transAxes, fontsize=14,
+    ax[3].text(0.95, 0.95, "(b)", transform=ax[3].transAxes, fontsize=14,
                verticalalignment='center', horizontalalignment='center',
                bbox=props)
-    ax[4].text(0.95, 0.95, "(c)", transform=ax[4].transAxes, fontsize=14,
+    ax[6].text(0.95, 0.95, "(c)", transform=ax[6].transAxes, fontsize=14,
                verticalalignment='center', horizontalalignment='center',
                bbox=props)
+    # phase markers
+    for i in [2, 5, 8]:
+        ax[i].axhline(np.pi/6, color='grey')
+        ax[i].axhline(7*np.pi/6, color='grey')
+    # settings
+    yticks, yticklabels = xticks_2p()
+    ax[0].set(xlim=(-200, 200))
+    ax[2].set(xlabel="Pulsed Field (mV/cm)", ylim=(0, 2*np.pi),
+              yticks = yticks, yticklabels=yticklabels, ylabel="Phase (rad.)")
+    ax[3].set(xlim=(-200, 200))
+    ax[5].set(xlabel="Pulsed Field (mV/cm)", ylim=(0, 2*np.pi),
+              yticks = yticks, yticklabels=yticklabels, ylabel="Phase (rad.)")
+    ax[6].set(xlim=(-200, 200))
+    ax[8].set(xlabel="Pulsed Field (mV/cm)", ylim=(0, 2*np.pi),
+              yticks = yticks, yticklabels=yticklabels, ylabel="Phase (rad.)")
     # clean up
     gso.tight_layout(fig)
     fname = "ModvsField.pdf"
@@ -324,6 +343,339 @@ def turning_time_figure():
     print(fname)
     plt.savefig(fname)
     return data_tot, picked_tot
+
+
+def turning_time_figure_dil():
+    au = atomic_units()
+    # import data
+    dname = os.path.join("..", "2D-Comp-Model", "computation", "Turning Time")
+    fname = os.path.join(dname, "data_raw.txt")
+    data_tot = pd.read_csv(fname, index_col=0)
+    fname = os.path.join(dname, "picked_w.txt")
+    picked_tot = pd.read_csv(fname, index_col=0)
+    fname = os.path.join(dname, "dil_binding.txt")
+    dil_bind = pd.read_csv(fname, index_col=0)
+    print(dil_bind['f'])
+    # convert to lab units
+    picked_tot['W'] = picked_tot['W']/au['GHz']
+    picked_tot['field'] = picked_tot['field']/au['mVcm']
+    # plot
+    fig, axes = plt.subplots(ncols=2, figsize=(6, 3), sharey=True)
+    ymin, ymax = -100, 100
+    xmin, xmax = 0, 100
+    # ==========
+    # uphill figure
+    # ==========
+    ax = axes[0]
+    colors = ['C2', 'C3', 'C9']
+    # mask uphill values (Dir == -1)
+    picked = picked_tot[picked_tot['Dir'] == -1].copy(deep=True)
+    # NaN mask
+    mask_NaN = (np.logical_not(np.isnan(picked['W'])))
+    mask_NaN = mask_NaN & (np.logical_not(np.isnan(picked['field'])))
+    # turning time = 10 ns
+    mask = (picked['kind'] == 'tt=10')
+    mask = mask & mask_NaN
+    dftt10 = picked[mask].copy(deep=True)
+    dftt10.sort_values(by='field', inplace=True)
+    # print(dftt10.loc[23, 'W'])
+    dftt10.plot(x='field', y='W', label='tturn=10', color='k', lw=3, ax=ax)
+    # upper binding time = 20 ns
+    mask = (picked['kind'] == 'tplus=20')
+    mask = mask & mask_NaN
+    dftplus = picked[mask].copy(deep=True)
+    dftplus.sort_values(by='field', inplace=True)
+    dftplus.plot(x='field', y='W', label='tplus=20', color='k', lw=1,
+                 ls='dashed', ax=ax)
+    # lower binding time = 20 ns
+    mask = (picked['kind'] == 'tb=20')
+    mask = mask & mask_NaN
+    dftbind = picked[mask].copy(deep=True)
+    obs = dftbind.iloc[-1].copy(deep=True)
+    obs['W'] = 0
+    obs['field'] = 0
+    dftbind = dftbind.append(obs, ignore_index=True).copy(deep=True)
+    dftbind.sort_values(by='field', inplace=True)
+    dftbind.plot(x='field', y='W', label='tb=20', color='k', lw=1, ls='dashed',
+                 ax=ax)
+    # dil binding
+    dil_bind.loc[6, 'wi'] = dftt10.loc[23, 'W']
+    dil_bind.loc[[0, 1, 2, 3, 4, 5], 'wi'] = \
+        dftt10.iloc[[0, 1, 2, 3, 4, 5]]['W'].reset_index(drop=True)
+    print(dil_bind)
+    print(dftt10.iloc[[0, 1, 2, 3, 4, 5]]['W'].reset_index(drop='True'))
+    dil_bind.plot(x='f', y='wi', color='k', lw=3, ax=ax)
+    dil_bind.plot(x='f', y='wf', color='k', lw=3, ax=ax)
+    # fill between
+    # If turning time < 10 ns, return is < 20 ns, survival is chaotic
+    ax.fill_between(dftt10['field'], dftt10['W'], ymin, color=colors[2])
+    # If between dil_bind 'wi' and 'wf', safe bound orbit.
+    # If 'wi' is NaN, then fill to tt=10
+    ax.fill_between(dil_bind['f'], dil_bind['wf'],
+                    dil_bind['wi'], color=colors[0])
+    # Above 'wf' is lost
+    ax.fill_between(dil_bind['f'], ymax, dil_bind['wf'], color=colors[1])
+    # between wi and tt10 is lost
+    ax.fill_between(dil_bind['f'], dil_bind['wi'],
+                    dftt10.iloc[range(0, 11)]['W'], color=colors[1])    
+    # above tt10 outside of wi -> wf is lost
+    mask = (dftt10['field'] >= 10)
+    ax.fill_between(dftt10[mask]['field'], ymax, dftt10[mask]['W'],
+                    color=colors[1])
+    # text labels
+    props = dict(boxstyle='round', facecolor='white', alpha=1.0)
+    align = {'verticalalignment': 'top',
+             'horizontalalignment': 'center'}
+    ax.text(80, 95, "(d)", **align, bbox=props)  # chaotic
+    # ax.text(50, 95, "(c)", **align, bbox=props)  # Immediate Ionization
+    # ax.text(32, 95, "(b)", **align, bbox=props)  # Goldylocks Zone
+    ax.text(10, 25, "(b)", **align, bbox=props)  # Goldylocks Zone
+    ax.text(10, 95, "(a)", **align, bbox=props)  # Late Return & Ionization
+    # touch ups
+    ax.set(xlabel="Pulsed Field (mV/cm)", xlim=(xmin, xmax),
+           ylabel=r"$W_0 + \Delta W_{MW}(\phi)$ (GHz)", ylim=(ymin, ymax),
+           title="Uphill Electrons")
+    ax.legend().remove()
+    # ==========
+    # downhill figure
+    # ==========
+    ax = axes[1]
+    colors = ['C2', 'C3', 'C9']
+    # mask uphill values (Dir == 1)
+    picked = picked_tot[picked_tot['Dir'] == 1].copy(deep=True)
+    # NaN mask
+    mask_NaN = (np.logical_not(np.isnan(picked['W'])))
+    mask_NaN = mask_NaN & (np.logical_not(np.isnan(picked['field'])))
+    # lower binding time = 20 ns
+    mask = (picked['kind'] == 'tb=20')
+    mask = mask & mask_NaN
+    dftbind = picked[mask].copy(deep=True)
+    obs = dftbind.iloc[-1].copy(deep=True)
+    obs['W'] = 0
+    obs['field'] = 0
+    dftbind = dftbind.append(obs, ignore_index=True)
+    dftbind.sort_values(by='field', inplace=True)
+    dftbind.plot(x='field', y='W', label='tb=20', color='k', lw=3, ax=ax)
+    # turning time = 10 ns
+    mask = (picked['kind'] == 'tt=10')
+    mask = mask & mask_NaN
+    dftt10 = picked[mask].copy(deep=True)
+    dftt10.sort_values(by='field', inplace=True)
+    obs = dftbind.iloc[-4]
+    dftt10 = dftt10.append(obs, ignore_index=True)
+    dftt10.plot(x='field', y='W', label='tturn=10', color='k', lw=3, ax=ax)
+    # DIL W = -2 E^0.5
+    dfdil = pd.DataFrame({'field': np.arange(xmin, xmax+1, 1)})
+    dfdil['W'] = -2*np.sqrt(dfdil['field']*au['mVcm'])/au['GHz']
+    mask = (dfdil['field'] >= max(dftt10['field']))
+    dfdil = dfdil[mask]
+    dfdil.plot(x='field', y='W', label='DIL', color='k', lw=3, ax=ax)
+    # fill between
+    # Above binding time = 20 ns, Immediately Ionizes
+    ax.fill_between(dftbind['field'], ymax, dftbind['W'], color=colors[1])
+    ax.fill_between(dfdil['field'], ymax, dfdil['W'], color=colors[1])
+    # Below turning time = 10 ns, Chaotic
+    ax.fill_between(dftt10['field'], dftt10['W'], ymin, color=colors[2])
+    mask = (dftbind['field'] >= max(dftt10['field']))
+    ax.fill_between(dftbind[mask]['field'], dftbind[mask]['W'], ymin,
+                    color=colors[2])
+    ax.fill_between(dfdil['field'], dfdil['W'], ymin, color=colors[2])
+    # Between binding time = 20ns and turnign time = 10 ns, Goldylocks
+    x, y1, y2 = interp_match(dftbind, dftt10, 'field', 'W')
+    ax.fill_between(x, y1, y2, color=colors[0])
+    # text labels
+    props = dict(boxstyle='round', facecolor='white', alpha=1.0)
+    align = {'verticalalignment': 'center',
+             'horizontalalignment': 'left'}
+    ax.text(2.5, -50, "(d)", **align, bbox=props)  # chaotic
+    # ax.text(0, 50, "(c)", **align, bbox=props)  # Late Return and Ionize
+    ax.text(10, 0, "(b)", **align, bbox=props)  # Goldylocks Zone
+    ax.text(2.5, 50, "(a)", **align, bbox=props)  # Immediate Ionization
+    # touch ups
+    ax.set(xlabel="Pulsed Field (mV/cm)", xlim=(xmin, xmax),
+           ylabel=r"$W_0 + \Delta W_{MW}(\phi)$ (GHz)", ylim=(ymin, ymax),
+           title="Downhill Electrons")
+    ax.legend().remove()
+    # save
+    fig.tight_layout()
+    fname = "up_and_down_orbits_dil.pdf"
+    print(fname)
+    plt.savefig(fname)
+    return data_tot, picked_tot
+
+
+def phase_filter(w0, dW, W):
+    arg = (W - w0)/dW
+    if arg > 1:
+        phi = -np.inf
+    elif arg < -1:
+        phi = np.inf
+    else:
+        phi = np.arccos(arg)
+    return phi
+
+
+def conv_model(x, x0):
+    """Model of AM laser envelope to convolve over data["bound"].
+    Returns np.array of 0.5 + np.cos(x + x0)"""
+    return 0.5*(1 + np.cos(x - x0))
+
+
+def laser_envelope(data):
+    """Takes masked data, builds a laser envelope from -2pi to 4pi
+    Returns DataFrame amlaser["phi", "I"]"""
+    # Build phase from -2pi to 4pi
+    phis = data["phi"]
+    lphi = len(phis)
+    phis.index = range(0, lphi)
+    phis_t = data["phi"] - 2*np.pi
+    phis_t.index = range(-lphi, 0)
+    phis = phis.append(phis_t)
+    phis_t = data["phi"] + 2*np.pi
+    phis_t.index = range(lphi, 2*lphi)
+    phis = phis.append(phis_t)
+    phis.sort_values(inplace=True)
+    # build into amlaser
+    amlaser = pd.DataFrame()
+    amlaser["phi"] = phis
+    amlaser["I"] = conv_model(amlaser["phi"], np.pi)/(200*0.5)
+    return amlaser
+
+
+def turning_time_convolution():
+    au = atomic_units()
+    xticks, xticklabels = xticks_2p()
+    # import data
+    dname = os.path.join("..", "2D-Comp-Model", "computation", "Turning Time")
+    fname = os.path.join(dname, "data_raw.txt")
+    # data_tot = pd.read_csv(fname, index_col=0)
+    fname = os.path.join(dname, "picked_w.txt")
+    picked_tot = pd.read_csv(fname, index_col=0)
+    # convert to lab units
+    picked_tot['W'] = picked_tot['W']/au['GHz']
+    picked_tot['field'] = picked_tot['field']/au['mVcm']
+    # plot
+    # fig, axes = plt.subplots(ncols=2, figsize=(6, 3), sharey=True)
+    fig, axes = plt.subplots(nrows=3, figsize=(8, 10))
+    # ymin, ymax = -100, 100
+    # xmin, xmax = 0, 100
+    # ==========
+    # uphill figure
+    # ==========
+    # ax = axes[0]
+    # colors = ['C2', 'C3', 'C9']
+    # mask uphill values (Dir == -1)
+    picked = picked_tot[picked_tot['Dir'] == -1].copy(deep=True)
+    # print(picked['kind'].unique())
+    # NaN mask
+    mask_NaN = (np.logical_not(np.isnan(picked['W'])))
+    mask_NaN = mask_NaN & (np.logical_not(np.isnan(picked['field'])))
+    # turning time = 10 ns
+    mask = (picked['kind'] == 'tt=10')
+    mask = mask & mask_NaN
+    dftt10 = picked[mask].copy(deep=True)
+    dftt10.sort_values(by='field', inplace=True)
+    # dftt10.plot(x='field', y='W', linestyle='', marker='.', label="tt = 10 ns",
+    #             ax=axes)
+    # tplus = 20
+    mask = (picked['kind'] == 'tplus=20')
+    mask = mask & mask_NaN
+    dftp20 = picked[mask].copy(deep=True)
+    dftp20.sort_values(by='field', inplace=True)
+    # dftp20.plot(x='field', y='W', linestyle='', marker='.', label="tp = 20 ns",
+    #             ax=axes)
+    # tb = 20
+    mask = (picked['kind'] == 'tb=20')
+    mask = mask & mask_NaN
+    dftb20 = picked[mask].copy(deep=True)
+    dftb20.sort_values(by='field', inplace=True)
+    # dftb20.plot(x='field', y='W', linestyle='', marker='.', label="tb = 20 ns",
+    #             ax=axes)
+    # basic probability
+    # massage tt10
+    dftt10['field'] = np.round(dftt10['field'], 0)
+    mask = (dftt10['field'] <= 100.0) & (dftt10['field'] >= 0.0)
+    dftt10 = dftt10[mask][['field', 'W']]
+    dftt10.sort_values(by='field')
+    # massage tb20
+    dftb20['field'] = np.round(dftb20['field'], 0)
+    dftb20 = dftb20[['field', 'W']]
+    dftb20 = dftb20.append({'field': 0, 'W': 0}, ignore_index=True)
+    dftb20 = dftb20.append(pd.DataFrame({'field': np.arange(55, 101),
+                                         'W': np.ones(46)*np.inf}),
+                           ignore_index=True)
+    dftb20 = dftb20[['field', 'W']]
+    dftb20.sort_values(by='field', inplace=True)
+    # massage tp20
+    dftp20['field'] = np.round(dftp20['field'], 0)
+    dftp20 = dftp20[['field', 'W']]
+    dftp20 = dftp20.append(pd.DataFrame({'field': np.arange(64, 101),
+                                         'W': np.ones(37)*np.inf}),
+                           ignore_index=True)
+    mask = dftt10['field'] < 15.0
+    dftp20 = dftp20.append(dftt10[mask], ignore_index=True)
+    dftp20 = dftp20[['field', 'W']]
+    dftp20.sort_values(by='field', inplace=True)
+    # indexes
+    dftt10.reset_index(drop=True, inplace=True)
+    dftp20.reset_index(drop=True, inplace=True)
+    dftb20.reset_index(drop=True, inplace=True)
+    # plots
+    dftt10.plot(x='field', y='W', linestyle='', marker='.', label="tt = 10 ns",
+                alpha=0.5, ax=axes[0])
+    dftp20.plot(x='field', y='W', linestyle='', marker='.', label="tp = 20 ns",
+                alpha=0.5, ax=axes[0])
+    dftb20.plot(x='field', y='W', linestyle='', marker='.', label="tb = 20 ns",
+                alpha=0.5, ax=axes[0])
+    axes[0].legend()
+    axes[0].set(ylabel="Energy (GHz)", xlabel="Field (mV/cm)",
+                title="Uphill Turning")
+    # combine
+    dfmarks = pd.DataFrame(dftt10['field'])
+    dfmarks['tt10'] = dftt10['W']
+    dfmarks['tp20'] = dftp20['W']
+    dfmarks['tb20'] = dftb20['W']
+    # select field and produce phase space probabilities
+    dW = 43
+    w0 = 0
+    f = 20
+    dphi = np.pi/180
+    axes[0].axvline(f, color='grey')
+    axes[0].axhline(w0 - dW, color='grey')
+    axes[0].axhline(w0 + dW, color='grey')
+    obs = dfmarks.loc[f]
+    print(obs)
+    for key in ['tt10', 'tp20', 'tb20']:
+        phi = phase_filter(w0, dW, obs[key])
+        obs[key] = (np.pi - phi) + np.pi/6
+    print(obs)
+    dfprob = pd.DataFrame({'phi': np.arange(np.pi/6, 7*np.pi/6 + dphi, dphi)})
+    dfprob['p'] = np.nan
+    mask = (dfprob['phi'] < obs['tt10'])
+    dfprob.loc[mask, 'p'] = 0.5
+    mask = (dfprob['phi'] >= obs['tt10']) & (dfprob['phi'] < obs['tp20'])
+    dfprob.loc[mask, 'p'] = 0
+    mask = (dfprob['phi'] >= obs['tp20']) & (dfprob['phi'] < obs['tb20'])
+    dfprob.loc[mask, 'p'] = 1
+    # fold
+    dfprob_a = dfprob.copy()
+    dfprob_a['phi'] = 14/6*np.pi - dfprob_a['phi']
+    dfprob = dfprob.append(dfprob_a, ignore_index=True)
+    dfprob['phi'] = np.mod(dfprob['phi'], 2*np.pi)
+    dfprob = dfprob.sort_values(by='phi')
+    dfprob.plot(x='phi', y='p', ax=axes[1])
+    axes[1].set(xticks=xticks, xticklabels=xticklabels, xlabel="Phase (rad.)",
+                ylabel=r"$P_{Survival}$", title="Simple Probability")
+    axes[1].legend().remove()
+    # convolution
+    amlaser = laser_envelope(dfprob)
+    conv = np.convolve(dfprob['p'], amlaser['I'], mode='same')
+    dfprob['conv'] = conv[range(len(dfprob['phi']), 2*len(dfprob['phi']))]
+    dfprob.plot(x='phi', y='conv', ax=axes[2])
+    axes[2].set(xticks=xticks, xticklabels=xticklabels, xlabel="Phase (rad.)",
+                ylabel="Norm. Signal", title="Expected Signal")
+    fig.tight_layout()
+    return
 # ==========
 
 
@@ -470,6 +822,94 @@ def w0_2D():
     # fig.tight_layout(rect=[0, 0, 1, 0.9])
     fig.tight_layout()
     plt.savefig('w0_2D.pdf')
+    return data, params
+
+
+def w0_en_sig_comp():
+    au = atomic_units()
+    # import
+    dname = os.path.join("..", "2D-Comp-Model", "computation")
+    fname = os.path.join(dname, "data_fit.txt")
+    data = pd.read_csv(fname, index_col=0)
+    fname = os.path.join(dname, "params_sums.txt")
+    params = pd.read_csv(fname, index_col=0)
+    # get needed values for W0 = 0 GHz, Epulse = 0, 36, 100 mV/cm
+    w0 = np.sort(data['E0'].unique())[1]
+    fields = np.sort(data['Ep'].unique())[[0, 1, 5, 10]]
+    print(fields/au['mVcm'])
+    # plot
+    fig, axes = plt.subplots(nrows=2, ncols=2, sharex='col', sharey='row',
+                             figsize=(10, 8))
+    # xmin, xmax = 0, 2*np.pi
+    # ymin, ymax = -0.05, 0.32
+    xticks, xticklabels = xticks_2p()
+    # colors = ['C0', 'C1', 'C2']
+    # ==========
+    # 36 mV/cm
+    # ==========
+    ax = axes[0, 0]
+    ax.axhline(0, color='k')
+    # masking
+    mask = (data['E0'] == w0)  # Energy
+    mask = mask & (data['Ep'] == fields[2])  # field
+    print(fields[2]/au['mVcm'], " mV/cm")
+    th_LRLs = np.sort(data["th_LRL"].unique())
+    mask0 = mask & (data["th_LRL"] == th_LRLs[0])
+    print(th_LRLs[0], " rad")
+    print(th_LRLs[1], " rad")
+    maskp = mask & (data["th_LRL"] == th_LRLs[1])
+    # plot th_LRL = NaN (sum signal)
+    # plot 1/2 th_LRL = 0
+    # ==========
+    obs = data[mask0]
+    xs = obs['phi']
+    ys = obs['enfinal']
+    ax.plot(xs, ys/au['GHz'], '.')
+    ax.set(ylim=(-400, 400), ylabel="W final (GHz)",
+           title=r"$\theta_{LRL} = 0$, Uphill")
+    # ==========
+    ax = axes[0, 1]
+    ax.axhline(0, color='k')
+    obs = data[maskp]
+    xs = obs['phi']
+    ys = obs['enfinal']
+    ax.plot(xs, ys/au['GHz'], '.')
+    ax.set(title=r"$\theta_{LRL} = \pi$, Downhill")
+    # ==========
+    # masking
+    mask = (params['E0'] == w0)  # Energy
+    mask = mask & (params['Ep'] == fields[2])  # field
+    mask = mask & np.isnan(params["dL"])  # dL combined
+    # add th_LRL = 0, pi, NaN (combined 0,pi)
+    th_LRLs = np.sort(params["th_LRL"].unique())
+    mask0 = mask & (params["th_LRL"] == th_LRLs[0])
+    maskp = mask & (params["th_LRL"] == th_LRLs[1])
+    # ==========
+    ax = axes[1, 0]
+    ax.axhline(0, color='k')
+    obs = params[mask0]
+    xs, ys = build_fitdata_from_params(obs)
+    ax.plot(xs, ys/2, '-', lw=3)
+    ax.set(xlabel="Delay (rad)", xticks=xticks, xticklabels=xticklabels,
+           ylabel="Norm. Signal")
+    # ==========
+    ax = axes[1, 1]
+    ax.axhline(0, color='k')
+    obs = params[maskp]
+    xs, ys = build_fitdata_from_params(obs)
+    ax.plot(xs, ys/2, '-', lw=3)
+    ax.set(xlabel="Delay (rad)", xticks=xticks, xticklabels=xticklabels)
+    # ==========
+    fig.suptitle("Field = 36 mV/cm", fontsize=16)
+    fig.tight_layout(rect=[0, 0, 1, 0.95])
+    # plot 1/2 th_LRL = pi
+    # xs, ys = build_fitdata_from_params(obs)
+    # ax.plot(xs, ys/2, label="Downhill", lw=3, ls='dashed', c=colors[1])
+    # clean up
+    # ax.set(xlim=(xmin, xmax), ylim=(ymin, ymax), xticks=xticks,
+    #        xticklabels=xticklabels,  # xlabel=r"Phase $\phi_0$ (rad)",
+    #        ylabel="Norm. Signal", title=r"$E_{pulse} = 0$ mV/cm")
+    plt.savefig("w0_en_sig_comp.pdf")
     return data, params
 
 
@@ -719,6 +1159,133 @@ def phase_delay():
     print(fname)
     plt.savefig(fname)
     return data_tot, mask_p2, data
+
+def phase_inversion():
+    # au = atomic_units()
+    # load
+    dname = os.path.join("..", "Data", "StaPD-Analysis")
+    fname = os.path.join(dname, "moddata.txt")
+    data_tot = pd.read_csv(fname, sep="\t", index_col=0)
+    # DIL - 14 GHz
+    mask = (data_tot['DL-Pro'] == 365856.7)
+    # fsort = fits[mask].copy(deep=True)
+    excluded = ["2016-09-23\\5_delay.txt", "2016-09-23\\11_delay.txt",
+                "2016-09-23\\12_delay.txt", "2016-09-23\\16_delay.txt",
+                "2016-09-23\\17_delay.txt", "2016-09-26\\8_delay.txt",
+                "2016-09-26\\9_delay.txt"]
+    for fname in excluded:
+        mask = mask & (data_tot["Filename"] != fname)
+    # Select particular data runs by name
+    Es = np.sort(data_tot[mask]['Static'].unique())
+    # print(Es)
+    mask_0 = mask & (data_tot['Static'] == Es[11])
+    fname_0 = data_tot[mask_0]['Filename'].unique()[0]
+    mask_m200 = mask & (data_tot['Static'] == Es[11 - 2])
+    fname_m200 = data_tot[mask_m200]['Filename'].unique()[0]
+    mask_p200 = mask & (data_tot['Static'] == Es[11 + 2])
+    fname_p200 = data_tot[mask_p200]['Filename'].unique()[0]
+    mask_m700 = mask & (data_tot['Static'] == Es[11 - 7])
+    fname_m700 = data_tot[mask_m700]['Filename'].unique()[0]
+    mask_p700 = mask & (data_tot['Static'] == Es[11 + 7])
+    fname_p700 = data_tot[mask_p700]['Filename'].unique()[0]
+    print(0, "\t", fname_0)
+    print(-200, "\t", fname_m200)
+    print(200, "\t", fname_p200)
+    print(-700, "\t", fname_m700)
+    print(700, "\t", fname_p700)
+    # start plotting
+    fig, axes = plt.subplots(nrows=5, sharex=True, sharey=False, figsize=(6,9))
+    nave = 3
+    # -700 mV
+    mask_m700 = (data_tot['Filename'] == fname_m700)
+    ax = axes[0]
+    data = data_tot[mask_m700].copy()
+    data.sort_values(by='wavelengths', inplace=True)
+    x, y = running_mean(data, nave)
+    ax.plot(x, y, '-', c='grey')
+    x = np.array(data['wavelengths'])
+    popt = np.array(data[['y0', 'a', 'phi']].iloc[0])
+    y = model_func_fit(x, *popt)
+    ax.plot(x, y, '-', c='k')
+    # -200 mV
+    mask_m200 = (data_tot['Filename'] == fname_m200)
+    ax = axes[1]
+    data = data_tot[mask_m200].copy()
+    data.sort_values(by='wavelengths', inplace=True)
+    x, y = running_mean(data, nave)
+    ax.plot(x, y, '-', c='grey')
+    x = np.array(data['wavelengths'])
+    popt = np.array(data[['y0', 'a', 'phi']].iloc[0])
+    y = model_func_fit(x, *popt)
+    ax.plot(x, y, '-', c='k')
+    # 0 mV
+    mask_0 = (data_tot['Filename'] == fname_0)
+    ax = axes[2]
+    data = data_tot[mask_0].copy()
+    data.sort_values(by='wavelengths', inplace=True)
+    x, y = running_mean(data, nave)
+    ax.plot(x, y, '-', c='grey')
+    x = np.array(data['wavelengths'])
+    popt = np.array(data[['y0', 'a', 'phi']].iloc[0])
+    y = model_func_fit(x, *popt)
+    ax.plot(x, y, '-', c='k')
+    # +200 mV
+    mask_p200 = (data_tot['Filename'] == fname_p200)
+    ax = axes[3]
+    data = data_tot[mask_p200].copy()
+    data.sort_values(by='wavelengths', inplace=True)
+    x, y = running_mean(data, nave)
+    ax.plot(x, y, '-', c='grey')
+    x = np.array(data['wavelengths'])
+    popt = np.array(data[['y0', 'a', 'phi']].iloc[0])
+    y = model_func_fit(x, *popt)
+    ax.plot(x, y, '-', c='k')
+    # +700 mV
+    mask_p700 = (data_tot['Filename'] == fname_p700)
+    ax = axes[4]
+    data = data_tot[mask_p700].copy()
+    data.sort_values(by='wavelengths', inplace=True)
+    x, y = running_mean(data, nave)
+    ax.plot(x, y, '-', c='grey')
+    x = np.array(data['wavelengths'])
+    popt = np.array(data[['y0', 'a', 'phi']].iloc[0])
+    y = model_func_fit(x, *popt)
+    ax.plot(x, y, '-', c='k')
+    # text
+    props = dict(boxstyle='round', facecolor='white', alpha=1.0)
+    axes[0].text(0.95, 0.95, "-50.4 mV/cm", transform=axes[0].transAxes,
+                 fontsize=14,
+                 verticalalignment='center', horizontalalignment='center',
+                 bbox=props)
+    axes[1].text(0.95, 0.95, "-14.4 mV/cm", transform=axes[1].transAxes,
+                 fontsize=14,
+                 verticalalignment='center', horizontalalignment='center',
+                 bbox=props)
+    axes[2].text(0.95, 0.95, "0 mV/cm", transform=axes[2].transAxes,
+                 fontsize=14,
+                 verticalalignment='center', horizontalalignment='center',
+                 bbox=props)
+    axes[3].text(0.95, 0.95, "+14.4 mV/cm", transform=axes[3].transAxes,
+                 fontsize=14,
+                 verticalalignment='center', horizontalalignment='center',
+                 bbox=props)
+    axes[4].text(0.95, 0.95, "+50.4 mV/cm", transform=axes[4].transAxes,
+                 fontsize=14,
+                 verticalalignment='center', horizontalalignment='center',
+                 bbox=props)
+    # settings
+    xticks = np.array([0, 0.5, 1, 1.5, 2, 2.5, 3]) + 1/6
+    xticklabels = [r"$\pi/6$", "", r"$\pi + \pi/6$", "", r"$2\pi + \pi/6$",
+                   "", r"$3\pi + \pi/6$"]
+    ax.set(xticks=xticks, xticklabels=xticklabels)
+    ax.set_xlabel("Phase Delay (rad.)", fontsize=14)
+    for i in [0, 1, 2, 3, 4]:
+        axes[i].grid(True)
+    axes[0].set_title("DIL - 14 GHz", fontsize=16)
+    axes[2].set_ylabel("Norm. Signal", fontsize=14)
+    fig.tight_layout()
+    plt.savefig("phase_inversion.pdf")
+    return
 # ==========
 
 
@@ -942,10 +1509,14 @@ def circle_static():
 
 # ==========
 # main script
-fits = field_modulation()
+# fits = field_modulation()
 # data, picked = turning_time_figure()
 # data, params = w0_2D()
 # data, params = w20_2D()
 # data_tot, mask, data = phase_delay()
+phase_inversion()
 # phases, mw = field_fig()
 # fits = circle_static()
+# data, params = w0_en_sig_comp()
+# turning_time_convolution()
+# turning_time_figure_dil()
