@@ -1,44 +1,21 @@
 \documentclass[aps,pra,preprint,groupedaddress]{revtex4-1}
+<<<<<<< HEAD
 %\documentclass[aps,prl,preprint,superscriptaddress]{revtex4-1}
 %\documentclass[aps,prl,reprint,groupedaddress]{revtex4-1}
+=======
+>>>>>>> 374802a66b0f5e758bfa0525da6bb1c6ef6512f6
 
 \usepackage{graphicx}
 \usepackage{amsmath}
-
-% You should use BibTeX and apsrev.bst for references
-% Choosing a journal automatically selects the correct APS
-% BibTeX style file (bst file), so only uncomment the line
-% below if necessary.
-%\bibliographystyle{apsrev4-1}
 
 \begin{document}
 
 \title{Phase Dependent Ionization of Rydberg Atoms in Static Fields}
 
-% repeat the \author .. \affiliation  etc. as needed
-% \email, \thanks, \homepage, \altaffiliation all apply to the current
-% author. Explanatory text should go in the []'s, actual e-mail
-% address or url should go in the {}'s for \email and \homepage.
-% Please use the appropriate macro foreach each type of information
-
-% \affiliation command applies to all authors since the last
-% \affiliation command. The \affiliation command should follow the
-% other information
-% \affiliation can be followed by \email, \homepage, \thanks as well.
 \author{Eric Magnuson}
 \email[]{edm5gb@virginia.edu}
 \author{Tom Gallagher}
-%\homepage[]{Your web page}
-%\thanks{}
-%\altaffiliation{}
 \affiliation{University of Virginia, Department of Physics}
-
-%Collaboration name if desired (requires use of superscriptaddress
-%option in \documentclass). \noaffiliation is required (may also be
-%used with the \author command).
-%\collaboration can be followed by \email, \homepage, \thanks as well.
-%\collaboration{}
-%\noaffiliation
 
 \date{\today}
 
@@ -46,20 +23,7 @@
 Pump-probe schemes using high frequency pulsed light synchronous to strong field low frequency fields are a prolific tool for probing atomic, molecular and surface electron dynamics. We realize one such system in Rydberg states of Li using an 819-nm excitation laser amplutde modulated synchronously to a 15.9-GHz microwave field. We show that when the modulation is at the same frequency of the microwave field, phase dependent ionization is only observed in the presence of static fields. Our results are well described by a computational model. Analysis of this model shows the importance of multiple classical electron orbits.
 \end{abstract}
 
-% insert suggested PACS numbers in braces on next line
-\pacs{}
-% insert suggested keywords - APS authors don't need to do this
-%\keywords{}
-
-%\maketitle must follow title, authors, abstract, \pacs, and \keywords
 \maketitle
-
-% body of paper here - Use proper section commands
-% References should be done using the \cite, \ref, and \label commands
-% Put \label in argument of \section for cross-referencing
-%\section{\label{}}
-%\subsection{}
-%\subsubsection{}
 
 \section{\label{sec:intro}Introduction}
 
@@ -91,8 +55,6 @@ Show that symmetry arguments limit what harmonics of the MW field the system res
 Note: \emph{INCLUDE LEVEL DIAGRAM}
 
 In this experiment, Li atoms in a collimated thermal beam are optically excited to high lying Rydberg or continuum states along the path $2s \xrightarrow{\text{671 nm}} 2p \xrightarrow{\text{610 nm}} 3d \xrightarrow{\text{819 nm}} nf, \epsilon f$. These optical beams intersect at a right angle forming a rectangular 1 mm$^3$ excitation region. This region is at an anti-node of a 15.9 GHz Fabry-Perot microwave cavity. The excitation occurs in the presence of microwave fields, so that the $nf, \epsilon f$ electron exchanges energy with the field as it leaves the atomic core.
-
-% (THIS IS ALL MENTIONED LATER) The 1 mm$^3$ region is much smaller than the extent of the microwave antinode, allowing us to consider the microwave field constant across the region. The interaction region is enclosed on top, bottom and two sides by aluminum plates. Combined with the two Fabry-Perot mirrors, this forms a 10-cm cubic enclosure. Bias voltages can be applied independently to each plate and mirror to control static fields in the interaction region.
 
 The microwave cavity is allowed to load for 240 ns before the first laser pulse, and the microwave input is shut off 20 ns after the last laser pulse, allowing the cavity to empty. Synchronous with the MW power envelope, a static field pulse is applied to the top and bottom aluminum plates to produce a vertical static field in the interaction region. The 610-nm and 671-nm lasers are pulsed synchronously for 20 ns, after which the 819-nm laser is pulsed with a square envelope for 20 ns. One microsecond after the last laser pulse, we field ionize surviving Rydberg states within 100 GHz of the ionization limit by applying a negative voltage pulse to an aluminum plate below the interaction region. Ionized electrons are pushed into a microchannel plate (MCP) assembly which produces a voltage pulse proportional to the number of electrons detected. This pulse is integrated through a boxcar integrator and recorded.
 
@@ -163,8 +125,6 @@ S = A \cos{[\omega t - \phi_0]} + S_0
 \end{equation}
 The model frequency is fixed at $\omega = 2\pi / f_{MW}$, while the amplitude (A), phase offset ($\phi_0$) and mean signal ($S_0$) are used as fit parameters. Using this model to quantify the phase-dependent Rydberg signals, we verify that phase dependent signals only occur in the presence of a vertical pulsed field, and are not observable in a horizontally pulsed field. In a 4 V/cm MW field and a 14 mV/cm pulsed field, we excite electrons with the AM-IR laser tuned 14 GHz below the DIL. The angle of the applied pulsed field relative to the MW field and IR laser polarization is adjusted using the bias plates around the interaction region.
 
-%To further explore this phenomena, we record how these fit parameters change as we vary the applied static field for three tunings of the excitation laser central frequency: 2-GHz above, and 14 and 30 GHz below the DIL.
-
 \begin{figure}
 	\includegraphics[width=0.7\textwidth]{circle_static}
 	\caption{With the central IR frequency $2\pi\omega_o$ tuned to 14 GHz below the DIL, the angle above the horizontal of a 14.4 mV/cm pulsed field is rotated by applying pulsed voltages to vertical and horizontal bias plates. When the pulsed field is perpendicular to the vertical MW and IR polarization, there no phase dependence. The phase dependence grows as $\vec{E}_{pulsed}$ is rotated to have a larger vertical component. The measurement is repeated in three sets, and linear regression on the combined data set shows the peak to peak modulation crosses zero at $6.0 \pm 0.9$ degrees. This corresponds to $\vec{E}_{pulsed} \cdot \hat{z} = 1.5 \pm 0.2$ mV/cm, which is the approximate size of our stray static field.}
@@ -173,8 +133,7 @@ The model frequency is fixed at $\omega = 2\pi / f_{MW}$, while the amplitude (A
 
 Fig.~\ref{fig:CircleStatic} shows the effect of applying a pulsed field at angles near perpendicular to the MW and IR polarization. The measurement was repeated three separate times, Each set of data showing the peak to peak modulation crosses zero when $\vec{E}_{pulse}$ is nearly horizontal, and has a linear relationship with the z-component of the field. A fit to all three sets of data shows modulation is zero at $6.0 \pm 0.9$ degrees below the horizontal, corresponding to a $-1.5 \pm 0.2$ mV/cm z-component of the pulsed field. This is explainable by the $<2$ mV/cm residual static field in the interaction region. As the angle is changed, the amplitude of the phase dependence increases linearly with the component of the pulsed field along the MW and AM laser polarization. This indicates that the static field in the polarization direction is required to break the symmetry of the system and observe phase dependence.
 
-\begin{figure}
-	\includegraphics[width=0.5\textwidth]{ModvsField}
+	\includegraphics[width=0.7\textwidth]{ModvsField}
 	\caption{Mean signal ($S_0$) and peak-to-peak modulation ($2\cdot A$) against applied pulsed static field for excitation laser central frequencies of +2 GHz, -14 GHz, and -30 GHz relative to the DIL. A negative peak-to-peak modulation indicates the greatest Rydberg signal is detected with an optical delay near $\omega t_o = 7\pi/6$, while a negative modulation indicates the detected signal is greatest near $\omega t_o = \pi/6$.}
 	\label{fig:ModvsField}
 \end{figure}
@@ -189,25 +148,27 @@ Finally, Fig.~\ref{fig:ModvsField} (c) shows the case for the central AM IR freq
 
 \section{\label{sec:disc} Comparison to Computational Model}
 
-To understand the results presented in Fig.~\ref{fig:ModvsField}, we conducted two classical computational models.  First, we used a 1 dimensional model to calculate the fate of an $e^-$ after it's first orbit. Energy exchange with the MW field occurs only over the first-half-cycle very close to the atom core. The long orbit of an $e^-$ in the pulsed field and Coulomb potential is unaffected over time periods greater than one cycle. As such, we can calculate what happens to an $e^-$ in this first orbit as a function of $E_{pulse}$ and the orbital energy $e^-$ has after energy exchange with the MW field: $W_{orbit} = W_0 + \Delta W_{MW}(\omega t_0)$.
+\emph{To understand the experimental results shown in the previous section, we conduct two calculations of classical electron motion in the combined Coulomb, MW and pulsed field.}
 
-\emph{ADD MATH DESCRIPTION OF TURNING AND BINDING TIMES HERE.}
+\emph{The classical picture can be divided into three steps.}
 
-The results of this calculation for uphill and downhill $e^-$ are shown in Fig.~\ref{fig:orbits}. For uphill electrons, there are four qualitatively distinct behaviors. Deeply bound electrons and orbits in strong pulsed fields are in region (d). These electrons are launched uphill against the combined Coulomb and pulsed field potential and execute an orbit that returns to the core before 20 ns. With the MW field still on, the $e^-$ will again exchange energy with the MW field, and execute another orbit. Because orbit times are much larger than the MW period, the phase of the phase of the MW field is essentially random when the $e^-$ returns, and $e^-$s will undergo a random walk in energy over many orbits. As such, whether $e^-$s in this region ionize is probabilistic. The deeper below the ionization limit this random walk starts, the less likely ionization is to occur.
+\emph{1) Exchange energy with the MW field as it leaves the ion core.}
 
-\emph{QUICK NOTES, NEED TO FLUSH OUT}
+\emph{2) Undergo a long orbit. High energy electrons may ionize. Low energy electrons will return to the core while the pulsed and MW field are still on. Electrons in narrow energy band will undergo long bound orbits that do not return to the core until after the fields are zeroed.}
 
-In regions (a) and (c), the $e-$ undergoes a long orbit and does not return to the core before the pulsed field shuts off at 20 ns. When the $E_{pulsed}$ shuts off, the $e^-$ is left with a positive energy $W = v^2/2 - 1/r$, and will ionize. Region (b) is a narrow exception, where the field shuts off very near the apoaxis of the $e^-$ orbit, and it is left in a very long period bound state, and will remain bound.
+\emph{3) Electrons that return to the core will again exchange energy with the MW field as they slingshot around the ion core.}
 
-Similar behaviors are shown in the downhill case. $e^-$ in region (d) below the depressed potential barrier will return to the core before 20ns and undergo a random energy walk. Above this in region (a) the electron will directly ionize. There is again a small region (b) where the field turns off at the apoaxis and the $e^-$ is deposited into a bound, long-period orbit.
+\emph{Our first computation explicitly separates these stages. As a conceptual tool, we use a 1-D model to calculate the classical period of the orbit after the electron has exchanged energy with the MW field.}
 
-Regions (a), (c), and (d) describe the behavior seen in Fig~\ref{fig:ModvsField}. In both uphill and downhill cases, remaining bound is more likely if energy is lost to the MW field. This occurs at $\omega t_0 = \pi/6$ for uphill $e^-$ and $\omega t_0 = 7\pi/6$ for downhill $e^-$. High energy either puts the $e^-$ into region (a) or (c) where it will ionize, while low energy puts the $e^-$ starting as far away from the ionization limit for it's random energy walk in region (d).
+\emph{Our second computation uses a 2-D model to continuously integrate the electron equations of motion until the static field has turned off and the MW field has rung down.}
 
-For above or at the the ionization limit, a small increase in static field will cause a large drop in downhill signal, while uphill $e^-$ are effected by much larger fields. This leaves the phase dependence of the uphill signal to dominate. This is shown in Fig.~\ref{fig:2DW0}.
+\subsection{1-D Model and Turning Time}
 
-Fig.~\ref{2DW20} shows the model at $W_0 = -20$ GHz. Below the ionization limit, a small increase in static field brings the depressed potential barrier seen by downhill electrons closer to $W_0$. As such, the mean downhill signal falls, but the peak to peak modulation increases. This leads to the total phase dependence at small fields being $\pi$ out of phase with the small signal phase dependence when $W_0 = 0$ GHz.
-
-However, as the field increases, the depressed potential barrier moves below $W_0$, and at large fields the downhill signal again disappears. This leaves the uphill electron signal to dominate the total observed signal. This phase dependence is then in phase with the large field signal at $W_0 = 0$ GHz.
+\begin{figure}
+	\includegraphics[width=\textwidth]{EvP}
+	\caption{Energy exchange ($\Delta W_{MW}$) with the MW field vs. phase ($\omega t_0$) of the MW field at excitation for an electron leaving the ion core. Calculated by integrating the 1-D classical equations of motion for an electron initially excited with an orbital energy $v^2/2 - 1/r = 0$, starting from the inner turning point for an electron f-state angular momentum, $\approx 6$ a.u.. The calculated values for MW field amplitudes of 2, 4, and 6 mV/cm (color) fit closely to predicted values of $E_{MW} / \omega^{2/3} \cdot \cos(\omega t_0 - \pi/6)$ (black).}
+	\label{fig:EvP}
+\end{figure}
 
 \begin{figure}
 	\includegraphics[width=\textwidth]{up_and_down_orbits}
@@ -227,10 +188,28 @@ However, as the field increases, the depressed potential barrier moves below $W_
 	\label{fig:2DW20}
 \end{figure}
 
+%To understand the results presented in Fig.~\ref{fig:ModvsField}, we conducted two classical computational models. First, we used a 1 dimensional model to calculate the fate of an $e^-$ after it's first orbit. As discussed in Sec.~\ref{sec:back}, energy exchange with the MW field occurs only over the first-half-cycle very close to the atom core. The long orbit of an $e^-$ in the pulsed field and Coulomb potential is unaffected over time periods greater than one cycle. As such, we can calculate what happens to an $e^-$ in this first orbit as a function of $E_{pulse}$ and the orbital energy $e^-$ has after energy exchange with the MW field: $W_{orbit} = W_0 + \Delta W_{MW}(\omega t_0)$.
+
+%\emph{ADD MATH DESCRIPTION OF TURNING AND BINDING TIMES HERE.}
+
+%The results of this calculation for uphill and downhill $e^-$ are shown in Fig.~\ref{fig:orbits}. For uphill electrons, there are four qualitatively distinct behaviors. Deeply bound electrons and orbits in strong pulsed fields are in region (d). These electrons are launched uphill against the combined Coulomb and pulsed field potential and execute an orbit that returns to the core before 20 ns. With the MW field still on, the $e^-$ will again exchange energy with the MW field, and execute another orbit. Because orbit times are much larger than the MW period, the phase of the phase of the MW field is essentially random when the $e^-$ returns, and $e^-$s will undergo a random walk in energy over many orbits. As such, whether $e^-$s in this region ionize is probabilistic. The deeper below the ionization limit this random walk starts, the less likely ionization is to occur.
+
+%\emph{QUICK NOTES, NEED TO FLUSH OUT}
+
+%In regions (a) and (c), the $e-$ undergoes a long orbit and does not return to the core before the pulsed field shuts off at 20 ns. When the $E_{pulsed}$ shuts off, the $e^-$ is left with a positive energy $W = v^2/2 - 1/r$, and will ionize. Region (b) is a narrow exception, where the field shuts off very near the apoaxis of the $e^-$ orbit, and it is left in a very long period bound state, and will remain bound.
+
+%Similar behaviors are shown in the downhill case. $e^-$ in region (d) below the depressed potential barrier will return to the core before 20ns and undergo a random energy walk. Above this in region (a) the electron will directly ionize. There is again a small region (b) where the field turns off at the apoaxis and the $e^-$ is deposited into a bound, long-period orbit.
+
+%Regions (a), (c), and (d) describe the behavior seen in Fig~\ref{fig:ModvsField}. In both uphill and downhill cases, remaining bound is more likely if energy is lost to the MW field. This occurs at $\omega t_0 = \pi/6$ for uphill $e^-$ and $\omega t_0 = 7\pi/6$ for downhill $e^-$. High energy either puts the $e^-$ into region (a) or (c) where it will ionize, while low energy puts the $e^-$ starting as far away from the ionization limit for it's random energy walk in region (d).
+
+%For above or at the the ionization limit, a small increase in static field will cause a large drop in downhill signal, while uphill $e^-$ are effected by much larger fields. This leaves the phase dependence of the uphill signal to dominate. This is shown in Fig.~\ref{fig:2DW0}.
+
+%Fig.~\ref{fig:2DW20} shows the model at $W_0 = -20$ GHz. Below the ionization limit, a small increase in static field brings the depressed potential barrier seen by downhill electrons closer to $W_0$. As such, the mean downhill signal falls, but the peak to peak modulation increases. This leads to the total phase dependence at small fields being $\pi$ out of phase with the small signal phase dependence when $W_0 = 0$ GHz.
+
+%However, as the field increases, the depressed potential barrier moves below $W_0$, and at large fields the downhill signal again disappears. This leaves the uphill electron signal to dominate the total observed signal. This phase dependence is then in phase with the large field signal at $W_0 = 0$ GHz.
+
 \section{\label{sec:conc} Conclusions}
 
-\emph{EMPTY}
-
-%\bibliography{basename of .bib file}
+Empty
 
 \end{document}
