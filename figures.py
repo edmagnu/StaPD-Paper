@@ -1355,8 +1355,8 @@ def field_fig():
 # circle_static.pdf
 # ==========
 def excluded_files(data):
-    flist = ['Circle Static\\2015-11-28\\7_delay_botm200mV_35dB.txt',
-             'Circle Static\\2015-11-29\\17_delay_hp200mV_vm020mV.txt']
+    flist = ['Circle Static\\2015-11-28\\7_delay_botm200mV_35dB.txt']
+    #          'Circle Static\\2015-11-29\\17_delay_hp200mV_vm020mV.txt']
     for fname in flist:
         mask = data['Filename'] != fname
         data = data[mask].copy(deep=True)
@@ -1493,6 +1493,124 @@ def circle_static():
     fig.tight_layout()
     plt.savefig('circle_static.pdf')
     return fits
+
+
+def circstat_dscan_plot(ax, data_tot, fits_tot, fname, nave):
+    mask = (data_tot['Filename'] == fname)
+    data = data_tot[mask].copy()
+    data.sort_values(by='wavelengths', inplace=True)
+    mask = (fits_tot['Filename'] == fname)
+    fits = fits_tot[mask].copy()
+    x, y = running_mean(data, nave)
+    ax.plot(x, y, '-', c='grey')
+    x = np.array(data['wavelengths'])
+    popt = fits[['y0', 'a', 'phi']].values[0]
+    y = model_func_fit(x, *popt)
+    ax.plot(x, y, '-', c='k')
+    return ax
+
+
+def circstat_delays():
+    fname = os.path.join("..", "Data", "StaPD-Analysis", "Circle Static",
+                         "rawdata.txt")
+    data_tot = pd.read_csv(fname, index_col=0)
+    fname = os.path.join("..", "Data", "StaPD-Analysis", "Circle Static",
+                         "fits.txt")
+    fits_tot = pd.read_csv(fname, index_col=0)
+    mask = (data_tot['group'] == 2)
+    # maskf = (fits_tot['group'] == 2)
+    print("fx = ", data_tot.loc[mask, 'fx'].unique())
+    print("fz = ", data_tot.loc[mask, 'fz'].unique())
+    print("fa = ", data_tot.loc[mask, 'fa'].unique())
+    print("names = ", data_tot.loc[mask, 'Filename'].unique())
+    fnames = data_tot.loc[mask, 'Filename'].unique()
+    # print(fnames)
+    # figure
+    fig, axes = plt.subplots(nrows=6, ncols=1, sharex=True, sharey=True,
+                             figsize=(6, 9))
+    nave = 3
+    # vz = 0 mV
+    ax = axes[3]
+    fname = fnames[0]
+    ax = circstat_dscan_plot(ax, data_tot, fits_tot, fname, nave)
+    # vz = -20 mV
+    ax = axes[2]
+    fname = fnames[3]
+    ax = circstat_dscan_plot(ax, data_tot, fits_tot, fname, nave)
+    # vz = +20 mV
+    ax = axes[4]
+    fname = fnames[4]
+    ax = circstat_dscan_plot(ax, data_tot, fits_tot, fname, nave)
+    # vz = -40 mV
+    ax = axes[1]
+    fname = fnames[5]
+    ax = circstat_dscan_plot(ax, data_tot, fits_tot, fname, nave)
+    # vz = +40 mV
+    ax = axes[5]
+    fname = fnames[2]
+    ax = circstat_dscan_plot(ax, data_tot, fits_tot, fname, nave)    
+    # vz = -60 mV
+    ax = axes[0]
+    fname = fnames[1]
+    ax = circstat_dscan_plot(ax, data_tot, fits_tot, fname, nave)
+    # text
+    props = dict(boxstyle='round', facecolor='white', alpha=1.0)
+    axes[0].text(0.95, 0.90, 
+                 # "-4.3 mV/cm",
+                 r"$-17.5^\circ$",
+                 transform=axes[0].transAxes,
+                 fontsize=14,
+                 verticalalignment='center', horizontalalignment='center',
+                 bbox=props)
+    axes[1].text(0.95, 0.90,
+                 # "-2.9 mV/cm",
+                 r"$-11.5^\circ$",
+                 transform=axes[1].transAxes,
+                 fontsize=14,
+                 verticalalignment='center', horizontalalignment='center',
+                 bbox=props)
+    axes[2].text(0.95, 0.90,
+                 # "-1.4 mV/cm",
+                 r"$-5.7^\circ$",
+                 transform=axes[2].transAxes,
+                 fontsize=14,
+                 verticalalignment='center', horizontalalignment='center',
+                 bbox=props)
+    axes[3].text(0.95, 0.90,
+                 # "0 mV/cm",
+                 r"$0^\circ$",
+                 transform=axes[3].transAxes,
+                 fontsize=14,
+                 verticalalignment='center', horizontalalignment='center',
+                 bbox=props)
+    axes[4].text(0.95, 0.90,
+                 # "+1.4 mV/cm",
+                 r"$+5.7^\circ$",
+                 transform=axes[4].transAxes,
+                 fontsize=14,
+                 verticalalignment='center', horizontalalignment='center',
+                 bbox=props)
+    axes[5].text(0.95, 0.90,
+                 # "+2.9 mV/cm",
+                 r"$+11.5^\circ$",
+                 transform=axes[5].transAxes,
+                 fontsize=14,
+                 verticalalignment='center', horizontalalignment='center',
+                 bbox=props)
+    # beautify
+    xticks = np.array([0, 0.5, 1, 1.5, 2.0]) + 1/12
+    xticklabels = [r"$\pi/6$", "", r"$\pi + \pi/6$", "", r"$2\pi + \pi/6$"]
+    axes[5].set(xticks=xticks, xticklabels=xticklabels)
+    # total axes labels
+    fig.add_subplot(111, frameon=False)
+    plt.tick_params(labelcolor='none', top='off', bottom='off', left='off',
+                    right='off')
+    plt.grid(False)
+    plt.xlabel("Delay (rad.)", fontsize=14)
+    plt.ylabel("Norm. Signal", fontsize=14, labelpad=20)
+    fig.tight_layout(rect=[0, 0, 0.95, 1])
+    plt.savefig("circ_stat_delay.pdf")
+    return
 # ==========
 
 
@@ -1561,9 +1679,10 @@ def Efinal_phase():
 # data, params = w0_2D()
 # data, params = w20_2D()
 # data_tot, mask, data = phase_delay()
-phase_inversion()
+# phase_inversion()
 # phases, mw = field_fig()
-# fits = circle_static()
+fits = circle_static()
 # data, params = w0_en_sig_comp()
 # turning_time_convolution()
 # turning_time_figure_dil()
+circstat_delays()
