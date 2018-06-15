@@ -42,9 +42,9 @@ def phase_amp_mean_plot(data, title, ph_th, ax1, ax2, ax3):
     data DataFrame must have 'Ep', 'x0', 'a', and 'y0' keys."""
     # plot data
     ax1.axhline(0, color='grey')
-    data.plot(x='Ep', y='a', ax=ax1, style='-o')
-    data.plot(x='Ep', y='y0', ax=ax2, style='-o')
-    data.plot(x='Ep', y='x0', ax=ax3, style='-o')
+    data.plot(x='Ep', y='a', yerr='sig_a', ax=ax1)
+    data.plot(x='Ep', y='y0', yerr='sig_y0', ax=ax2)
+    data.plot(x='Ep', y='x0', yerr='sig_x0', ax=ax3)
     # beautify
     # ax1.tick_params(which='minor', left='off')
     ax1.set(ylabel="Amp (pk-pk)", title=title)
@@ -75,8 +75,11 @@ def fsort_prep(fsort, excluded, title, ph_th, figname, ax1, ax2, ax3):
     data = pd.DataFrame()
     data['Ep'] = fsort['Static']
     data['a'] = fsort['a']
+    data['sig_a'] = fsort['sig_a']
     data['x0'] = fsort['phi']
+    data['sig_x0'] = fsort['sig_phi']
     data['y0'] = fsort['y0']
+    data['sig_y0'] = fsort['sig_y0']
     # phase threshold
     if ph_th is not None:
         # ph_th = 6*np.pi/6
@@ -172,13 +175,13 @@ def field_modulation():
     yticks, yticklabels = xticks_2p()
     ax[0].set(xlim=(-200, 200))
     ax[2].set(xlabel="Pulsed Field (mV/cm)", ylim=(0, 2*np.pi),
-              yticks = yticks, yticklabels=yticklabels, ylabel="Phase (rad.)")
+              yticks=yticks, yticklabels=yticklabels, ylabel="Phase (rad.)")
     ax[3].set(xlim=(-200, 200))
     ax[5].set(xlabel="Pulsed Field (mV/cm)", ylim=(0, 2*np.pi),
-              yticks = yticks, yticklabels=yticklabels, ylabel="Phase (rad.)")
+              yticks=yticks, yticklabels=yticklabels, ylabel="Phase (rad.)")
     ax[6].set(xlim=(-200, 200))
     ax[8].set(xlabel="Pulsed Field (mV/cm)", ylim=(0, 2*np.pi),
-              yticks = yticks, yticklabels=yticklabels, ylabel="Phase (rad.)")
+              yticks=yticks, yticklabels=yticklabels, ylabel="Phase (rad.)")
     # clean up
     gso.tight_layout(fig)
     plt.savefig('ModvsField.pdf')
@@ -414,7 +417,7 @@ def turning_time_figure_dil():
     ax.fill_between(dil_bind['f'], ymax, dil_bind['wf'], color=colors[1])
     # between wi and tt10 is lost
     ax.fill_between(dil_bind['f'], dil_bind['wi'],
-                    dftt10.iloc[range(0, 11)]['W'], color=colors[1])    
+                    dftt10.iloc[range(0, 11)]['W'], color=colors[1])
     # above tt10 outside of wi -> wf is lost
     mask = (dftt10['field'] >= 10)
     ax.fill_between(dftt10[mask]['field'], ymax, dftt10[mask]['W'],
@@ -572,22 +575,16 @@ def turning_time_convolution():
     mask = mask & mask_NaN
     dftt10 = picked[mask].copy(deep=True)
     dftt10.sort_values(by='field', inplace=True)
-    # dftt10.plot(x='field', y='W', linestyle='', marker='.', label="tt = 10 ns",
-    #             ax=axes)
-    # tplus = 20
+    # tplus = 20 ns
     mask = (picked['kind'] == 'tplus=20')
     mask = mask & mask_NaN
     dftp20 = picked[mask].copy(deep=True)
     dftp20.sort_values(by='field', inplace=True)
-    # dftp20.plot(x='field', y='W', linestyle='', marker='.', label="tp = 20 ns",
-    #             ax=axes)
     # tb = 20
     mask = (picked['kind'] == 'tb=20')
     mask = mask & mask_NaN
     dftb20 = picked[mask].copy(deep=True)
     dftb20.sort_values(by='field', inplace=True)
-    # dftb20.plot(x='field', y='W', linestyle='', marker='.', label="tb = 20 ns",
-    #             ax=axes)
     # basic probability
     # massage tt10
     dftt10['field'] = np.round(dftt10['field'], 0)
@@ -1153,6 +1150,7 @@ def phase_delay():
     plt.savefig("phase_delay.pdf")
     return data_tot, mask_p2, data
 
+
 def phase_inversion():
     # au = atomic_units()
     # load
@@ -1187,7 +1185,8 @@ def phase_inversion():
     print(-700, "\t", fname_m700)
     print(700, "\t", fname_p700)
     # start plotting
-    fig, axes = plt.subplots(nrows=5, sharex=True, sharey=False, figsize=(6,9))
+    fig, axes = plt.subplots(nrows=5, sharex=True, sharey=False,
+                             figsize=(6, 9))
     nave = 3
     # -700 mV
     mask_m700 = (data_tot['Filename'] == fname_m700)
@@ -1548,14 +1547,14 @@ def circstat_delays():
     # vz = +40 mV
     ax = axes[5]
     fname = fnames[2]
-    ax = circstat_dscan_plot(ax, data_tot, fits_tot, fname, nave)    
+    ax = circstat_dscan_plot(ax, data_tot, fits_tot, fname, nave)
     # vz = -60 mV
     ax = axes[0]
     fname = fnames[1]
     ax = circstat_dscan_plot(ax, data_tot, fits_tot, fname, nave)
     # text
     props = dict(boxstyle='round', facecolor='white', alpha=1.0)
-    axes[0].text(0.95, 0.90, 
+    axes[0].text(0.95, 0.90,
                  # "-4.3 mV/cm",
                  r"$-17.5^\circ$",
                  transform=axes[0].transAxes,
@@ -1674,15 +1673,15 @@ def Efinal_phase():
 
 # ==========
 # main script
-# fits = field_modulation()
+fits = field_modulation()
 # data, picked = turning_time_figure()
 # data, params = w0_2D()
 # data, params = w20_2D()
 # data_tot, mask, data = phase_delay()
 # phase_inversion()
 # phases, mw = field_fig()
-fits = circle_static()
+# fits = circle_static()
 # data, params = w0_en_sig_comp()
 # turning_time_convolution()
 # turning_time_figure_dil()
-circstat_delays()
+# circstat_delays()
