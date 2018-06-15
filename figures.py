@@ -98,6 +98,126 @@ def fsort_prep(fsort, excluded, title, ph_th, figname, ax1, ax2, ax3):
     return data, ax1, ax2, ax3
 
 
+def ebar_pam_plot(data, ph_th, ax0, ax1, ax2):
+    # phase threshold
+    mask = (data['x0'] >= (ph_th - np.pi)) & (data['x0'] < ph_th)
+    data.loc[mask, 'a'] = -data[mask]['a']
+    mask = (data['x0'] >= (ph_th + np.pi))
+    data.loc[mask, 'a'] = -data[mask]['a']
+    # phase
+    mask = (data['x0'] < (ph_th - np.pi))
+    data.loc[mask, 'x0'] = data['x0'] + 2*np.pi
+    mask = (data['x0'] >= (ph_th + np.pi))
+    data.loc[mask, 'x0'] = data['x0'] - 2*np.pi
+    # plot
+    # pk-pk amp.
+    ax = ax0
+    ax.axhline(0, color='grey')
+    # data.plot(x='Ep', y='a', yerr='sig_a', ax=ax)
+    ax.plot(data['Ep'], data['a'], '-', c='C0')
+    ax.plot(data['Ep'], data['a'], '.', c='k')
+    ax.errorbar(data['Ep'], data['a'], yerr=data['sig_a'],
+                fmt='none', ecolor='k',
+                capsize=3)
+    # mean
+    ax = ax1
+    ax.axhline(0, color='grey')
+    ax.plot(data['Ep'], data['y0'], '-', c='C0')
+    ax.plot(data['Ep'], data['y0'], '.', c='k')
+    ax.errorbar(data['Ep'], data['y0'], yerr=data['sig_y0'],
+                fmt='none', ecolor='k',
+                capsize=3)
+    # phase
+    ax = ax2
+    ax.axhline(np.pi/6, color='grey')
+    ax.axhline(7*np.pi/6, color='grey')
+    ax.plot(data['Ep'], data['x0'], '-', c='C0')
+    ax.plot(data['Ep'], data['x0'], '.', c='k')
+    ax.errorbar(data['Ep'], data['x0'], yerr=data['sig_x0'],
+                fmt='none', ecolor='k',
+                capsize=3)
+    return ax0, ax1, ax2
+
+
+def ebar_pam_prep(fits, mask, excluded, ph_th):
+    fsort = fits[mask].copy(deep=True)
+    mask = (fsort['a'] < 0)
+    fsort.loc[mask, 'a'] = -fsort[mask]['a']
+    fsort.loc[mask, 'phi'] = fsort[mask]['phi'] + np.pi
+    fsort['phi'] = fsort['phi'] % (2*np.pi)
+    # amplitude -> pk-pk
+    fsort['a'] = 2*fsort['a']
+    # mV/cm
+    fsort['Static'] = fsort['Static']*0.72*0.1
+    # manually exclude bad data runs
+    for fname in excluded:
+        fsort = fsort[fsort['Filename'] != fname]
+    fsort.sort_values(by=['Static'], inplace=True)
+    # translate
+    data = pd.DataFrame()
+    data['Ep'] = fsort['Static']
+    data['a'] = fsort['a']
+    data['sig_a'] = fsort['sig_a']
+    data['x0'] = fsort['phi']
+    data['sig_x0'] = fsort['sig_phi']
+    data['y0'] = fsort['y0']
+    data['sig_y0'] = fsort['sig_y0']
+    return data
+
+
+def test_pam_plot():
+    # read in all fits
+    fname = os.path.join("..", "Data", "StaPD-Analysis", "fits.txt")
+    fits = pd.read_csv(fname, sep="\t", index_col=0)
+    # figure
+    fig, axes = plt.subplots(nrows=3, ncols=3, sharex='col', sharey='row',
+                             figsize=(10.5, 8))
+    # DIL + 2 GHz
+    mask = (fits['DL-Pro'] == 365872.6) & (fits['Attn'] == 44)
+    excluded = ["2016-09-23\\3_delay.txt", "2016-09-23\\4_delay.txt"]
+    ph_th = 5.5/6*np.pi
+    data = ebar_pam_prep(fits, mask, excluded, ph_th)
+    axes[0, 0], axes[1, 0], axes[2, 0] = \
+        ebar_pam_plot(data, ph_th, axes[0, 0], axes[1, 0], axes[2, 0])
+    # DIL - 14 GHz
+    mask = (fits['DL-Pro'] == 365856.7)
+    excluded = ["2016-09-23\\5_delay.txt", "2016-09-23\\11_delay.txt",
+                "2016-09-23\\12_delay.txt", "2016-09-23\\16_delay.txt",
+                "2016-09-23\\17_delay.txt", "2016-09-26\\8_delay.txt",
+                "2016-09-26\\9_delay.txt"]
+    ph_th = 5.5/6*np.pi
+    data = ebar_pam_prep(fits, mask, excluded, ph_th)
+    axes[0, 1], axes[1, 1], axes[2, 1] = \
+        ebar_pam_plot(data, ph_th, axes[0, 1], axes[1, 1], axes[2, 1])
+    # DIL - 30 GHz
+    mask = (fits['DL-Pro'] == 365840.7)
+    excluded = ["2016-09-27\\7_delay.txt", "2016-09-27\\15_delay.txt"]
+    ph_th = 5.5/6*np.pi
+    data = ebar_pam_prep(fits, mask, excluded, ph_th)
+    axes[0, 2], axes[1, 2], axes[2, 2] = \
+        ebar_pam_plot(data, ph_th, axes[0, 2], axes[1, 2], axes[2, 2])
+    # beautify
+    fig.subplots_adjust(wspace=3)
+    xlims = (-200, 200)
+    # x
+    for i in [0, 1, 2]:
+        axes[2, i].set(xlim=xlims, xlabel="Pulsed Field (mV/cm)")
+    # y
+    axes[0, 0].set(ylabel="Pk-Pk Modulation")
+    axes[1, 0].set(ylabel="Mean Signal")
+    xticks, xticklabels = xticks_2p()
+    axes[2, 0].set(ylabel="Phsae (rad.)",
+                   yticks=xticks, yticklabels=xticklabels)
+    # titles
+    axes[0, 0].set(title="DIL + 2 GHz")
+    axes[0, 1].set(title="DIL - 14 GHz")
+    axes[0, 2].set(title="DIL - 30 GHz")
+    # finalize
+    fig.tight_layout()
+    plt.savefig("ModvsField_ebars.pdf")
+    return
+
+
 def field_modulation():
     # read in all fits
     fname = os.path.join("..", "Data", "StaPD-Analysis", "fits.txt")
@@ -185,7 +305,7 @@ def field_modulation():
     # clean up
     gso.tight_layout(fig)
     plt.savefig('ModvsField.pdf')
-    return fits
+    return fits, ax[0]
 # ==========
 
 
@@ -1673,7 +1793,8 @@ def Efinal_phase():
 
 # ==========
 # main script
-fits = field_modulation()
+# fits, ax = field_modulation()
+test_pam_plot()
 # data, picked = turning_time_figure()
 # data, params = w0_2D()
 # data, params = w20_2D()
