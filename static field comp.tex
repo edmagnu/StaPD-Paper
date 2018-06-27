@@ -1,0 +1,55 @@
+\documentclass[aps,pra,preprint,groupedaddress]{revtex4-1}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+\begin{document}
+
+\section{\label{sec:2DMod} Two Dimensional Classical Model}
+
+To provide insight into the observed phase dependence in the number of detected atoms as well as the phase reversal observed when the laser is tuned below the DIL we have constructed a two-dimensional model of a classical Rydberg electron moving in the combined Coulomb, static, and microwave (mw) fields. Expressed in atomic units, the equation of motion is:
+\begin{align*}
+\ddot{\vec{r}} & = -\vec{E}_{coul}(\vec{r}) - \vec{E}_{s}(t) - \vec{E}_{mw}(t) \\
+ & = -\frac{1}{r^2} \cdot \hat{r} - \Phi_s(t) \cdot E_{s} \cdot \hat{z} - \Phi_{mw}(t) \cdot E_{mw} \sin{(\omega t + \phi_0)} \cdot \hat{z}
+\end{align*}
+$\Phi_s$ and $\Phi_{mw}$ are envelopes describing the square wave turning off the static  field and the exponential ring-down of the MW field. Explicitly,
+\begin{align*}
+\Phi_s(t \leq t_{off}) & = 1 & \Phi_{mw}(t \leq t_{off}) & = 1 \\
+\Phi_s(t > t_{off}) & = 0 & \Phi_{mw}(t > t_{off}) & = e^{-(t-t_{off})/\tau_{mw}}.
+\end{align*}
+The microwave field amplitude is 4 V/cm, the frequency is 15.9 GHz, the microwave and static fields are turned off at $t_0=$20 ns, and $\tau_{mw}=xxx$. The electron is launched at time $t=0$ starting from the periapsis of the highly elliptical Rydberg orbit with an initial energy $W_0$ and initial angular momentum $l_0 = \sqrt{3 \cdot (3+1)}$, corresponding to an $f$ state. the electron's orbit lies in the x-z plane, and initially it is in an elliptical orbit with its semimajor axis along the the +z or -z axis. In Fig. 10 we show the beginnings of two trajectories, A and B, which are initially on elliptical orbits. If the static field $E_s$ is in the +z direction, as shown, an electron launched on trajectory A is reflected back toward the ion by the static field, and we label it an "uphill" trajectory. An electron launched on trajectory B is a "downhill" trajectory. Both trajectories shown in Fig. 10 have angular momentum in the +y direction. As expected from the symmetry of the problem, the results we obtain are unchanged when the sign of the angular momentum is reversed.
+
+
+For computation, the vector equations are expressed in terms of Cartesian coordinates \{x,y,z\}. Including the initial conditions, the system of ordinary differential equations to integrate is:
+\begin{align*}
+x(0) & = 0 & z(0) & = \pm r_0 \\
+\dot{x}(0) & = \pm v_0 & \dot{z}(0) & = 0 \\
+\ddot{x} & = -\frac{x}{(x^2 + z^2)^{3/2}} & \ddot{z} & = -\frac{z}{(x^2 + z^2)^{3/2}} - \Phi_s(t) \cdot E_s \\
+ & & & \quad \quad - \Phi_{mw}(t) \cdot E_{mw} \cdot \sin{(\omega t + \phi_0)}
+\end{align*}
+
+For each initial electron energy $W_0$ and static field $E_s$, electrons are launched at 200 microwave phases $\phi_0$ between 0 and $2\pi$, in the "uphill" and "downhill" directions. The equations of motion are integrated until the MW field has decayed for 5 times the decay constant, that is until  $t=t_{off} + 5\tau_{MW}$. After this integration time, the final energy $W_f = 1/2 v_f^2 - 1/r_f$ of the electron is recorded.
+
+An electron with a positive final energy escapes from the ion, while those with negative final energies are bound and detected. The detected signal as a function of phase is convolved with the intensity envelope of the laser to produce a simulated signal. We assume the laser intensity profile to be given by xyz. The calculated signals are normalized in the same way as the experimental data. To provide the maximum insight into the origin of the observed signals we treat the uphill and downhill electrons separately, then add them to produce the calculated signal. 
+In Fig. 11 we show the results for $W_0=$0, 36, and 100 mV/cm. These calculations should mimic the experimental results shown in Fig.7. As expected, with $E_s=0$ there are equal modulations in the electrons ejected uphill, the +z direction, and downhill, the -z direction. The maximum in the uphill (downhill) signal occurs at $\phi_0=\pi/6$ ($7\pi/6$), the phase at which the microwave field removes the most energy from an uphill (downhill) electron. Since the modulations are $\pi$ out of phase, they cancel in the detected signal. In a static field of 36 mV/cm most of the downhill electrons leave, with a few surviving at $\phi_0=7\pi/6$, the phase at which the microwave field removes the maximum amount of energy from a downhill electron. More uphill electrons survive as bound atoms at all phases, but they are much more likely to survive if $\phi_0=\pi/6$, the phase at which the microwave field extracts the most energy from an uphill electron. Adding the uphill and downhill signals yields a total signal with a peak at $\phi_0=\pi/6$. When the static field is increased to 100 mV/cm no electrons ejected downhill result in bound atoms; the entire detected signal is due to electrons launched uphill. Irrespective of the static field the maximum number of bound atoms from uphill electrons occurs at $\phi_0=\pi/6$. These calculations, which are in agreement with the model of Shuman et al., are why we fixed the phase of the maximum experimental signals at $\phi_0=\pi/6$.
+
+A surprising aspect of our data is the sign reversal of the modulation with increasing static field when the laser is tuned below the DIL, as seen in Figs. y and z.`Fig.~\ref{fig:2DW20} shows the results for $W_0 = -20$ GHz and $E_s = 0, ~7.2, ~100$ mV/cm. As for $W_0=0$, when $E_s=0$ there is no modulation when the uphill and downhill signals are summed. When $E_s=$7.2 mV/cm the maximum in the number of bound atoms detected occurs at $\phi_0=7\pi/6$, not $\pi/6$. The calculated signal exhibits the same phase reversal seen in the experimental data of Figs. y and z. Examining the uphill and downhill electron contributions separately shows the origin of the reversal. At $E_s=$7.2 mV/cm many of the uphill electrons are left as bound electrons for all phases, with only a slight dependence on $\phi_0$. While fewer of the downhill electrons are left bound, the dependence on $\phi_0$ is much ore pronounced, leading to a peak in the total detected signal at $\phi_0=7\pi/6$. When the static field is raised to 100 mV/cm essentially all the downhill electrons leave the ion, and the uphill electrons, which are most likley to remain bound when $\phi_0=\pi/6$, constitute almost the entire signal. In the presence of the larger static field the tuning slightly below the limit becomes equivalent to tuning to the limit in any static field.
+
+In sum, The model shows both the origins of the phase dependence and its unexpected reversal encountered when the laser is tuned below the DIL.
+
+\begin{figure}
+	\includegraphics{W0_2D}
+	\caption{Calculated observed signal from our 2 dimensional model, with initial energy $W_0 = 0$ GHz. The contributions from uphill and downhill electrons are in orange and blue, respectively, with the total expected signal in Green. At $E_{pulse} = 0$ mV/cm, uphill and downhill signals have opposite phase dependence, resulting in a flat total signal. As signal increases, downhill $e^-$ at every launch phase all ionize, and the total signal is dominated by the uphill signal.}
+	\label{fig:2DW0}
+\end{figure}
+
+
+
+\begin{figure}
+	\includegraphics{W20_2D}
+	\caption{Calculated observed signal from our 2 dimensional model, with initial energy $W_0 = -20 GHz$. Uphill and downhill signals are in blue and orange, respectively, with total signal in green. As in Fig.~\ref{fig:2DW0}, at $E_{pulse} = 0$ mV/cm, the uphill and downhill signals result in a flat total signal. At $E_{pulse} = 7.2$ mV/cm, the downhill signal is diminished, but the total phase dependence increases. The total signal shows a phase dependence shifted by $\pi$ from the small field signal for $W_0 = 0 GHz$ in Fig.~\ref{fig:2DW0}. At $E_{pulse} = 100$ mV/cm, downhill $e^-$ almost all ionize, and the uphill signal dominates the total signal.}
+	\label{fig:2DW20}
+\end{figure}
+
+\end{document}
+
