@@ -175,6 +175,7 @@ def circstat_zero():
     # final
     fig.tight_layout()
     fig.savefig("CircleDelay.pdf")
+    fig.savefig(os.path.join("..", "CircleDelay.pdf"))
     return
 
 

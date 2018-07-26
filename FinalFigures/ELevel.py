@@ -8,9 +8,11 @@ Created on Thu Jun 28 17:32:35 2018
 # Energy Level Diagram
 # For Static Field Recombination Paper
 
+import os
 import numpy as np
 import matplotlib.pyplot as plt
 # import pandas as pd
+
 
 def ELevel():
     """Energy level figure showing 2s -> 2p -> 3d -> n/e f"""
@@ -69,6 +71,7 @@ def ELevel():
     ax.axis('off')
     fig.tight_layout()
     fig.savefig("ELevel.pdf")
+    fig.savefig(os.path.join("..", "Elevel.pdf"))
     return
 
 

@@ -104,7 +104,8 @@ def FieldPhase():
     ax.text(xlims[1], 0, "108.0 mV/cm", **align, bbox=props)
     # save
     fig.tight_layout()
-    plt.savefig("FieldPhase.pdf")
+    fig.savefig("FieldPhase.pdf")
+    fig.savefig(os.path.join("..", "FieldPhase.pdf"))
     return data_tot
 
 

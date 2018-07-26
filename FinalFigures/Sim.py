@@ -111,7 +111,8 @@ def Sim0():
     axes[i] = Sim_plot(params, W0, Ep, ylims, title, axes[i])
     # save
     fig.tight_layout()
-    plt.savefig('Sim0.pdf')
+    fig.savefig("Sim0.pdf")
+    fig.savefig(os.path.join("..", "Sim0.pdf"))
     return data, params
 
 
@@ -147,7 +148,8 @@ def SimM20():
     axes[i] = Sim_plot(params, W0, Ep, ylims, title, axes[i])
     # save
     fig.tight_layout()
-    plt.savefig('SimM20.pdf')
+    fig.savefig("SimM20.pdf")
+    fig.savefig(os.path.join("..", "SimM20.pdf"))
     return data, params
 
 

@@ -8,6 +8,7 @@ Created on Thu Jun 28 12:00:56 2018
 # Coulomb, Static, and MW field diagram
 # For Static Field Recombination Paper
 
+import os
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -42,7 +43,7 @@ def CoulMW():
     potential['V'] = potential['C'] + potential['E']
     # plot
     potential.plot(x="z", y="V", linewidth=2,
-                   label=r"$-1/r - E_S \cdot z$", c = 'k', ax=ax)
+                   label=r"$-1/r - E_S \cdot z$", c='k', ax=ax)
     # beautify
     ax.set_xticks([])
     ax.set_yticks([])
@@ -76,6 +77,7 @@ def CoulMW():
         ax.spines[side].set_visible(False)
     fig.tight_layout()
     plt.savefig("CoulMW.pdf")
+    plt.savefig(os.path.join("..", "CoulMW.pdf"))
     return potential
 
 
@@ -84,13 +86,13 @@ def MW_field(ax):
     value."""
     # figure
     # fig, ax = plt.subplots()
-    xlims=(-1.2, 1.2)
-    ylims=(-np.pi/3, (2+2/3)*np.pi)
+    xlims = (-1.2, 1.2)
+    ylims = (-np.pi/3, (2+2/3)*np.pi)
     # build data
     df = pd.DataFrame()
     df['t'] = np.arange(-np.pi/6, 2*np.pi + np.pi/6, np.pi/180)
     df['f'] = -np.sin(df['t'])
-    #plot
+    # plot
     df.plot(x='f', y='t', c='C5', ax=ax)
     # manual axis lines
     arrowprops = {'width': 1, 'headwidth': 10, 'headlength': 10, 'color': 'k'}
@@ -103,7 +105,7 @@ def MW_field(ax):
     ax.text(xlims[1]+0.1, 0, r"$\vec{E}_{MW}$", fontsize=14,
             verticalalignment='center', horizontalalignment='left')
     # Es line
-    ylims=(ylims[0]*3, ylims[1])
+    ylims = (ylims[0]*3, ylims[1])
     ax.annotate(s="", xy=(xlims[0], ylims[0]), xytext=(xlims[1], ylims[0]),
                 arrowprops=arrowprops)
     ax.text(xlims[1]+0.1, ylims[0], r"$\vec{E}_S$", fontsize=14,

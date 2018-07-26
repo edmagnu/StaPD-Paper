@@ -129,6 +129,7 @@ def amp_figs():
     fig, ax = amp_mean_phase_plot(fits, mask, excluded, title)
     fig.tight_layout()
     fig.savefig("DILP2.pdf")
+    fig.savefig(os.path.join("..", "DILP2.pdf"))
     # DIL - 14 GHz
     mask = (fits['DL-Pro'] == 365856.7)
     excluded = ["2016-09-23\\5_delay.txt", "2016-09-23\\11_delay.txt",
@@ -139,6 +140,7 @@ def amp_figs():
     fig, ax = amp_mean_phase_plot(fits, mask, excluded, title)
     fig.tight_layout()
     fig.savefig("DILM14.pdf")
+    fig.savefig(os.path.join("..", "DILM14.pdf"))
     # DIL - 30 GHz
     mask = (fits['DL-Pro'] == 365840.7)
     excluded = ["2016-09-27\\7_delay.txt", "2016-09-27\\15_delay.txt"]
@@ -146,6 +148,7 @@ def amp_figs():
     fig, ax = amp_mean_phase_plot(fits, mask, excluded, title)
     fig.tight_layout()
     fig.savefig("DILM30.pdf")
+    fig.savefig(os.path.join("..", "DILM30.pdf"))
     return
 
 

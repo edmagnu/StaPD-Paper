@@ -8,6 +8,7 @@ Created on Mon Jul  2 16:44:00 2018
 # AM laser and MW timing figure.
 # For Static Field Recombination paper
 
+import os
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -92,7 +93,8 @@ def AMTiming():
     ax.spines['top'].set_visible(False)
     # finishing
     # fig.tight_layout(rect=[0.05, 0, 1, 1])
-    plt.savefig('AMTiming.pdf')
+    fig.savefig('AMTiming.pdf')
+    fig.savefig(os.path.join("..", "AMTiming.pdf"))
     return phases, mw
 
 

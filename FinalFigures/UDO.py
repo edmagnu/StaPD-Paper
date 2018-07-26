@@ -8,6 +8,7 @@ Created on Fri Jun 29 22:09:21 2018
 # Uphill and Downhill orbit starts for +y angular momentum
 # For Static Field Recombination paper.
 
+import os
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -62,7 +63,7 @@ def udo_plot():
     # field arrow
     arrowprops = {'width': 1, 'headwidth': 10, 'headlength': 10, 'color': 'k'}
     ax.annotate("", xy=(xlims[1]*0.3, ylims[1]*0.7),
-                xytext=(xlims[1]*0.8, ylims[1]*0.7), 
+                xytext=(xlims[1]*0.8, ylims[1]*0.7),
                 arrowprops=arrowprops)
     ax.text(xlims[1]*0.55, ylims[1]*0.72, r"$\vec{E}_S$", fontsize=14,
             horizontalalignment='center', verticalalignment='bottom')
@@ -71,6 +72,7 @@ def udo_plot():
     # finalize
     fig.tight_layout(rect=[0, 0, 0.95, 0.95])
     fig.savefig("UDO.pdf")
+    fig.savefig(os.path.join("..", "UDO.pdf"))
     return
 
 
