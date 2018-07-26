@@ -157,7 +157,7 @@ The delay scans of Fig. 5 show many of the important features of our observation
 
 \begin{figure}
 	\includegraphics[]{FieldPhase}
-	\caption{Rydberg state signal as the phase delay is scanned for various values of $E_S$. The central laser frequency is tuned to 2 GHz above the DIL. The vertical scale is normalized such that 1 is the total number of electrons excited by the 819 nm laser. When no static field is applied, there is no observed phase modulation. As the static field in increased, the phase dependence in the signal grows and then lessens as the total mean signal decreases. The experimental data are shown in grey, while the solid sinusoidal curves trace the best fit to Eq. (~\ref{eq:modfit}). The traces at + (solid) and -(dashed) 7.2 mV/cm show reversing the static field inverts the amplitude of the phase modulation.}
+	\caption{Rydberg state signal as the phase delay is scanned for various values of $E_S$. The central laser frequency is tuned to 2 GHz above the DIL. The vertical scale is normalized such that 1 is the total number of electrons excited by the 819 nm laser. When no static field is applied, there is no observed phase modulation. As the static field in increased, the phase dependence in the signal grows and then lessens as the total mean signal decreases. The experimental data are shown in grey, while the solid sinusoidal curves trace the best fit to Eq. (\ref{eq:modfit}). The traces at + (solid) and -(dashed) 7.2 mV/cm show reversing the static field inverts the amplitude of the phase modulation.}
 	\label{fig:fph}
 \end{figure}
 
@@ -170,7 +170,7 @@ While the addition of a static field in the vertical direction breaks the symmet
 
 \begin{figure}
 	\includegraphics[width=0.7\textwidth]{CircleDelay}
-	\caption{Rydberg signal obtained vs phase delay for laser tuning 14 GHz below the DIL in three different 14 mV/cm static fields oriented parallel and perpendicular to the z polarized microwave field. (a) t$E_s$ in the +z (vertical) direction, (b) $E_s$ in the x (horizontal) direction, and (c) $E_s$ in the -z (vertical) directions. There is no dependence on the delay whith the static field perpendicular to the microwave field, as expected from the symmetry of the problem. }
+	\caption{Rydberg signal obtained vs phase delay for laser tuning 14 GHz below the DIL in three different 14 mV/cm static fields oriented parallel and perpendicular to the z polarized microwave field. (a) $E_s$ in the +z (vertical) direction, (b) $E_s$ in the x (horizontal) direction, and (c) $E_s$ in the -z (vertical) \textbf{[directions]} direction. There is no dependence on the delay whith the static field perpendicular to the microwave field, as expected from the symmetry of the problem. }
 	\label{fig:CircleDelay}
 \end{figure}
 
@@ -178,8 +178,10 @@ While the addition of a static field in the vertical direction breaks the symmet
 With the laser tuned 2 GHz above the DIL we have taken extensive data, of which those shown in Fig.~\ref{fig:fph} are representative. To present these data in a more compact way we fit the observed phase scans to the sinusoidal form:
 \begin{equation} \label{eq:modfit}
 S = S_m  \cos{[ \phi_0-\pi/6]} + S_0,
+\hspace{10pt} \textbf{???} \hspace{10pt}
+S = S_m \cos{[\omega t_0 - \phi_0]} + S_0
 \end{equation}
-where $S_0$ is the phase average signal, and $S_m$ is the amplitude of the modulation. We constrain $\phi_0$ to lie in the range $0\leq \phi_0\leq \pi$, which results in the plots shown in Fig. 6. As expected, $S_0$ decreases from $S_0)=0.3$  as the magnitude of the static field is increased. the amplitude of the modulation $S_m$ is an odd function of the static field, reaching its maximal positive and negative values at $E_s=\pm 10$mV/cm. Finally, the phase $\phi_0$ is approximately constant.
+where $S_0$ is the phase average signal, and $S_m$ is the amplitude of the modulation. We constrain $\phi_0$ to lie in the range $0\leq \phi_0\leq \pi$, which results in the plots shown in Fig.~\ref{fig:DILP2}. As expected, $S_0$ decreases from $S_0=0.3$  as the magnitude of the static field is increased. the amplitude of the modulation $S_m$ is an odd function of the static field, reaching its maximal positive and negative values at $E_s=\pm 10$mV/cm. Finally, the phase $\phi_0$ is approximately constant.
 
 
 \begin{figure}
@@ -189,12 +191,12 @@ where $S_0$ is the phase average signal, and $S_m$ is the amplitude of the modul
 \end{figure}
 
 
-As shown by Fig. 7, when the 819 nm laser is tuned 14 GHz below the DIL, the average number of surviving atoms increases, as might be expected. Unexpectedly, with this laser tuning a small static field results in a modulation of opposite polarity to that seen in Fig. 6. As the amplitude of the static field is raised, the modulation changes sign, and at static fields larger than $\pm25$ mV/cm it has the same sign as seen in Fig. 6. While the sign reversal relative to Fig. 6 at small static fields is surprising, the similarity at higher static fields is not.
+As shown by Fig.~\ref{fig:DILM14}, when the 819 nm laser is tuned 14 GHz below the DIL, the average number of surviving atoms increases, as might be expected. Unexpectedly, with this laser tuning a small static field results in a modulation of opposite polarity to that seen in Fig.~\ref{fig:DILP2}. As the amplitude of the static field is raised, the modulation changes sign, and at static fields larger than $\pm25$ mV/cm it has the same sign as seen in Fig.~\ref{fig:DILP2}. While the sign reversal relative to Fig.~\ref{fig:DILP2} at small static fields is surprising, the similarity at higher static fields is not.
 
 
 \begin{figure}
 	\includegraphics[]{DILM14}
-	\caption{(a) Mean signal $E_0$, (b) peak to peak modulation, and (c) phase vs static field $E_s$ observed with the laser tuned 14 GHz below the DIL. These parameters are extracted by fitting delay scans such as those of Fig. 5 to Eq. (4) with the constraint $0\leq\phi_0\leq\pi$. At zero static field, we again observe the maximum mean signal, and there is no modulation. For small static fields, $|E_s|<25$ mV/cm,the modulation has the opposite sign to that shown in Fig. 8 and reaches its first peak at $E_S = \pm 12$ mV/cm. As the magnitude of the static field is increased modulation decreases and crosses zero at $E_S = \pm 25$ mV/cm. For $|E_s|> 25$mV/cm the modulation has the same sign as in Fig. 8, reaching its maximum at $E_s=\pm50$ mV/cm, and decreasing for higher magnitudes of the static field. A slight positive shift of the phase is observed as $|E_s|$ is increased.}
+	\caption{(a) Mean signal \textbf{E 0} $S_0$, (b) peak to peak modulation $2 \cdot S_m$, and (c) phase $\phi_0$ vs static field $E_s$ observed with the laser tuned 14 GHz below the DIL. These parameters are extracted by fitting delay scans such as those of Fig.~\ref{fig:fph} to Eq. (\ref{eq:modfit}) with the constraint $0\leq\phi_0\leq\pi$. At zero static field, we again observe the maximum mean signal, and there is no modulation. For small static fields, $|E_s|<25$ mV/cm, the modulation has the opposite sign to that shown in Fig.~\ref{fig:DILP2} and reaches its first peak at $E_S = \pm 12$ mV/cm. As the magnitude of the static field is increased modulation decreases and crosses zero at $E_S = \pm 25$ mV/cm. For $|E_s|> 25$mV/cm the modulation has the same sign as in Fig. 8, reaching its maximum at $E_s=\pm50$ mV/cm, and decreasing for higher magnitudes of the static field. A slight positive shift of the phase is observed as $|E_s|$ is increased.}
 	\label{fig:DILM14}
 \end{figure}
 
@@ -204,7 +206,7 @@ Finally, Fig.~\ref{fig:DILM30} shows the results for the laser tuned to DIL - 30
 
 \begin{figure}
 	\includegraphics[]{DILM30}
-	\caption{(a) Mean signal $E_0$, (b) peak to peak modulation, and (c) phase vs static field $E_s$ observed with the laser tuned 30 GHz below the DIL. These parameters are extracted by fitting delay scans such as those of Fig. 5 to Eq. (4) with the constraint $0\leq\phi_0\leq\pi$. As in Figs. 8 and 9, there is a maximum in the mean signal at $E_s=0$. Unlike Figs. 8 and 9, modulation is not immediately observed for $E_s\neq 0$. Modulation is not observed until $E_s=\pm xx$ mV/cm, at which point it has the same sign as in Fig. 9. It reaches its first maximum at $E_s=40??$ mV/cm, crosses zero at $E_s=\pm 80 ?? $ mV/cm, reaches its second maximum at $E_s=\pm 120 ??$ mV/cm, and decays to zero as $|E_s|$ is further increased. The phase appears to be constant.}
+	\caption{(a) Mean signal \textbf{E 0} $S_0$, (b) peak to peak modulation $2 \cdot S_m$, and (c) phase $\phi_0$ vs static field $E_s$ observed with the laser tuned 30 GHz below the DIL. These parameters are extracted by fitting delay scans such as those of Fig.~\ref{fig:fph} to Eq.~\ref{eq:modfit} with the constraint $0\leq\phi_0\leq\pi$. As in Figs.~\ref{fig:DILP2} and \ref{fig:DILM14}, there is a maximum in the mean signal at $E_s=0$. Unlike Figs.~\ref{fig:DILP2} and \ref{fig:DILM14}, modulation is not immediately observed for $E_s\neq 0$. Modulation is not observed until \textbf{[xx]} $E_s=\pm 30$ mV/cm, at which point it has the same sign as in Fig.~\ref{fig:DILM14}. It reaches its first maximum at \textbf{[40??]} $E_s=45$ mV/cm, crosses zero at \textbf{[80??]} $E_s=\pm 65$ mV/cm, reaches its second maximum at \textbf{[120??]} $E_s=\pm 140$ mV/cm, and decays to zero as $|E_s|$ is further increased. The phase appears to be constant.}
 	\label{fig:DILM30}
 \end{figure}
 
@@ -236,8 +238,10 @@ For computation, the vector equations are expressed in terms of Cartesian coordi
 \begin{align*}
 x(0) & = 0 & z(0) & = \pm r_0 \\
 \dot{x}(0) & = \pm v_0 & \dot{z}(0) & = 0 \\
-\ddot{x} & = -\frac{x}{(x^2 + z^2)^{3/2}} & \ddot{z} & = -\frac{z}{(x^2 + z^2)^{3/2}} - \Phi_s(t) \cdot E_s \\
- & & & \quad \quad - \Phi_{mw}(t) \cdot E_{mw} \cdot \sin{(\omega t + \phi_0)}
+\ddot{x} & = -\frac{x}{(x^2 + z^2)^{3/2}} & \ddot{z} & = -\frac{z}{(x^2 + z^2)^{3/2}} - \Theta_s(t) \cdot E_s \\
+ & & & \quad \quad - \Phi_{mw}(t) \cdot E_{mw} \cdot \sin{(\omega t + \phi_0)} \\
+ & & & \quad \quad \textbf{???} \\
+ & & & \quad \quad - \Theta_{mw}(t) \cdot E_{mw} \cdot \sin{(\omega t + \phi_0)}
 \end{align*}
 
 
