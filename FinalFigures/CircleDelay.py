@@ -147,12 +147,12 @@ def circstat_zero():
     # text
     props = dict(boxstyle='round', facecolor='white', alpha=1.0)
     align = {'verticalalignment': 'top',
-             'horizontalalignment': 'left'}
-    texts = ["(a) " + r"$+\hat{z}$",
-             "(b) " + r"$\hat{x}$",
-             "(c) " + r"$-\hat{z}$"]
+             'horizontalalignment': 'right'}
+    texts = ["(a)",
+             "(b)",
+             "(c)"]
     for i in [0, 1, 2]:
-        axes[i].text(0.85, 0.9, texts[i], transform=axes[i].transAxes,
+        axes[i].text(0.98, 0.9, texts[i], transform=axes[i].transAxes,
                  **align, fontsize=14, bbox=props)
     # pretty
     for i in [0, 1, 2]:

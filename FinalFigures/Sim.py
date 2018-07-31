@@ -75,7 +75,7 @@ def Sim_plot(params, W0, Ep, ylims, title, ax):
     # clean up
     ax.set(xlim=(xmin, xmax), ylim=(ymin, ymax), xticks=xticks,
            xticklabels=xticklabels,  # xlabel=r"Phase $\phi_0$ (rad)",
-           ylabel="Norm. Signal", title=title)
+           ylabel="Norm. Signal")  # , title=title)
     return ax
 
 
@@ -109,6 +109,14 @@ def Sim0():
     title = r"$E_S = 100$ mV/cm"
     Ep = fields[i]
     axes[i] = Sim_plot(params, W0, Ep, ylims, title, axes[i])
+    # text
+    props = dict(boxstyle='round', facecolor='white', alpha=1.0)
+    align = {'verticalalignment': 'top',
+             'horizontalalignment': 'right'}
+    texts = ["(a)", "(b)", "(c)"]
+    for i in [0, 1, 2]:
+        axes[i].text(0.98, 0.92, texts[i], bbox=props, **align,
+                     transform=axes[i].transAxes)
     # save
     fig.tight_layout()
     fig.savefig("Sim0.pdf")
@@ -146,6 +154,14 @@ def SimM20():
     title = r"$E_S = 100$ mV/cm"
     Ep = fields[i]
     axes[i] = Sim_plot(params, W0, Ep, ylims, title, axes[i])
+    # text
+    props = dict(boxstyle='round', facecolor='white', alpha=1.0)
+    align = {'verticalalignment': 'top',
+             'horizontalalignment': 'right'}
+    texts = ["(a)", "(b)", "(c)"]
+    for i in [0, 1, 2]:
+        axes[i].text(0.98, 0.92, texts[i], bbox=props, **align,
+                     transform=axes[i].transAxes)
     # save
     fig.tight_layout()
     fig.savefig("SimM20.pdf")
