@@ -112,6 +112,14 @@ def amp_mean_phase_plot(fits, mask, excluded, title):
     ax[2].set(ylabel="Phase (rad.)", yticks=yticks, yticklabels=ylabels)
     # title
     ax[0].set(title=title)
+    # text
+    props = dict(boxstyle='round', facecolor='white', alpha=1.0)
+    align = {'verticalalignment': 'top',
+             'horizontalalignment': 'right'}
+    texts = ["(a)", "(b)", "(c)"]
+    for i in [0, 1, 2]:
+        ax[i].text(0.98, 0.92, texts[i], bbox=props, **align,
+                   transform=ax[i].transAxes)
     # finish
     fig.tight_layout()
     return fig, ax
