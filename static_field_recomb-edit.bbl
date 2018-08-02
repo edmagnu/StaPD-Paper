@@ -70,14 +70,13 @@
   {journal} {\bibinfo  {journal} {Phys. Rev. Lett.}\ }\textbf {\bibinfo
   {volume} {99}},\ \bibinfo {pages} {233001} (\bibinfo {year}
   {2007})}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Ranitovic}\ \emph
-  {et~al.}(2010{\natexlab{a}})\citenamefont {Ranitovic}, \citenamefont {Tong},
-  \citenamefont {Gramkow}, \citenamefont {De}, \citenamefont {DePaola},
-  \citenamefont {Singh}, \citenamefont {Cao}, \citenamefont {Magrakvelidze},
-  \citenamefont {Ray}, \citenamefont {Bocharova}, \citenamefont {Mashiko},
-  \citenamefont {Sandhu}, \citenamefont {Gagnon}, \citenamefont {Murnane},
-  \citenamefont {Kapteyn}, \citenamefont {Litvinyuk},\ and\ \citenamefont
-  {Cocke}}]{Ranitovic}%
+\bibitem [{\citenamefont {Ranitovic}\ \emph {et~al.}(2010)\citenamefont
+  {Ranitovic}, \citenamefont {Tong}, \citenamefont {Gramkow}, \citenamefont
+  {De}, \citenamefont {DePaola}, \citenamefont {Singh}, \citenamefont {Cao},
+  \citenamefont {Magrakvelidze}, \citenamefont {Ray}, \citenamefont
+  {Bocharova}, \citenamefont {Mashiko}, \citenamefont {Sandhu}, \citenamefont
+  {Gagnon}, \citenamefont {Murnane}, \citenamefont {Kapteyn}, \citenamefont
+  {Litvinyuk},\ and\ \citenamefont {Cocke}}]{Ranitovic}%
   \BibitemOpen
   \bibfield  {author} {\bibinfo {author} {\bibfnamefont {P.}~\bibnamefont
   {Ranitovic}}, \bibinfo {author} {\bibfnamefont {X.~M.}\ \bibnamefont {Tong}},
@@ -97,35 +96,18 @@
   }\href {http://stacks.iop.org/1367-2630/12/i=1/a=013008} {\bibfield
   {journal} {\bibinfo  {journal} {New Journal of Physics}\ }\textbf {\bibinfo
   {volume} {12}},\ \bibinfo {pages} {013008} (\bibinfo {year}
-  {2010}{\natexlab{a}})}\BibitemShut {NoStop}%
-\bibitem [{\citenamefont {Ranitovic}\ \emph
-  {et~al.}(2010{\natexlab{b}})\citenamefont {Ranitovic}, \citenamefont {Tong},
-  \citenamefont {Gramkow}, \citenamefont {De}, \citenamefont {DePaola},
-  \citenamefont {Singh}, \citenamefont {Cao}, \citenamefont {Magrakvelidze},
-  \citenamefont {Ray}, \citenamefont {Bocharova}, \citenamefont {Mashiko},
-  \citenamefont {Sandhu}, \citenamefont {Gagnon}, \citenamefont {Murnane},
-  \citenamefont {Kapteyn}, \citenamefont {Litvinyuk},\ and\ \citenamefont
-  {Cocke}}]{Tong}%
+  {2010})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Tong}\ \emph {et~al.}(2010)\citenamefont {Tong},
+  \citenamefont {Ranitovic}, \citenamefont {Cocke},\ and\ \citenamefont
+  {Toshima}}]{Tong}%
   \BibitemOpen
-  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {P.}~\bibnamefont
-  {Ranitovic}}, \bibinfo {author} {\bibfnamefont {X.~M.}\ \bibnamefont {Tong}},
-  \bibinfo {author} {\bibfnamefont {B.}~\bibnamefont {Gramkow}}, \bibinfo
-  {author} {\bibfnamefont {S.}~\bibnamefont {De}}, \bibinfo {author}
-  {\bibfnamefont {B.}~\bibnamefont {DePaola}}, \bibinfo {author} {\bibfnamefont
-  {K.~P.}\ \bibnamefont {Singh}}, \bibinfo {author} {\bibfnamefont
-  {W.}~\bibnamefont {Cao}}, \bibinfo {author} {\bibfnamefont {M.}~\bibnamefont
-  {Magrakvelidze}}, \bibinfo {author} {\bibfnamefont {D.}~\bibnamefont {Ray}},
-  \bibinfo {author} {\bibfnamefont {I.}~\bibnamefont {Bocharova}}, \bibinfo
-  {author} {\bibfnamefont {H.}~\bibnamefont {Mashiko}}, \bibinfo {author}
-  {\bibfnamefont {A.}~\bibnamefont {Sandhu}}, \bibinfo {author} {\bibfnamefont
-  {E.}~\bibnamefont {Gagnon}}, \bibinfo {author} {\bibfnamefont {M.~M.}\
-  \bibnamefont {Murnane}}, \bibinfo {author} {\bibfnamefont {H.}~\bibnamefont
-  {Kapteyn}}, \bibinfo {author} {\bibfnamefont {I.}~\bibnamefont {Litvinyuk}},
-  \ and\ \bibinfo {author} {\bibfnamefont {C.~L.}\ \bibnamefont {Cocke}},\
-  }\href {http://stacks.iop.org/1367-2630/12/i=1/a=013008} {\bibfield
-  {journal} {\bibinfo  {journal} {New Journal of Physics}\ }\textbf {\bibinfo
-  {volume} {12}},\ \bibinfo {pages} {013008} (\bibinfo {year}
-  {2010}{\natexlab{b}})}\BibitemShut {NoStop}%
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {X.~M.}\ \bibnamefont
+  {Tong}}, \bibinfo {author} {\bibfnamefont {P.}~\bibnamefont {Ranitovic}},
+  \bibinfo {author} {\bibfnamefont {C.~L.}\ \bibnamefont {Cocke}}, \ and\
+  \bibinfo {author} {\bibfnamefont {N.}~\bibnamefont {Toshima}},\ }\href
+  {\doibase 10.1103/PhysRevA.81.021404} {\bibfield  {journal} {\bibinfo
+  {journal} {Phys. Rev. A}\ }\textbf {\bibinfo {volume} {81}},\ \bibinfo
+  {pages} {021404} (\bibinfo {year} {2010})}\BibitemShut {NoStop}%
 \bibitem [{\citenamefont {Mauritsson}\ \emph {et~al.}(2006)\citenamefont
   {Mauritsson}, \citenamefont {Johnsson}, \citenamefont {Gustafsson},
   \citenamefont {L'Huillier}, \citenamefont {Schafer},\ and\ \citenamefont
