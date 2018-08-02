@@ -30,7 +30,7 @@ def AMTiming():
     mw = a*np.sin(phases) + offmw
     ir = a*np.cos(phases + phi0) + offir
     # plot
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(3.375, 3.375))
     ax.plot(phases, mw, c='C3', lw=3)
     ax.fill_between(phases, ir, -a + offir, color='C0')
     # markers
@@ -92,7 +92,7 @@ def AMTiming():
     ax.spines['right'].set_visible(False)
     ax.spines['top'].set_visible(False)
     # finishing
-    # fig.tight_layout(rect=[0.05, 0, 1, 1])
+    fig.tight_layout(rect=[0.05, 0, 1, 1])
     fig.savefig('AMTiming.pdf')
     fig.savefig(os.path.join("..", "AMTiming.pdf"))
     return phases, mw

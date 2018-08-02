@@ -28,7 +28,7 @@ def udo_plot():
     b = 5
     x, y, c = ellipse(a, b)
     # plotting
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(3.375, 3.375))
     ax.axis('off')
     xlims = (-a*0.4, a*0.4)
     ylims = (-b, b)
@@ -46,20 +46,20 @@ def udo_plot():
             horizontalalignment='center', verticalalignment='bottom')
     # ellipses
     xd = x - c
-    ax.plot(xd, y, '-.', c='C0')
+    ax.plot(xd, y, '--', c='C0')
     xu = x + c
     plt.plot(xu, -y, '--', c='C1')
     # starting arrows
     arrowprops = {'width': 0.8, 'headwidth': 7, 'headlength': 7, 'color': 'C0'}
     ax.annotate("", xy=(a - c, ylims[1]*0.3), xytext=(a - c, 0),
                 arrowprops=arrowprops)
-    ax.text(a - c, -ylims[1]*0.1, "(B)", fontsize=14,
-            horizontalalignment='center', verticalalignment='center')
+    ax.text(a - c, -ylims[1]*0.05, "B", fontsize=14,
+            horizontalalignment='center', verticalalignment='top')
     arrowprops['color'] = 'C1'
     ax.annotate("", xy=(c-a, -ylims[1]*0.3), xytext=(c-a, 0),
                 arrowprops=arrowprops)
-    ax.text(c - a, ylims[1]*0.1, "(A)", fontsize=14,
-            horizontalalignment='center', verticalalignment='center')
+    ax.text(c - a, ylims[1]*0.05, "A", fontsize=14,
+            horizontalalignment='center', verticalalignment='bottom')
     # field arrow
     arrowprops = {'width': 1, 'headwidth': 10, 'headlength': 10, 'color': 'k'}
     ax.annotate("", xy=(xlims[1]*0.3, ylims[1]*0.7),
@@ -70,7 +70,8 @@ def udo_plot():
     # core
     ax.plot(0, 0, '.', markersize=20, c='k')
     # finalize
-    fig.tight_layout(rect=[0, 0, 0.95, 0.95])
+    fig.tight_layout(rect=[-0.05, -0.05, 0.95, 0.95])
+    # fig.tight_layout()
     fig.savefig("UDO.pdf")
     fig.savefig(os.path.join("..", "UDO.pdf"))
     return

@@ -97,29 +97,34 @@ def ebar_pam_plot(data, ph_th, ax0, ax1, ax2):
 
 def amp_mean_phase_plot(fits, mask, excluded, title):
     """Standardize figure for amp, mean, phase plotting."""
-    fig, ax = plt.subplots(nrows=3, sharex=True)
+    fig, ax = plt.subplots(nrows=3, sharex=True, figsize=(3.375, 3.375*1.2))
     ph_th = 5.5/6*np.pi
     data = ebar_pam_prep(fits, mask, excluded, ph_th)
     ax[0], ax[1], ax[2] = ebar_pam_plot(data, ph_th, ax[0], ax[1], ax[2])
-    # xlims = (-200, 200)
     # x
+    # xlims = (-200, 200)
     # ax[2].set(xlim=xlims, xlabel=r"Field $E_S$ (mV/cm)")
-    ax[2].set(xlabel=r"Field $E_S$ (mV/cm)")
+    ax[2].set_xlabel(r"Field $E_S$ (mV/cm)", fontsize=9)
     # y
-    ax[0].set(ylabel="Pk-Pk Modulation")
-    ax[1].set(ylabel="Mean Signal")
+    ax[0].set_ylabel("Pk-Pk Modulation", fontsize=9)
+    ax[1].set_ylabel("Mean Signal", fontsize=9)
     yticks, ylabels = xticks_2p()
-    ax[2].set(ylabel="Phase (rad.)", yticks=yticks, yticklabels=ylabels)
+    ax[2].set_ylabel("Phase (rad.)", fontsize=9)
+    ax[2].set(ylim=(-2*np.pi/6, 13*np.pi/6), yticks=yticks,
+              yticklabels=ylabels)
+    for i in [0, 1, 2]:
+        ax[i].tick_params(labelsize=8, direction='in')
     # title
-    ax[0].set(title=title)
+    # ax[0].set(title=title)
     # text
-    props = dict(boxstyle='round', facecolor='white', alpha=1.0)
+    props = dict(boxstyle='round', facecolor='white', edgecolor='white',
+                 alpha=1.0)
     align = {'verticalalignment': 'top',
              'horizontalalignment': 'right'}
     texts = ["(a)", "(b)", "(c)"]
     for i in [0, 1, 2]:
         ax[i].text(0.98, 0.92, texts[i], bbox=props, **align,
-                   transform=ax[i].transAxes)
+                   transform=ax[i].transAxes, fontsize=9)
     # finish
     fig.tight_layout()
     return fig, ax

@@ -23,8 +23,8 @@ def CoulMW():
     fAU1mVcm = 1.94469e-13
     enAU1GHz = 1.51983e-7
     # set up figure
-    fig, ax = plt.subplots()
-    ax2 = fig.add_axes([0.75, 0.5, 0.15, 0.4])
+    fig, ax = plt.subplots(figsize=(3.375, 3.375))
+    ax2 = fig.add_axes([0.7, 0.45, 0.15, 0.4])
     zmax = 1000000
     xlims = (-zmax, zmax)
     ylims = (-100, 100)
