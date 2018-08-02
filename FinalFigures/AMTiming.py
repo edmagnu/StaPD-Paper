@@ -30,7 +30,7 @@ def AMTiming():
     mw = a*np.sin(phases) + offmw
     ir = a*np.cos(phases + phi0) + offir
     # plot
-    fig, ax = plt.subplots(figsize=(3.375, 3.375))
+    fig, ax = plt.subplots(figsize=(3.375, 0.8*3.375))
     ax.plot(phases, mw, c='C3', lw=3)
     ax.fill_between(phases, ir, -a + offir, color='C0')
     # markers
@@ -38,7 +38,7 @@ def AMTiming():
     props = dict(boxstyle='round', color='white', alpha=0)
     align = {'verticalalignment': 'bottom',
              'horizontalalignment': 'center'}
-    fs = 14  # text font size
+    fs = 9  # text font size
     # zero references
     arrowprops = {'width': 1, 'headwidth': 10, 'headlength': 10,
                   'color': 'dimgray'}
@@ -71,8 +71,8 @@ def AMTiming():
             **align, bbox=props, fontsize=fs)
     # y labels
     align['verticalalignment'] = 'center'
-    ax.text(-2.8, offmw, "MW Field", rotation=90, **align, fontsize=fs)
-    ax.text(-2.8, offir, "IR Intensity", rotation=90, **align, fontsize=fs)
+    ax.text(-2.8, offmw, "MW Field", rotation=90, **align, fontsize=9)
+    ax.text(-2.8, offir, "IR Intensity", rotation=90, **align, fontsize=9)
     # axes
     xticklabels = []
     xticks = np.arange(0, 5.5, 0.5)*np.pi
@@ -82,9 +82,10 @@ def AMTiming():
         else:
             label = ""
         xticklabels = xticklabels + [label]
-    ax.set_xlabel("MW Phase (rad.)", fontsize=fs)
+    ax.set_xlabel("MW Phase (rad.)", fontsize=9)
     ax.set(xticks=xticks, xticklabels=xticklabels,
            yticks=[], yticklabels=[])
+    ax.tick_params(labelsize=8, direction='in')
     ax.set(xlim=(xlims[0] - 0.1*np.diff(xlims)[0],
                  xlims[1] + 0.1*np.diff(xlims)[0]))
     ax.tick_params(labelsize=fs-2)
