@@ -6,7 +6,7 @@
 %Control: page (0) single
 %Control: year (1) truncated
 %Control: production of eprint (0) enabled
-\begin{thebibliography}{10}%
+\begin{thebibliography}{11}%
 \makeatletter
 \providecommand \@ifxundefined [1]{%
  \@ifx{#1\undefined}
@@ -108,6 +108,15 @@
   {\doibase 10.1103/PhysRevA.81.021404} {\bibfield  {journal} {\bibinfo
   {journal} {Phys. Rev. A}\ }\textbf {\bibinfo {volume} {81}},\ \bibinfo
   {pages} {021404} (\bibinfo {year} {2010})}\BibitemShut {NoStop}%
+\bibitem [{\citenamefont {Zhong}\ and\ \citenamefont
+  {Robicheaux}(2016)}]{Zhong}%
+  \BibitemOpen
+  \bibfield  {author} {\bibinfo {author} {\bibfnamefont {C.}~\bibnamefont
+  {Zhong}}\ and\ \bibinfo {author} {\bibfnamefont {F.}~\bibnamefont
+  {Robicheaux}},\ }\href {\doibase 10.1103/PhysRevA.93.033410} {\bibfield
+  {journal} {\bibinfo  {journal} {Phys. Rev. A}\ }\textbf {\bibinfo {volume}
+  {93}},\ \bibinfo {pages} {033410} (\bibinfo {year} {2016})}\BibitemShut
+  {NoStop}%
 \bibitem [{\citenamefont {Mauritsson}\ \emph {et~al.}(2006)\citenamefont
   {Mauritsson}, \citenamefont {Johnsson}, \citenamefont {Gustafsson},
   \citenamefont {L'Huillier}, \citenamefont {Schafer},\ and\ \citenamefont
