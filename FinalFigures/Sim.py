@@ -75,8 +75,58 @@ def Sim_plot(params, W0, Ep, ylims, title, ax):
     # clean up
     ax.set(xlim=(xmin, xmax), ylim=(ymin, ymax), xticks=xticks,
            xticklabels=xticklabels,  # xlabel=r"Phase $\phi_0$ (rad)",
-           ylabel="Norm. Signal", title=title)
+           ylabel="Norm. Signal")  # , title=title)
     return ax
+
+
+def Sim_multiplot(params, Eps, W0):
+    """Standard plot for model results"""
+    # plot
+    fig, axes = plt.subplots(nrows=3, sharex='col', figsize=(3.375, 3.375*1.2))
+    ylims = (-0.05, 0.45)
+    for i in [0, 1, 2]:
+        axes[i] = Sim_plot(params, W0, Eps[i], ylims, "", axes[i])
+    # text
+    props = dict(boxstyle='round', facecolor='white', edgecolor='white',
+                 alpha=0)
+    align = {'verticalalignment': 'top',
+             'horizontalalignment': 'right'}
+    texts = ["(a)", "(b)", "(c)"]
+    for i in [0, 1, 2]:
+        axes[i].text(0.98, 0.93, texts[i], bbox=props, **align,
+                     transform=axes[i].transAxes, fontsize=8)
+    # labeling
+    axes[2].set_xlabel(r"Delay $\omega t_0$ (rad.)", fontsize=9)
+    for i in [0, 1, 2]:
+        axes[i].set_ylabel("Norm. Signal", fontsize=9)
+        axes[i].tick_params(labelsize=8, direction='in')
+    return fig, axes
+
+
+def Sims():
+    """Model Results at W0 = 0, -20 GHz"""
+    dname = os.path.join("..", '..', "2D-Comp-Model", "computation")
+    fname = os.path.join(dname, "params_sums.txt")
+    params = pd.read_csv(fname, index_col=0)
+    # ==========
+    # get needed values for W0 = 0 GHz, Epulse = 0, 36, 100 mV/cm
+    W0 = np.sort(params['E0'].unique())[1]
+    fields = np.sort(params['Ep'].unique()[[0, 5, 10]])
+    fig, axes = Sim_multiplot(params, fields, W0)
+    # finalize
+    fig.tight_layout()
+    fig.savefig("Sim0.pdf")
+    fig.savefig(os.path.join("..", "Sim0.pdf"))
+    # ==========
+    # get needed values for W0 = -20 GHz, Epulse = 0, 7.2, 100 mV/cm
+    W0 = np.sort(params['E0'].unique())[0]    
+    fields = np.sort(params['Ep'].unique()[[0, 1, 10]])
+    fig, axes = Sim_multiplot(params, fields, W0)
+    # finalize
+    fig.tight_layout()
+    fig.savefig("SimM20.pdf")
+    fig.savefig(os.path.join("..", "SimM20.pdf"))
+    return
 
 
 def Sim0():
@@ -92,7 +142,7 @@ def Sim0():
     W0 = np.sort(params['E0'].unique())[1]
     fields = np.sort(params['Ep'].unique()[[0, 5, 10]])
     # plot
-    fig, axes = plt.subplots(nrows=3, sharex=True)
+    fig, axes = plt.subplots(nrows=3, sharex=True, figsize=(3.375, 3.375*1.5))
     ylims = (-0.05, 0.4)
     # 0 mV/cm
     i = 0
@@ -109,6 +159,14 @@ def Sim0():
     title = r"$E_S = 100$ mV/cm"
     Ep = fields[i]
     axes[i] = Sim_plot(params, W0, Ep, ylims, title, axes[i])
+    # text
+    props = dict(boxstyle='round', facecolor='white', alpha=1.0)
+    align = {'verticalalignment': 'top',
+             'horizontalalignment': 'right'}
+    texts = ["(a)", "(b)", "(c)"]
+    for i in [0, 1, 2]:
+        axes[i].text(0.98, 0.92, texts[i], bbox=props, **align,
+                     transform=axes[i].transAxes)
     # save
     fig.tight_layout()
     fig.savefig("Sim0.pdf")
@@ -125,11 +183,11 @@ def SimM20():
     data = pd.read_csv(fname, index_col=0)
     fname = os.path.join(dname, "params_sums.txt")
     params = pd.read_csv(fname, index_col=0)
-    # get needed values for W0 = 0 GHz, Epulse = 0, 36, 100 mV/cm
+    # get needed values for W0 = -20 GHz, Epulse = 0, 36, 100 mV/cm
     W0 = np.sort(params['E0'].unique())[0]    
     fields = np.sort(params['Ep'].unique()[[0, 1, 10]])
     # plot
-    fig, axes = plt.subplots(nrows=3, sharex=True)
+    fig, axes = plt.subplots(nrows=3, sharex=True, figsize=(3.375, 3.375*1.5))
     ylims = (-0.05, 0.4)
     # 0 mV/cm
     i = 0
@@ -146,6 +204,14 @@ def SimM20():
     title = r"$E_S = 100$ mV/cm"
     Ep = fields[i]
     axes[i] = Sim_plot(params, W0, Ep, ylims, title, axes[i])
+    # text
+    props = dict(boxstyle='round', facecolor='white', alpha=1.0)
+    align = {'verticalalignment': 'top',
+             'horizontalalignment': 'right'}
+    texts = ["(a)", "(b)", "(c)"]
+    for i in [0, 1, 2]:
+        axes[i].text(0.98, 0.92, texts[i], bbox=props, **align,
+                     transform=axes[i].transAxes)
     # save
     fig.tight_layout()
     fig.savefig("SimM20.pdf")
@@ -154,5 +220,6 @@ def SimM20():
 
 
 # main script
-Sim0()
-SimM20()
+Sims()
+# Sim0()
+# SimM20()

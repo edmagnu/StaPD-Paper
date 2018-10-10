@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 def ELevel():
     """Energy level figure showing 2s -> 2p -> 3d -> n/e f"""
     plt.close()
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(3.375, 3.375))
     w = 0.75
     dx = 0.5
     dy = 1

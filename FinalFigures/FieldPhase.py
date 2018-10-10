@@ -63,7 +63,7 @@ def FieldPhase():
     statics = np.sort(data_tot['Static'].unique())
     # plot 0, 7.2, -7.2, 36, 108 mV/cm
     istatics = [21, 23, 19, 29, -7]
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(3.375, 3.375))
     nave = 3
     for i in istatics:
         print("{0} \t {1} mV \t {2} mV/cm".format(
@@ -75,33 +75,41 @@ def FieldPhase():
             ls = '-'
         ax = phase_plot(data_tot, mask, nave, ax, ls)
     # tidy
-    ax.set(xlabel=r"Delay $\omega t_0$ (rad.)", ylabel="Norm. Signal",
-           xticks=np.arange(0, 3.5, 0.5),
+    ax.set_xlabel(r"Delay $\omega t_0$ (rad.)", fontsize=9)
+    ax.set_ylabel("Norm. Signal", fontsize=9)
+    ax.set(xticks=np.arange(0, 3.5, 0.5),
            xticklabels=["0", r"$\pi$", r"$2\pi$", r"$3\pi$", r"$4\pi$",
                         r"$5\pi$", r"$6\pi$"],
            ylim=(-0.03, 0.37))
+    ax.tick_params(labelsize=8, direction='in')
     # twin axes
     ax2 = ax.twiny()
     ax2.tick_params('x')
     tps = 1/(15.932*1e9)*1e12
     xlims = ax.get_xlim()
     tlims = tuple(np.array(xlims)*tps)
-    xticks = ax.get_xticks()
-    tticks = tuple(np.array(xticks)*tps)
-    tticklabels = np.round(tticks, 1)
-    ax2.set(xlim=tlims, xticks=tticks, xticklabels=tticklabels,
-            xlabel=r"Delay $t_0$ (ps)")
+    # xticks = ax.get_xticks()
+    # tticks = tuple(np.array(xticks)*tps)
+    ax2.set_xlim(tlims)
+    ax2.set_xticks(range(0, 190, 20))
+    ax2.tick_params(labelsize=8, direction='in')
+    ax2.set_xlabel(r"Delay $t_0$ (ps)", fontsize=9)
     for side in ['bottom', 'right', 'left']:
         ax2.spines[side].set_visible(False)
     # labels
-    props = dict(boxstyle='round', facecolor='white', alpha=1.0)
+    props = dict(boxstyle='round', facecolor='white', edgecolor='white',
+                 alpha=1.0)
     align = {'verticalalignment': 'center',
              'horizontalalignment': 'right'}
-    ax.text(xlims[1], 0.3, "0.0 mV/cm", **align, bbox=props)
-    ax.text(xlims[1], 0.18, "+/- 7.2 mV/cm", **align, bbox=props)
+    ax.text(xlims[1] - 0.1, 0.28, "0.0 mV/cm", **align, bbox=props,
+            fontsize=8)
+    ax.text(xlims[1] - 0.1, 0.16, "+/- 7.2 mV/cm", **align, bbox=props,
+            fontsize=8)
     # ax.text(xlims[1], 0.25, "-7.2 mV/cm", **align, bbox=props)
-    ax.text(xlims[1], 0.06, "36.0 mV/cm", **align, bbox=props)
-    ax.text(xlims[1], 0, "108.0 mV/cm", **align, bbox=props)
+    ax.text(xlims[1] - 0.1, 0.06, "36.0 mV/cm", **align, bbox=props,
+            fontsize=8)
+    ax.text(xlims[1] - 0.1, -0.01, "108.0 mV/cm", **align, bbox=props,
+            fontsize=8)
     # save
     fig.tight_layout()
     fig.savefig("FieldPhase.pdf")

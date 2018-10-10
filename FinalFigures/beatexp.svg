@@ -15,8 +15,8 @@
    viewBox="0 0 288.90882 245.99996"
    id="svg2"
    version="1.1"
-   inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="beatexp.svg"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="beatexp.pdf"
    inkscape:export-filename="C:\Users\edmag\Documents\Work\StaPD-Paper\FinalFigures\beatexp.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96">
@@ -421,7 +421,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="3.959798"
      inkscape:cx="154.37992"
-     inkscape:cy="97.716121"
+     inkscape:cy="107.81764"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -430,10 +430,10 @@
      inkscape:snap-nodes="true"
      inkscape:object-nodes="true"
      inkscape:snap-object-midpoints="true"
-     inkscape:window-width="1852"
-     inkscape:window-height="1057"
+     inkscape:window-width="1280"
+     inkscape:window-height="1002"
      inkscape:window-x="-8"
-     inkscape:window-y="-8"
+     inkscape:window-y="48"
      inkscape:window-maximized="1"
      inkscape:bbox-paths="true"
      inkscape:snap-center="true"
@@ -461,7 +461,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
         <cc:license
            rdf:resource="http://creativecommons.org/licenses/by/4.0/" />
       </cc:Work>
@@ -614,8 +614,8 @@
            style="font-size:10px;line-height:1.25;stroke-linecap:butt;stroke-linejoin:round">TA</tspan></text>
     </g>
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#979797;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:bevel;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
-       d="m 370,197.36222 10,0 0,45 -30,0 0,10.00001 30,0 0,50.00002"
+       style="fill:none;stroke:#979797;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:bevel;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
+       d="m 370,197.36222 10,0 0,45 -30,0 0,10.00001 30,0 -0.49999,46.39994"
        id="path4240"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccccc" />
@@ -686,7 +686,8 @@
          cy="300.36221"
          cx="287"
          id="path4571"
-         style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.70905387;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:3.5999999;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+         style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.70905387;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:3.5999999;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         d="m 304,300.36221 c 0,9.38884 -7.61116,17 -17,17 -9.38884,0 -17,-7.61116 -17,-17 0,-9.38884 7.61116,-17 17,-17 9.38884,0 17,7.61116 17,17 z" />
       <path
          inkscape:connector-curvature="0"
          id="path4605"
@@ -833,7 +834,7 @@
          style="stroke-linecap:butt;stroke-linejoin:round">
         <path
            sodipodi:open="true"
-           d="m 225,334.36221 a 10,10 0 0 1 -10,10"
+           d="m 225,334.36221 c 0,5.52285 -4.47715,10 -10,10"
            sodipodi:end="1.5707963"
            sodipodi:start="0"
            sodipodi:ry="10"
@@ -883,7 +884,8 @@
          cy="302.36221"
          cx="260.07251"
          id="path5248"
-         style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+         style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         d="m 260.57251,302.36221 c 0,0.27615 -0.22386,0.5 -0.5,0.5 -0.27614,0 -0.5,-0.22385 -0.5,-0.5 0,-0.27614 0.22386,-0.5 0.5,-0.5 0.27614,0 0.5,0.22386 0.5,0.5 z" />
     </g>
     <g
        transform="translate(3.0000022,50.000054)"
@@ -918,11 +920,11 @@
        style="stroke-linecap:butt;stroke-linejoin:round" />
     <g
        id="g5323"
-       transform="matrix(0,1,-1,0,672.8622,-91.884258)"
+       transform="translate(0.59325678,17.660275)"
        style="stroke-linecap:butt;stroke-linejoin:round">
       <path
          sodipodi:open="true"
-         d="m 388.56699,296.86221 a 10,10 0 0 1 -8.66025,5 10,10 0 0 1 -8.66026,-5"
+         d="m 388.56699,296.86221 c -2.76142,4.78293 -8.87733,6.42168 -13.66025,3.66026 -1.52019,-0.87769 -2.78257,-2.14006 -3.66026,-3.66026"
          sodipodi:end="2.6179939"
          sodipodi:start="0.52359878"
          sodipodi:ry="10"
@@ -931,10 +933,10 @@
          sodipodi:cx="379.90674"
          sodipodi:type="arc"
          id="path5317"
-         style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+         style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
       <use
-         height="100%"
-         width="100%"
+         height="245.99995"
+         width="288.90881"
          transform="matrix(1,0,0,-1,1.3893307e-8,584.72441)"
          id="use5319"
          xlink:href="#path5317"
@@ -977,15 +979,16 @@
          style="font-size:8.74999997px;line-height:1.25;stroke-linecap:butt;stroke-linejoin:round;-inkscape-font-specification:'STIX, Normal';font-family:STIX;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;text-anchor:start;text-align:start;writing-mode:lr;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;">if</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.75px;line-height:0%;font-family:STIX;-inkscape-font-specification:'STIX, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="365.43616"
-       y="314.68723"
-       id="text5761"><tspan
+       style="font-size:8.75px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:0%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:STIX;-inkscape-font-specification:'STIX, Normal'"
+       x="338.55673"
+       y="313.172"
+       id="text5761"
+       sodipodi:linespacing="0%"><tspan
          sodipodi:role="line"
          id="tspan5763"
-         x="365.43616"
-         y="314.68723"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.75px;line-height:1.25;font-family:STIX;-inkscape-font-specification:'STIX, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-linecap:butt;stroke-linejoin:round">Cavity</tspan></text>
+         x="338.55673"
+         y="313.172"
+         style="font-size:8.75px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:1.25;writing-mode:lr-tb;text-anchor:start;font-family:STIX;-inkscape-font-specification:'STIX, Normal'">Cavity</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0%;font-family:STIX;-inkscape-font-specification:'STIX, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-size:8.74999997px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;"
@@ -1171,10 +1174,11 @@
        x="108.8536"
        y="155.67221"
        id="text37089"
-       transform="translate(-4.8640834e-6,7.467297e-6)"><tspan
+       transform="translate(-4.8640834e-6,7.467297e-6)"
+       sodipodi:linespacing="14%"><tspan
          sodipodi:role="line"
          id="tspan37091"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:8.74999997px;line-height:1.25;font-family:STIX;-inkscape-font-specification:'STIX, Bold';stroke-linecap:butt;stroke-linejoin:round;text-anchor:start;text-align:start;writing-mode:lr;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:8.75000021px;line-height:14%;font-family:Sans;-inkscape-font-specification:Sans Bold;stroke-linecap:butt;stroke-linejoin:round;text-anchor:start;text-align:start;writing-mode:lr;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal"
          x="108.8536"
          y="155.67221">HOPLL</tspan></text>
     <rect
@@ -1190,10 +1194,11 @@
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:8.75px;line-height:0%;font-family:STIX;-inkscape-font-specification:'STIX, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="304.85001"
        y="162.69221"
-       id="text37245"><tspan
+       id="text37245"
+       sodipodi:linespacing="14%"><tspan
          sodipodi:role="line"
          id="tspan37247"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:8.75px;line-height:1.25;font-family:STIX;-inkscape-font-specification:'STIX, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-linecap:butt;stroke-linejoin:round"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:8.75000021px;line-height:14%;font-family:Sans;-inkscape-font-specification:Sans Bold;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr;text-anchor:start;stroke-linecap:butt;stroke-linejoin:round"
          x="304.85001"
          y="162.69221">IR Amplification</tspan></text>
     <rect
@@ -1208,10 +1213,11 @@
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:8.75px;line-height:0%;font-family:STIX;-inkscape-font-specification:'STIX, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="247.30957"
        y="383.56717"
-       id="text37251"><tspan
+       id="text37251"
+       sodipodi:linespacing="14%"><tspan
          sodipodi:role="line"
          id="tspan37253"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:8.75px;line-height:1.25;font-family:STIX;-inkscape-font-specification:'STIX, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-linecap:butt;stroke-linejoin:round"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:8.75000021px;line-height:14%;font-family:Sans;-inkscape-font-specification:Sans Bold;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr;text-anchor:start;stroke-linecap:butt;stroke-linejoin:round"
          x="247.30957"
          y="383.56717">MW amplification</tspan></text>
     <text
@@ -1274,11 +1280,11 @@
          x="268.71179"
          y="282.36221">PD</tspan></text>
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker23214)"
-       d="m 352,352.36222 8,0 0,-65 10,1e-5"
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#marker23214)"
+       d="m 352,352.36222 28.00001,-5e-5 c -0.1455,-18.22119 -0.24072,-12.98588 0.20031,-31.2"
        id="path23206"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cccc" />
+       sodipodi:nodetypes="ccc" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.75px;line-height:0%;font-family:STIX;-inkscape-font-specification:'STIX, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
