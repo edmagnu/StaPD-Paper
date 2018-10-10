@@ -122,8 +122,9 @@ def circstat_delays():
               r"$-0.0^\circ$", r"$+5.7^\circ$", r"$+11.5^\circ$"]
     for i in [0, 1, 2, 3, 4, 5]:
         axes[i].text(0.98, 0.93, angles[i], transform=axes[i].transAxes,
-                 verticalalignment='top', horizontalalignment='right',
-                 fontsize=14, bbox=props)
+                     verticalalignment='top', horizontalalignment='right',
+                     
+                     fontsize=14, bbox=props)
     # beautify
     xticks = np.array([0, 0.5, 1, 1.5, 2.0]) + 1/12
     xticklabels = [r"$\pi/6$", "", r"$\pi + \pi/6$", "", r"$2\pi + \pi/6$"]
