@@ -1,0 +1,11 @@
+Dear Yujun Wang,
+
+We thank the referee for his/her constructive comments. We agree that the classical picture we present is somewhat at odds with quantum mechanical calculations to describe the XUV/NIR experiments. The calculations indicate that the XUV excitation occurs coherently over more than one NIR field cycle. In contrast, in our simple classical model we assume the excitation occurs in one NIR cycle.
+
+To ensure that the reader is aware of the differences between the quantum mechanical calculations and our classical model, we point it out explicitly in the first paragraph.
+
+We agree with the referee that resolving the apparent contradiction in the classical and quantum mechanical descriptions is desirable. We hope to conduct experiments at higher microwave frequency with no static field to address this question.
+
+Sincerely,
+
+Eric Magnuson
